@@ -1,5 +1,6 @@
 body{
     background: #fff4e0;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -16,22 +17,12 @@ aside{
     width: 7vw;
 }
 
-header{
-    background: #94B49F;
-    box-shadow: 0 0 3px #000;
-    display: flex;
-    padding: .2rem;
-    width: auto;
-}
 
 li{
     list-style: none;
 }
 
 nav{
-    align-content: ;
-    display: flex;
-    flex-direction: row;
     width: 100vw;
 }
 
@@ -47,8 +38,17 @@ nav > li{
    width: 5rem;
 }
 
+.nav-grid{
+    background: #94B49F;
+    box-shadow: 0 0 3px #000;
+    display: grid;
+    gap: 3rem;
+    padding: .2rem;
+    width: auto;
+}
+
 .search{
-    border: none;
+    border: non2px solid blacke;
     border-radius: 50px;
     margin:2.5vh;
     height: 2vh;

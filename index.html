@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Game Shelf</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/fav-logo.png">
 </head>
+
 <body>
-    <header>
+    <header class="nav-grid">
         <div class="logo">
             <img class="logo-img" src="img/logo.png" alt="company logo">
         </div>
-        <nav>
-            <input class="search" type="text" placeholder="Search...">
-            <ul>
-                <li><a>Log Out</a></li>
-                <li><a>Profile</a></li>
-            </ul>
-        </nav>
+        <input class="search" type="text" placeholder="  Search...">
+        <ul>
+            <li><a>Log Out</a></li>
+            <li><a>Profile</a></li>
+        </ul>
     </header>
 
-    <aside>
+    <aside class="side-bar">
         <ul class="nav-items">
             <li>item</li>
             <li>item</li>
@@ -34,25 +38,29 @@
 
     <section class="collection">
         <div class="lable">
-            <div class="games">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
-            </div>
+            <h2>Your Collection</h2> <hr>
         </div>
+        <div class="games">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" alt="">
+        </div>    
     </section>
 
     <section class="recommend">
         <div class="lable">
-            <div class="games">
-
-            </div>
+           <h2>Recommended Games</h2>
         </div>
-    </section>
-</body>
+        <div class="games">
+            <img src="http://via.placeholder.com/200x200" alt="">
+            <img src="http://via.placeholder.com/200x200" alt="">
+            <img src="http://via.placeholder.com/200x200" alt="">
+    
+        </div>
+
 </html>
