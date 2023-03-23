@@ -5,33 +5,52 @@ body{
     padding: 0;
 }
 
-aside{
-    background: #b4cfb0;
-    border-bottom-right-radius: 30px;
-    border-top-right-radius: 30px;
-    box-shadow: 0 0 3px #1d412f;
-    padding-top: 2vh;
-    position: sticky;
-    margin-top: 17vh;
-    height: 50vh;
-    width: 7vw;
+hr{
+    width: 30vw;
+    margin-bottom: 2rem;
 }
-
 
 li{
     list-style: none;
 }
 
-nav{
-    width: 100vw;
+.copy{
+    align-self: center;;
+    font-size: small;
+    margin-left: .5rem;
 }
 
-nav > li{
-    margin: auto;
+.foot{
+    background: #94B49F;
+    display: grid;
+    height: 6rem;
+    margin-top: 6rem;
+    padding: .2rem;
+    width: auto;
 }
 
-.logo{
-    display:inline-block;
+.games{
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content:center;
+}
+
+.grid-box{
+    display: grid;
+    justify-content: center;
+}
+
+.lable{
+    color: rgb(91, 94, 94);
+    justify-self: center;
+    margin-top: 6rem;
+}
+
+.list-grid{
+    display: grid;
+    gap: 4.3rem;
+    margin: 5rem 1.5rem;
 }
 
 .logo-img{
@@ -39,18 +58,42 @@ nav > li{
 }
 
 .nav-grid{
+    align-items: center;
     background: #94B49F;
     box-shadow: 0 0 3px #000;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
+    height: 6rem;
     padding: .2rem;
     width: auto;
 }
 
+.recommend{
+    display: grid;
+}
+
+.rec-games{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+}
+
 .search{
-    border: non2px solid blacke;
+    border: none;
     border-radius: 50px;
-    margin:2.5vh;
     height: 2vh;
     width: 20vw;
+}
+
+.side-bar{
+    background: #b4cfb0;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    box-shadow: 0 0 3px #1d412f;
+    display:grid;
+    position: fixed;
+    margin-top: 17vh;
+    height: 55vh;
+    width: 9vw;
 }
