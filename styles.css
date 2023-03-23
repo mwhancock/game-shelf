@@ -4,9 +4,21 @@ body{
     padding: 0;
 }
 
+aside{
+    background: #b4cfb0;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    box-shadow: 0 0 3px #1d412f;
+    padding-top: 2vh;
+    position: sticky;
+    margin-top: 17vh;
+    height: 50vh;
+    width: 7vw;
+}
+
 header{
     background: #94B49F;
-    box-shadow: 0 0 3px #000000;
+    box-shadow: 0 0 3px #000;
     display: flex;
     padding: .2rem;
     width: auto;
@@ -16,10 +28,29 @@ li{
     list-style: none;
 }
 
+nav{
+    align-content: ;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+nav > li{
+    margin: auto;
+}
+
 .logo{
     display:inline-block;
 }
 
 .logo-img{
    width: 5rem;
+}
+
+.search{
+    border: none;
+    border-radius: 50px;
+    margin:2.5vh;
+    height: 2vh;
+    width: 20vw;
 }
