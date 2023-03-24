@@ -11,6 +11,7 @@ a{
 }
 
 hr{
+    color: #5b5e5e;
     width: 30vw;
     margin-bottom: 2rem;
 }
@@ -21,7 +22,8 @@ li{
 
 
 .copy{
-    align-self: center;;
+    align-self: center;
+    color:#4d5e5f;
     font-size: small;
     margin-left: .5rem;
 }
@@ -48,7 +50,7 @@ li{
 }
 
 .lable{
-    color: rgb(91, 94, 94);
+    color: #5b5e5e;
     justify-self: center;
     margin-top: 17vh;
 }
@@ -60,7 +62,8 @@ li{
 }
 
 .logo-img{
-   width: 5rem;
+   margin-left: 1rem;
+   width: 6rem;
 }
 
 .nav-btn{
@@ -78,7 +81,7 @@ li{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
-    height: 6rem;
+    height: 7rem;
     padding: .2rem;
     position: fixed;
     width: 100vw;
@@ -92,15 +95,16 @@ li{
 .rec-games{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
+    gap: 3.14rem;
 }
 
 .search{
+    background: #b4cfb0;
     border: none;
     border-radius: 50px;
-    height: 2vh;
-    margin-left: 6vw;
-    width: 20vw;
+    height: 4vh;
+    padding-left: 1.5rem;
+    width: 30vw;
 }
 
 .side-bar{
