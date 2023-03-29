@@ -56,12 +56,13 @@ hr,
   margin-left: 0.5rem;
 }
 
-.feature-card{
+.feature-card {
+  display: none;
   justify-self: center;
   border: 3px solid hotpink;
   grid-template-rows: 1fr;
   height: 15rem;
-  width:30rem;
+  width: 30rem;
 }
 
 .foot {
@@ -78,6 +79,7 @@ hr,
 
 .grid-box {
   display: grid;
+  position: relative;
 }
 
 .head {
@@ -89,6 +91,7 @@ hr,
   padding: 0.2rem;
   position: fixed;
   width: 100vw;
+  z-index: 10;
 }
 
 .lable {
@@ -141,4 +144,5 @@ hr,
   position: fixed;
   margin-top: 27vh;
   width: auto;
+  z-index: 10;
 }
