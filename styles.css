@@ -5,6 +5,7 @@ body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 a {
@@ -53,6 +54,14 @@ hr,
   align-self: center;
   font-size: small;
   margin-left: 0.5rem;
+}
+
+.feature-card{
+  justify-self: center;
+  border: 3px solid hotpink;
+  grid-template-rows: 1fr;
+  height: 15rem;
+  width:30rem;
 }
 
 .foot {
