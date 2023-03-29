@@ -57,12 +57,13 @@ hr,
 }
 
 .feature-card {
-  display: none;
+  /* display: none; */
   justify-self: center;
   border: 3px solid hotpink;
   grid-template-rows: 1fr;
   height: 15rem;
   width: 30rem;
+  overflow: hidden;
 }
 
 .foot {
@@ -72,9 +73,18 @@ hr,
   width: auto;
 }
 
+.gallery{
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .games {
   gap: 3rem;
   grid-template-columns: repeat(4, 1fr);
+}
+
+.gal-img{
+  height: auto;
+  width: 30rem;
 }
 
 .grid-box {
@@ -100,12 +110,29 @@ hr,
 }
 
 .logo-img {
-  margin-left: 1rem;
   width: 6rem;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.nav-item {
+  border-radius: 50px;
+  padding: .5rem;
+}
+
+.nav-item:hover{
+  background-color: #94b49f;
+  transition-duration: 700ms;
+}
+
 .nav-list {
-  gap: 4.3rem;
+  gap: 3.5rem;
   margin: 3.5rem 2.3rem 0 0;
   max-height: 100%;
 }
