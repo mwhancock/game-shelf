@@ -59,7 +59,6 @@ hr,
 .feature-card {
   /* display: none; */
   justify-self: center;
-  border: 3px solid hotpink;
   grid-template-rows: 1fr;
   height: 15rem;
   width: 30rem;
@@ -74,17 +73,30 @@ hr,
 }
 
 .gallery{
-  grid-template-columns: 1fr 1fr 1fr;
+  height: 20rem;
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: 40rem;
+}
+
+.gallery-img{
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.gallery-track-container {
+  background: lightblue;
+  padding: 10px;
+  height: 30rem;
 }
 
 .games {
   gap: 3rem;
   grid-template-columns: repeat(4, 1fr);
-}
-
-.gal-img{
-  height: auto;
-  width: 30rem;
 }
 
 .grid-box {
@@ -124,11 +136,12 @@ hr,
 .nav-item {
   border-radius: 50px;
   padding: .5rem;
+  transition: 500ms ease;
 }
 
 .nav-item:hover{
   background-color: #94b49f;
-  transition-duration: 700ms;
+  
 }
 
 .nav-list {
