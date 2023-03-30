@@ -49,11 +49,13 @@ hr,
 }
 
 .next-btn, .prev-btn {
+  background: none;
+  border: none;
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 58%;
   width: auto;
-  margin-top: -22px;
+  margin-top: -3.2rem;
   padding: 16px;
   color: white;
   font-weight: bold;
@@ -62,41 +64,47 @@ hr,
   border-radius: 0 3px 3px 0;
   user-select: none;
 }
+
+.next-btn:hover, .prev-btn:hover{
+  background: rgba(178, 225, 212, 0.624);
+  border-radius: 20px;
+}
+
 /* Classes */
 
 .copy {
-  align-self: center;
   font-size: small;
-  margin-left: 0.5rem;
+  margin-top: 2.2rem;
 }
 
 .feature-card {
   display: none;
-  height: 15rem;
-  width: 30rem;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  position: a;
+  position: absolute;
 }
 
 .foot {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
-  width: auto;
+  position: absolute;
+  width: 100%;
 }
 
 .gallery{
-  background: lightblue;
-  height: 20rem;
+  height: 15rem;
   position: relative;
   margin: 0 auto;
-  max-height: 100%;
-  width: 40rem;
+  width: 30rem;
+  overflow: hidden;
 }
 
 .gallery-img{
-  max-height: 100%;
-  max-width: 100%;
+  left: 0;
+  max-height: auto;
+  width: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -126,6 +134,10 @@ hr,
 
 .lable {
   justify-self: center;
+  margin-top: 9vh;
+}
+
+.featured{
   margin-top: 17vh;
 }
 
@@ -146,13 +158,13 @@ hr,
 }
 
 .nav-item {
-  border-radius: 50px;
   padding: .5rem;
-  transition: 500ms ease;
+  transition: 600ms ease;
 }
 
 .nav-item:hover{
   background-color: #94b49f;
+  border-radius: 50px;
   
 }
 
@@ -163,17 +175,17 @@ hr,
 }
 
 .next-btn{
-  right: 0;
+  right: -0;
   border-radius: 3px 0 0 3px;
 }
 
 .prev-btn{
-  left: 0;
+  background: none;left: 0;
   border-radius: 3px 0 0 3px;
 }
 
 .recommend {
-  margin-top: -3rem;
+  margin-top: 2.5rem;
 }
 
 .rec-games {
