@@ -7,9 +7,11 @@ fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9
  // Targets the "Feature Card" and initializes the carousel index at 0
 let slides = document.getElementsByClassName("feature-card");
 let slideIndex = 0;
+const navItem = document.getElementsByClassName("nav-item")
 slideShow();
+let slider = setInterval(slideShow, 4000);
 
-// Slideshow automation -- sets display none, then loops through displaying next card every 4 seconds
+// Slideshow automation
 function slideShow(){
     let i;
     for(i = 0;  i < slides.length; i++) {
@@ -18,21 +20,10 @@ function slideShow(){
     slideIndex++;
     if(slideIndex > slides.length){slideIndex = 1};
     slides[slideIndex-1].style.display = "block";
-    let slider = setInterval(slideShow, 4000);
     // pauseSlideShow(slider);
 }
 
 // Manual controls for slide show
-function prevSlide(){
-    let i;
-    for(i = 0;  i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    slideIndex--;
-    if(slideIndex < 0){slideIndex = -10;}
-    slides[slideIndex-1].style.display = "block"
-}
-
 function nextSlide(){
     let i;
     for(i = 0;  i < slides.length; i++) {
@@ -43,6 +34,13 @@ function nextSlide(){
     slides[slideIndex-1].style.display = "block";
 }
 
-// function pauseSlideShow(n){
-//     slides.addEventListener("mouseover", clearInterval(n))
-// }
+function prevSlide(){
+    let i;
+    for(i = 0;  i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex--;
+    if(slideIndex < 0){slideIndex = 6;}
+    slides[slideIndex].style.display = "block"
+}
+
