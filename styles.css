@@ -78,6 +78,7 @@ hr,
 }
 
 .feature-card {
+  cursor: pointer;
   display: none;
   height: 100%;
   width: 100%;
@@ -91,6 +92,10 @@ hr,
   padding-bottom: 3rem;
   position: absolute;
   width: 100%;
+}
+
+.fade {
+  animation-duration: 2s;
 }
 
 .gallery{
