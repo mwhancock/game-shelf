@@ -31,7 +31,6 @@ hr,
   color: #5b5e5e;
 }
 
-.games,
 .main-grid {
   justify-content: center;
 }
@@ -89,6 +88,10 @@ hr,
 
 .logo-img {
   width: 6rem;
+}
+
+.nav-btn{
+  display: flex;
 }
 
 .search {
@@ -150,8 +153,18 @@ hr,
 
 /* Main Body */
 .games {
-  gap: 3rem;
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: column;
+  grid-gap: 1.3rem;
+  grid-template-columns: repeat(8, calc(25% - 1.5rem));
+  grid-template-rows: 1fr 1fr;
+  padding: 1.5rem;
+  width: 50vw;
+  overflow-x: auto;
+}
+
+.game-card{
+  grid-column-end: auto;
+  width: 100%;
 }
 
 .grid-box {
@@ -179,6 +192,8 @@ hr,
 }
 
 .nav-item {
+  font-size: 1.15rem;
+  font-weight: 500;
   padding: .5rem;
   transition: 600ms ease;
 }
