@@ -1,8 +1,14 @@
-
 // Import api and console log game data to console
-fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA")
-    .then((response) => response.json())
-    .then((data) => console.log(data.games))
+async function getGameList(){
+    const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
+    const data = await response.json();
+    let gameList = data.games
+    for(let i = 0; i < gameList.length; i++){
+        console.log(gameList[i]["name"]);
+    }
+}
+ 
+getGameList();
 
  // Targets the "Feature Card" and initializes the carousel index at 0
 let slides = document.getElementsByClassName("feature-card");
