@@ -3,8 +3,9 @@ async function getGameList(){
     const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
     const data = await response.json();
     let gameList = data.games
-    for(let i = 0; i < gameList.length; i++){
-        console.log(gameList[i]["name"]);
+    for(let gameIndex = 0; gameIndex < gameList.length; gameIndex++){
+        console.log(gameList[gameIndex]["name"]);
+        console.log(gameList[gameIndex]["images"]["medium"])
     }
 }
  
