@@ -1,25 +1,48 @@
-// fetch game collection, logs the name of each game in list
-async function getGameList(){
+const libraryPreview = document.getElementById("library-preview")
+
+// fetch game collection, returns array of game objects
+
+async function getGameData(){
     const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
-    const data = await response.json();
-    const gameList = data.games;
-    for(let gameIndex = 0; gameIndex <= gameList.length; gameIndex++){
-        console.log(gameList[gameIndex]["name"]);
+    return response.json()
+}
+
+async function gameArt(){
+    try{
+        const data = await getGameData();
+        let imgArr = [];
+        for(let i = 0; i < 20; i++){
+            imgArr.push(data["games"][i]["images"]["medium"])
+        }
+         console.log(imgArr);
+    }catch(error){
+        console.log(error)
     }
 }
 
-// fetch game collection, log image url for each game in list
-async function getGameArt(){
-    const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
-    const data = await response.json();
-    const artList = data.games;
-    for(let gameIndex = 0; gameIndex <= artList.length; gameIndex++){
-        console.log(artList[gameIndex]["images"]["medium"]);
+const libPreview = gameArt();
+
+async function populateLibraryPreview(){
+    for(let i = 0; i <20; i++){
+        let newDiv = document.createElement("div");
+        let newAnchor = document.createElement("a");
+        let newImg = document.createElement("img");
+        newDiv.setAttribute("class", "game-card");
+        newAnchor.setAttribute("href", "game-page");
+        newImg.setAttribute("src", gameArt.then(data => {data[i]})); 
+        libraryPreview.appendChild(newDiv.appendChild(newAnchor.appendChild(newImg)));
+        // console.log(gameArt.then(data => {data[2]}))
     }
+    const anchor = document.createElement("a");
+    anchor.setAttribute("href", "library.html");
+    anchor.setAttribute("class", "lib-btn");
+    anchor.innerText = "Full Library";
+    libraryPreview.appendChild(anchor);
 }
- 
-getGameList();
-getGameArt();
+
+// populateLibraryPreview();
+// console.log(gameArt.then(data => {data[1][1]}));
+
 
  // Targets the "Feature Card" and initializes the carousel index at 0
 let slides = document.getElementsByClassName("feature-card");
