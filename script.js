@@ -1,11 +1,12 @@
 
 
-// Define a custom event for retrieving API data so we avoid async callbacks
-
+// Grab our HTML Element that is going to display APi data once avaailable
 const count_display = document.getElementById('count-display');
 
+// Add an event listener to our HTML element that needs the API data
 count_display.addEventListener('games_retrieved', (event) => {
     console.log(event)
+    // Set the element's value to our API data
     count_display.innerHTML = `Game Data Retrieved for ${event.detail?.games?.length} Games`
 })
 
@@ -48,30 +49,27 @@ async function populateLibraryPreview() {
     }
 }
 
-let game_list = []
-let game_count = 0
-let is_loading = true
-
-
-let test = "val" // variable we want to listen for
 
 fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA")
     .then( res => res.json() )
     .then( data =>
         {
+            // Define the event emitter for our new custom event
             const gameDataRetrieved = new CustomEvent(
                 'games_retrieved', 
                 {
+                    // set our API's data into custom properties of the event's detail object
                     detail: 
                     {
+                        // we can pass anything we want as a key-value pair here, neat!
                         count: data.count, 
                         games: data.games
                     } 
                 }
             )
-            is_loading = false
-            game_list = data.games
-            game_count = data.count
+
+            // dispatch our event using the HTML object it is attached to
+            // we could also use the window object for this as well
             count_display.dispatchEvent(gameDataRetrieved);
         }
     )
@@ -127,8 +125,8 @@ function slideShow(){
     // set a timer variable (setTimeout( callback, interval ))
 
     // Clear time interval based on element focus
-        // current_slide.addEventListener('mouseenter', callback) clearTimeout
-        // current_slide.addEventListener('mouseleave', callback) setTimeout
+    // current_slide.addEventListener('mouseenter', callback) clearTimeout
+    // current_slide.addEventListener('mouseleave', callback) setTimeout
 
 
     let i;
