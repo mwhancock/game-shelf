@@ -125,6 +125,7 @@ hr,
   margin: 0 auto;
   width: 30rem;
   overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 .gallery-img{
@@ -133,7 +134,7 @@ hr,
   width: 100%;
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 0; 
 }
 
 .material-symbols-outlined {
