@@ -65,29 +65,11 @@
         <h2>Featured</h2>
       </div>
       <hr />
-      <div
+      <div id="gallery"
         class="gallery"
         onmouseenter="stopSlideShow()"
         onmouseleave="startSlideShow()"
       >
-      <div class="feature-card fade">
-        <img class="gallery-img" src="img/game1.jpg" alt="picture of game" />
-      </div>
-      <div class="feature-card fade">
-        <img class="gallery-img" src="img/game2.jpg" alt="picture of game" />
-      </div>
-      <div class="feature-card fade">
-        <img class="gallery-img" src="img/game3.jpg" alt="picture of game" />
-      </div>
-      <div class="feature-card fade">
-        <img class="gallery-img" src="img/game4.jpg" alt="picture of game" />
-      </div>
-      <div class="feature-card fade">
-        <img class="gallery-img" src="img/game5.jpg" alt="picture of game" />
-      </div>
-      <div class="feature-card fade">
-        <img class="gallery-img" src="img/game6.jpg" alt="picture of game" />
-      </div>
 
         <button class="prev-btn">
           <span class="material-symbols-outlined"> arrow_back_ios </span>
@@ -127,7 +109,7 @@
     <!-- Feature Card Template -->
     <template id="feature-card-template">
       <div class="feature-card fade">
-        <img class="gallery-img" src="img/game1.jpg" alt="picture of game" />
+        <img class="gallery-img" alt="picture of game" />
       </div>
     </template>
 
@@ -139,7 +121,7 @@
     </template>
 
     <!-- Recommended Game Card Template -->
-    <template class="rec-game-card-template">
+    <template id="rec-game-card-template">
       <div class="rec-game-card">
         <img src="" alt="placeholder image" />
       </div>
