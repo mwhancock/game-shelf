@@ -1,6 +1,14 @@
+/* Global Variables */
+:root{
+  --bg-color: #fff4e0;
+  --dark-green: #94b49f;
+  --light-green: #b4cfb0;
+  --text-color: #4d5e5f;
+  --main-border-radius: 20px;
+}
 /* Tags */
 body {
-  background: #fff4e0;
+  background: var(--bg-color);
   font-family: "Montserrat", sans-serif;
   margin: 0;
   padding: 0;
@@ -21,28 +29,24 @@ li {
 }
 
 /* Grouped */
-a,
-.copy, lib-btn {
-  color: #4d5e5f;
+a, hr,
+.copy, .lable, .lib-btn {
+  color: var(--text-color);
 }
 
 hr,
-.lable {
-  color: #5b5e5e;
-}
-
 .main-grid {
   justify-content: center;
 }
 
 .head,
 .foot {
-  background: #94b49f;
+  background: var(--dark-green);
 }
 
 .search,
 .side-bar {
-  background: #b4cfb0;
+  background: var(--light-green);
 }
 
 .next-btn, .prev-btn {
@@ -58,13 +62,12 @@ hr,
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
   user-select: none;
 }
 
 .next-btn:hover, .prev-btn:hover{
-  background: rgba(178, 225, 212, 0.624);
-  border-radius: 20px;
+  background: #b2e1d49f;
+  border-radius: var(--main-border-radius);
 }
 
 /* Classes */
@@ -143,12 +146,10 @@ hr,
 
 .next-btn{
   right: -0;
-  border-radius: 3px 0 0 3px;
 }
 
 .prev-btn{
-  background: none;left: 0;
-  border-radius: 3px 0 0 3px;
+  left: 0;
 }
 
 /* Main Body */
@@ -163,7 +164,7 @@ hr,
 }
 
 .game-card > a > img{
-  border-radius: 20px;
+  border-radius: var(--main-border-radius);
   grid-column-end: auto;
   height:auto;
   width: 200px;
@@ -180,8 +181,8 @@ hr,
 }
 
 .lib-btn{
-  background: #b4cfb0;
-  border-radius: 20px;
+  background: var(--light-green);
+  border-radius: var(--main-border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,7 +194,7 @@ hr,
 }
 
 .lib-btn:hover{
-  background-color: #94b49f;
+  background-color: var(--dark-green);
   color:#30393a;
 }
 
@@ -207,7 +208,7 @@ hr,
 }
 
 .rec-game-card > img {
-  border-radius: 20px;;
+  border-radius: var(--main-border-radius);
 }
 /* Side Navigation */
 .fade {
@@ -222,7 +223,7 @@ hr,
 }
 
 .nav-item:hover{
-  background-color: #94b49f;
+  background-color: var(--dark-green);
   border-radius: 50px;
 }
 
