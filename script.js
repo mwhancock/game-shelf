@@ -107,52 +107,66 @@ async function getGameArt(){
 
 // populateLibraryPreview();
 // console.log(gameArt.then(data => {data[1][1]}));
+
+
+// Slideshow automation
+
+// Declare variables needed for slideshow
 let slideCollection = document.getElementsByClassName("feature-card");
+let slideArr = Array.from(slideCollection);
 let slideIndex = 0;
-let slideArr = Array.from(slideCollection)
+let timer;
 
-slideArr.forEach((slide) => {
-    slide.style.display = "none"
-})// Slideshow automation
+function startSlideShow(){
+    timer = setInterval(slideShow, 4000)
+}
 
+function stopSlideShow(){
+    timer = clearInterval(timer)
+}
 
+// Automatically moves through images
 function slideShow(){
-
-    // Hiding all slideshow items
-    // Iterating to next index in slides array
-    // Displaying cusrrent index of array
-  
-    }
-    
-    // set a timer variable (setTimeout( callback, interval ))
-    
-    // Clear time interval based on element focus
-    // current_slide.addEventListener('mouseenter', callback) clearTimeout
-    // current_slide.addEventListener('mouseleave', callback) setTimeout
-// }
-
-// Manual controls for slide show
-function nextSlide(){
     slideArr.forEach((slide) => {
         slide.style.display = "none";
     })
-
     slideIndex++;
-
     if(slideIndex >= slideArr.length){slideIndex = 0};
     slideArr[slideIndex].style.display = "block";
-    console.log(slideIndex)
+    console.log(slideIndex);
 }
 
-function prevSlide(){
+// Manual controls for slide show
+
+// Add event listener to the next button that calls the next slide when clicked
+const nextSlide = document.querySelector(".next-btn");
+nextSlide.addEventListener("click", () => {fwdSlide()});
+
+// Add event listener to the previous button that calls the previous slide when clicked
+const prevSlide = document.querySelector(".prev-btn");
+prevSlide.addEventListener("click", () => bwdSlide());
+
+// Gets the index of the last item in the slide array
+let lastSlide = slideArr.length - 1;
+
+// Function to move to next slide
+function fwdSlide(){
+    slideArr.forEach((slide) => {
+        slide.style.display = "none";
+    })
+    slideIndex++;
+    if(slideIndex >= slideArr.length){slideIndex = 0};
+    slideArr[slideIndex].style.display = "block";
+}
+
+// Function to move to previous slide
+function bwdSlide(){
     slideArr.forEach((slide) => {
         slide.style.display = "none";
     })
     slideIndex--;
-
-    if(slideIndex < 0){slideIndex = 5;}
-    slideArr[slideIndex].style.display = "block"
-    console.log(slideIndex)
+    if(slideIndex < 0){slideIndex = lastSlide;}
+    slideArr[slideIndex].style.display = "block";
 }
 
-slideShow();
+startSlideShow();

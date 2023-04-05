@@ -67,8 +67,8 @@
       <hr />
       <div
         class="gallery"
-        onmouseenter="clearInterval()"
-        onmouseleave="setInterval(slideShow, 4000)"
+        onmouseenter="stopSlideShow()"
+        onmouseleave="startSlideShow()"
       >
       <div class="feature-card fade">
         <img class="gallery-img" src="img/game1.jpg" alt="picture of game" />
@@ -89,11 +89,11 @@
         <img class="gallery-img" src="img/game6.jpg" alt="picture of game" />
       </div>
 
-        <button class="prev-btn" onclick="prevSlide()">
+        <button class="prev-btn">
           <span class="material-symbols-outlined"> arrow_back_ios </span>
         </button>
 
-        <button class="next-btn" onclick="nextSlide()">
+        <button class="next-btn">
           <span class="material-symbols-outlined"> arrow_forward_ios </span>
         </button>
       </div>
