@@ -74,6 +74,7 @@ hr,
 /* Classes */
 
 /* Header */
+
 .head {
   align-items: center;
   box-shadow: 0 0 3px #000;
@@ -96,6 +97,9 @@ hr,
 
 .nav-btn{
   display: flex;
+  max-width: 20vw;
+  gap: 2rem;
+  right: 10px;
 }
 
 .search {
@@ -106,6 +110,22 @@ hr,
   width: 30vw;
 }
 
+.top-nav-btn {
+  background: var(--light-green);
+  border-radius: var(--main-border-radius);
+  border: none;
+  box-shadow: 0 0 1px #000;
+  color: var(--text-color);
+  font-size: smaller;
+  padding: .3rem .5rem;
+  transition: 400ms ease;
+}
+.top-nav-btn:hover{
+  background: var(--dark-green);
+  border: 1px solid var(--text-color);
+  color: #303a3b;
+  cursor: pointer;
+}
 
 
 /* Gallery Classes */
@@ -115,7 +135,7 @@ hr,
 
 .feature-card {
   cursor: pointer;
-  height: 100%;
+  max-height: auto;
   width: 100%;
   overflow: hidden;
   position: absolute;
@@ -131,7 +151,7 @@ hr,
 
 .gallery-img{
   left: 0;
-  max-height: auto;
+  height: auto;
   width: 100%;
   position: absolute;
   top: 0;

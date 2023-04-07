@@ -6,48 +6,61 @@ const gallery = document.getElementById("gallery");
 // Grab our HTML Element that is going to display APi data once available
 const count_display = document.getElementById("count-display");
 
-// // Add an event listener to our HTML element that needs the API data
-// count_display.addEventListener('games_retrieved', (event) => {
-//     console.log(event)
-//     // Set the element's value to our API data
-//     count_display.innerHTML = `Game Data Retrieved for ${event.detail?.games?.length} Games`
-// })
+let images = [];
 
-// fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA")
-//     .then( res => res.json() )
-//     .then( data =>
-//         {
-//             // Define the event emitter for our new custom event
-//             const gameDataRetrieved = new CustomEvent(
-//                 'games_retrieved',
-//                 {
-//                     // set our API's data into custom properties of the event's detail object
-//                     detail:
-//                     {
+// // Add an event listener to our HTML element that needs the API data
+count_display.addEventListener('games_retrieved', (e) => {
+    console.log(e)
+    // Set the element's value to our API data
+    count_display.innerHTML = `Game Data Retrieved for ${e.detail?.games?.length} Games`
+})
+
+libraryPreview.addEventListener('games_retrieved', (e) => {
+    const gameList = e.detail.games;
+    gameList.forEach((game) => {
+        images.push(game.images.medium)
+    })
+    showFeatureCards();
+    let slideCards = document.getElementsByClassName("feature-card");
+    slideArr = Array.from(slideCards);
+    lastSlide = slideArr.length - 1;
+    startSlideShow();
+
+})
+
+fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA")
+    .then( res => res.json() )
+    .then( data =>
+        {
+            // Define the event emitter for our new custom event
+            const gameDataRetrieved = new CustomEvent(
+                'games_retrieved',
+                {
+                    // set our API's data into custom properties of the event's detail object
+                    detail:
+                    {
 // we can pass anything we want as a key-value pair here, neat!
-//             count: data.count,
-//             games: data.games
-//         }
-//     }
-// )
+            count: data.count,
+            games: data.games
+        }
+    }
+)
 
 // dispatch our event using the HTML object it is attached to
 // we could also use the window object for this as well
-//         count_display.dispatchEvent(gameDataRetrieved);
-//     }
-// )
-// .catch( err =>
-//     {
-//         console.log('ERROR: ', err);
-//     }
-// );
+        // count_display.dispatchEvent(gameDataRetrieved);
+        libraryPreview.dispatchEvent(gameDataRetrieved)
+    }
+)
+.catch( err =>
+    {
+        console.log('ERROR: ', err);
+    }
+);
 
-// Fetch game collection, returns array of game objects
+// // Fetch game collection, returns array of game objects
 
-// async function getGameData(){
-//     const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
-//     return response.json()
-// }
+
 
 // async function gameArt(){
 //     try{
@@ -86,7 +99,7 @@ const count_display = document.getElementById("count-display");
 
 // if (!is_loading) console.log({game_list, game_count})
 
-// fetch game collection, log image url for each game in list
+// // fetch game collection, log image url for each game in list
 // async function getGameArt(){
 //     const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
 //     const data = await response.json();
@@ -184,22 +197,9 @@ function showFeatureCards() {
 
     for (i = 0; i < 7; i++) {
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = `img/game${[i + 1]}.jpg`;
+        imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
         gallery.append(imgItem);
     }
 }
-
-// Adds feature cards into the DOM
-showFeatureCards();
-
-// Once the DOM is loaded, grabs feature cards and adds them into an array,
-// get the index of the last card, then starts slide show
-document.addEventListener("DOMContentLoaded", () => {
-    let slideCards = document.getElementsByClassName("feature-card");
-    slideArr = Array.from(slideCards);
-    lastSlide = slideArr.length - 1;
-    startSlideShow();
-
-})
 
