@@ -104,12 +104,14 @@ const count_display = document.getElementById("count-display");
 // populateLibraryPreview();
 // console.log(gameArt.then(data => {data[1][1]}));
 
+
 // SLIDESHOW AUTOMATION
 
 // Declare variables needed for slideshow
-let slideCollection = document.getElementsByClassName(".feature-card");
-let slideArr = Array.from(slideCollection);
+
 let slideIndex = 0;
+let lastSlide;
+let slideArr;
 let timer;
 
 function startSlideShow() {
@@ -129,7 +131,6 @@ function slideShow() {
   if (slideIndex >= slideArr.length) {
     slideIndex = 0;
   }
-  console.log(slideArr);
 
   slideArr[slideIndex].style.display = "block";
 }
@@ -147,7 +148,6 @@ const prevSlide = document.querySelector(".prev-btn");
 prevSlide.addEventListener("click", () => bwdSlide());
 
 // Gets the index of the last item in the slide array
-let lastSlide = slideArr.length - 1;
 
 // Function to move to next slide
 function fwdSlide() {
@@ -163,34 +163,43 @@ function fwdSlide() {
 
 // Function to move to previous slide
 function bwdSlide() {
-  slideArr.forEach((slide) => {
-    slide.style.display = "none";
-  });
-  slideIndex--;
-  if (slideIndex < 0) {
-    slideIndex = lastSlide;
-  }
-  slideArr[slideIndex].style.display = "block";
+    slideArr.forEach((slide) => {
+        slide.style.display = "none";
+    });
+    slideIndex--;
+    if (slideIndex < 0) {
+        slideIndex = lastSlide;
+    }
+    slideArr[slideIndex].style.display = "block";
 }
-
 
 // TEMPLATE MANIPULATION
 
+// Clones feature card template 7 times, adding img source to each card,
+//  then appends to featured section of page
 function showFeatureCards() {
-  let itemDiv, temp, imgItem, imgPath, i;
-  temp = document.getElementById("feature-card-template");
-
-  for (i = 0; i < 6; i++) {
+    let itemDiv, imgItem, imgPath, i;
+    temp = document.getElementById("feature-card-template");
     itemDiv = temp.content.cloneNode(true);
-    imgItem = itemDiv.querySelector("img");
-    imgPath = `img/game${[i + 1]}.jpg`;
-    imgItem.setAttribute("src", imgPath);
-    itemDiv.appendChild(imgItem);
-    gallery.appendChild(itemDiv);
-    console.log(itemDiv)
-  }
+
+    for (i = 0; i < 7; i++) {
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = `img/game${[i + 1]}.jpg`;
+        imgItem.setAttribute("src", imgPath);
+        gallery.append(imgItem);
+    }
 }
 
+// Adds feature cards into the DOM
 showFeatureCards();
-// startSlideShow();
+
+// Once the DOM is loaded, grabs feature cards and adds them into an array,
+// get the index of the last card, then starts slide show
+document.addEventListener("DOMContentLoaded", () => {
+    let slideCards = document.getElementsByClassName("feature-card");
+    slideArr = Array.from(slideCards);
+    lastSlide = slideArr.length - 1;
+    startSlideShow();
+
+})
 
