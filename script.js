@@ -15,17 +15,26 @@ count_display.addEventListener('games_retrieved', (e) => {
     count_display.innerHTML = `Game Data Retrieved for ${e.detail?.games?.length} Games`
 })
 
-libraryPreview.addEventListener('games_retrieved', (e) => {
+// Add event listener to gallery element, then populate with images from game list
+gallery.addEventListener('games_retrieved', (e) => {
     const gameList = e.detail.games;
     gameList.forEach((game) => {
         images.push(game.images.medium)
     })
     showFeatureCards();
-    let slideCards = document.getElementsByClassName("feature-card");
+    let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
     startSlideShow();
+})
 
+// Add event listener to library preview element, then populate with images from users game list
+libraryPreview.addEventListener('games_retrieved', (e) => {
+    const gameList = e.detail.games;
+    gameList.forEach((game) => {
+        images.push(game.images.medium);
+    })
+    getLibPrev();
 })
 
 fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA")
@@ -48,8 +57,9 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9R
 
 // dispatch our event using the HTML object it is attached to
 // we could also use the window object for this as well
-        // count_display.dispatchEvent(gameDataRetrieved);
-        libraryPreview.dispatchEvent(gameDataRetrieved)
+        count_display.dispatchEvent(gameDataRetrieved);
+        gallery.dispatchEvent(gameDataRetrieved);
+        libraryPreview.dispatchEvent(gameDataRetrieved);
     }
 )
 .catch( err =>
@@ -58,64 +68,7 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9R
     }
 );
 
-// // Fetch game collection, returns array of game objects
-
-
-
-// async function gameArt(){
-//     try{
-//         const data = await getGameData();
-//         let imgArr = [];
-
-//         for(let i = 0; i < 20; i++){
-//             imgArr.push(data["games"][i]["images"]["medium"])
-//         }
-//             console.log(imgArr);
-//     }catch(error){
-//         console.log(error)
-//     }
-// }
-
-// const libPreview = gameArt();
-
-// async function populateLibraryPreview() {
-//     for(let i = 0; i <20; i++){
-//         let newDiv = document.createElement("div");
-//         let newAnchor = document.createElement("a");
-//         let newImg = document.createElement("img");
-//         newDiv.setAttribute("class", "game-card");
-//         newAnchor.setAttribute("href", "game-page");
-//         newImg.setAttribute("src", gameArt.then(data => {data[i]}));
-//         libraryPreview.appendChild(newDiv.appendChild(newAnchor.appendChild(newImg)));
-//         // console.log(gameArt.then(data => {data[2]}))
-//     }
-// }
-
-// // Console log our API values after an arbitrary delay
-// setTimeout(
-//     () => {console.log({game_list, game_count})},
-//     5000
-// );
-
 // if (!is_loading) console.log({game_list, game_count})
-
-// // fetch game collection, log image url for each game in list
-// async function getGameArt(){
-//     const response = await fetch ("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA");
-//     const data = await response.json();
-//     const artList = data.games;
-//     for(let gameIndex = 0; gameIndex <= artList.length; gameIndex++){
-//         // console.log(artList[gameIndex]["images"]["medium"]);
-//     }
-//     const anchor = document.createElement("a");
-//     anchor.setAttribute("href", "library.html");
-//     anchor.setAttribute("class", "lib-btn");
-//     anchor.innerText = "Full Library";
-//     libraryPreview.appendChild(anchor);
-// }
-
-// populateLibraryPreview();
-// console.log(gameArt.then(data => {data[1][1]}));
 
 
 // SLIDESHOW AUTOMATION
@@ -188,18 +141,44 @@ function bwdSlide() {
 
 // TEMPLATE MANIPULATION
 
-// Clones feature card template 7 times, adding img source to each card,
+// Clones feature card template 7 times, adds classes and src to card,
 //  then appends to featured section of page
 function showFeatureCards() {
-    let itemDiv, imgItem, imgPath, i;
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv;
     temp = document.getElementById("feature-card-template");
-    itemDiv = temp.content.cloneNode(true);
 
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 10; i++) {
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        itemDiv.setAttribute("class", "feature-card fade")
         imgItem = itemDiv.querySelector("img").cloneNode(true);
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
-        gallery.append(imgItem);
+        imgItem.setAttribute("class", "gallery-img");
+        imgItem.setAttribute("alt", "a picture of a game")
+        itemDiv.append(imgItem);
+        gallery.append(itemDiv);
     }
+}
+
+// Clones game card template 20 times, adds classes and src to each,
+// then appends to library preview section
+function getLibPrev(){
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv;
+    temp  = document.getElementById("game-card-template");
+    libBtn = document.getElementById("lib-btn-template").content.cloneNode(true);
+
+    for(i = 0; i < 20; i++){
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div")
+        itemDiv.setAttribute("class", "game-card")
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = images[i];
+        imgItem.setAttribute("src", imgPath);
+        imgItem.setAttribute("alt", "a picture of a game")
+        itemDiv.append(imgItem)
+        libraryPreview.append(itemDiv)
+    }
+    libraryPreview.append(libBtn);
 }
 
