@@ -31,13 +31,20 @@ gallery.addEventListener('games_retrieved', (e) => {
 // Add event listener to library preview element, then populate with images from users game list
 libraryPreview.addEventListener('games_retrieved', (e) => {
     const gameList = e.detail.games;
+    gameList.sort();
     gameList.forEach((game) => {
         images.push(game.images.medium);
     })
     getLibPrev();
 })
 
-fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9RQI1WBCZA")
+// Boardgamegeek API
+// const parser = new DOMParser();
+// fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
+//     .then(res => parser.parseFromString(res, "text/xml"))
+//     .then(data => {console.log(data)})
+
+fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=name_a_z&client_id=9RQI1WBCZA")
     .then( res => res.json() )
     .then( data =>
         {
@@ -67,9 +74,6 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&client_id=9R
         console.log('ERROR: ', err);
     }
 );
-
-// if (!is_loading) console.log({game_list, game_count})
-
 
 // SLIDESHOW AUTOMATION
 
@@ -168,7 +172,7 @@ function getLibPrev(){
     temp  = document.getElementById("game-card-template");
     libBtn = document.getElementById("lib-btn-template").content.cloneNode(true);
 
-    for(i = 0; i < 20; i++){
+    for(i = 0; i < 16; i++){
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div")
         itemDiv.setAttribute("class", "game-card")
@@ -176,6 +180,7 @@ function getLibPrev(){
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game")
+        imgItem.setAttribute("class", "game-img")
         itemDiv.append(imgItem)
         libraryPreview.append(itemDiv)
     }
