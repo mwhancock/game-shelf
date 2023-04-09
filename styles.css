@@ -1,7 +1,8 @@
 /* Global Variables */
 :root{
   --bg-color: #fff4e0;
-  --dark-green: #94b49f;
+  --nav-green: #94b49f;
+  --dark-green: #8dac87;
   --light-green: #b4cfb0;
   --text-color: #4d5e5f;
   --main-border-radius: 20px;
@@ -41,7 +42,7 @@ hr,
 
 .head,
 .foot {
-  background: var(--dark-green);
+  background: var(--nav-green);
 }
 
 .search,
@@ -117,6 +118,7 @@ hr,
   box-shadow: 0 0 1px #000;
   color: var(--text-color);
   font-size: smaller;
+  font-weight: 500;
   padding: .3rem .5rem;
   transition: 400ms ease;
 }
@@ -198,9 +200,9 @@ hr,
 .game-img{
   border-radius: var(--main-border-radius);
   box-shadow: 0 0 2px var(--text-color);
-  max-height: 25vh;
+  height: 23vh;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .grid-box {
@@ -224,7 +226,9 @@ hr,
   font-size: 1.15rem;
   font-weight: 500;
   padding: .5rem;
+  max-height: 90%;
   width: 2fr;
+  margin-top: 1rem;
 }
 
 .lib-btn:hover{
