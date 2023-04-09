@@ -197,6 +197,7 @@ hr,
 
 .game-img{
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   max-height: 25vh;
   width: 100%;
   object-fit: contain;
