@@ -20,8 +20,9 @@
     />
     <link rel="icon" type="image/x-icon" href="img/fav-logo.png" />
 
-    <!-- SCRIPTS -->
-    <script src="script.js" async></script>
+         <!-- SCRIPTS -->
+  <script type="module" src="script.js">import { nextSlide, prevSlide } from './modules/slideshowFunctions.js'</script>
+
   </head>
 
   <body>
@@ -55,11 +56,11 @@
         </nav>
       </aside>
 
-      <!-- Clark's Code -->
+      <!-- Clark's Code
       <div class="lable featured">
         <h2 id="count-display">Getting Game Data... Please Wait</h2>
       </div>
-      <hr />
+      <hr /> -->
 
       <!-- GALLERY -->
       <div class="lable featured">
@@ -132,5 +133,6 @@
     <template id="lib-btn-template">
       <a href="library.html" class="lib-btn">Full Library</a>
     </template>
+
   </body>
 </html>
