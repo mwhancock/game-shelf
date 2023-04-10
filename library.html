@@ -17,9 +17,10 @@
      <link rel="icon" type="image/x-icon" href="img/fav-logo.png" />
  
      <!-- Scripts -->
-     <script src="script.js" async></script>
+     <script type="module" src="./libScript.js"></script>
+
 </head>
-<body>
+<body class="libraryPage">
      <!-- Top Navigation -->
      <header class="grid-box head">
       <div class="logo">
@@ -36,6 +37,9 @@
 
     <!-- Main Body -->
     <main class="grid-box main-grid">
+      <section id="library">
+
+      </section>
 
       <!-- Side Navigation -->
       <aside class="grid-box side-bar">
@@ -49,6 +53,14 @@
           </ul>
         </nav>
       </aside>
+
+        <!-- Game Card Template -->
+    <template id="game-card-template">
+      <div>
+        <a href="game-page.html"><img/></a>
+      </div>
+    </template>
+
     </main>
 </body>
 </html>

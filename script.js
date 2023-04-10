@@ -1,15 +1,15 @@
 import { showFeatureCards, getLibPrev, images } from './modules/templateFunctions.js'
 import { startSlideShow, stopSlideShow } from './modules/slideshowFunctions.js';
 
-// Grab HTML element that will display users libre=ary preview when available
-let libraryPreview = document.getElementById("library-preview");
+// Global variables
 
+let libraryPreview = document.getElementById("library-preview");
 window.libraryPreview = libraryPreview;
 
 const gallery = document.getElementById("gallery");
-
 let slideArr;
 window.slideArr = slideArr;
+
 let lastSlide;
 window.lastSlide = lastSlide;
 
@@ -51,10 +51,6 @@ libraryPreview.addEventListener('games_retrieved', (e) => {
     getLibPrev();
 })
 
-// library.addEventListener('games_retrieved', () => {
-//    getLibrary();
-// })
-
 // Boardgamegeek API
 
 fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
@@ -91,7 +87,6 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
         // count_display.dispatchEvent(gameDataRetrieved);
         gallery.dispatchEvent(gameDataRetrieved);
         libraryPreview.dispatchEvent(gameDataRetrieved);
-        // library.dispatchEvent(gameDataRetrieved);
     }
 )
 .catch( err =>

@@ -45,4 +45,23 @@ function getLibPrev(){
     libraryPreview.append(libBtn);
 }
 
-export { showFeatureCards, getLibPrev, images }
+function getLibrary(){
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv;
+    temp = document.getElementById("game-card-template");
+
+    for(i = 0; i < images.length(); i++){
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        itemDiv.setAttribute("class", "game-card")
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = images[i];
+        imgItem.setAttribute("src", imgPath);
+        imgItem.setAttribute("alt", "a picture of a game");
+        imgItem.setAttribute("class", "gae-img");
+        itemDiv.append(imgItem);
+        library.append(itemDiv)
+    }
+   
+}
+
+export { showFeatureCards, getLibPrev, getLibrary, images }
