@@ -56,10 +56,17 @@ libraryPreview.addEventListener('games_retrieved', (e) => {
 // })
 
 // Boardgamegeek API
-// const parser = new DOMParser();
-// fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
-//     .then(res => parser.parseFromString(res, "text/xml"))
-//     .then(data => {console.log(data)})
+
+fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
+    .then(res => {return res.text()})
+    .then((data) => {
+        const gameData = new DOMParser().parseFromString(data, "text/xml")
+        const gameList = gameData.querySelector("items")["children"]
+        console.log(gameList)
+        for(let game in gameList){
+            console.log(game[0])
+        }
+    })
 
 fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=name_a_z&client_id=9RQI1WBCZA")
     .then( res => res.json() )
