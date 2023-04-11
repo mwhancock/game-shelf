@@ -20,13 +20,11 @@
     />
     <link rel="icon" type="image/x-icon" href="img/fav-logo.png" />
 
-         <!-- SCRIPTS -->
-  <script src="script.js" async></script>
-
+    <!-- SCRIPTS -->
+    <script src="script.js" async></script>
   </head>
 
-  <body
-  >
+  <body>
     <!-- TOP NAVIGATION
     <header class="grid-box head">
       
@@ -39,7 +37,6 @@
 
     <!-- MAIN BODY -->
     <main class="grid-box main-grid">
-
       <!-- SIDE NAVIGATION -->
       <aside class="grid-box side-bar">
         <nav aria-label="primary-navigation">
@@ -49,11 +46,23 @@
                 ><img class="logo-img" src="img/logo.png" alt="company logo"
               /></a>
             </div>
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="library.html">Library</a></li>
-            <li class="nav-item"><a href="#">Recommended</a></li>
-            <li class="nav-item"><a href="#">Browse</a></li>
-            <li class="nav-item"><a href="#">Forums</a></li>
+            <li>
+              <button class="nav-item" onclick="pickTab('home')">Home</button>
+            </li>
+            <li>
+              <button class="nav-item" onclick="pickTab('library')">Library</button>
+            </li>
+            <li>
+              <button class="nav-item" onclick="pickTab()">
+                Recommended
+              </button>
+            </li>
+            <li>
+              <button class="nav-item" onclick="pickTab()">Browse</button>
+            </li>
+            <li>
+              <button class="nav-item" onclick="pickTab()">Forums</button>
+            </li>
           </ul>
         </nav>
       </aside>
@@ -64,40 +73,47 @@
       </div>
       <hr /> -->
 
-      <!-- GALLERY -->
-      <div class="lable featured">
-        <h2>Featured</h2>
-      </div>
-      <hr />
-      <div id="gallery"
-        class="gallery"
-        onmouseenter="stopSlideShow()"
-        onmouseleave="startSlideShow()"
-      >
+      <!-- Home Tab -->
 
-        <button class="prev-btn">
-          <span class="material-symbols-outlined"> arrow_back_ios </span>
-        </button>
-
-        <button class="next-btn">
-          <span class="material-symbols-outlined"> arrow_forward_ios </span>
-        </button>
-      </div>
-
-      <!-- USER COLLECTION PREVIEW-->
-      <div class="lable">
-        <h2>Your Library</h2>
-      </div>
-      <hr />
-      <section id="library-preview" class="grid-box games"></section>
-
-      <!-- RECOMMENDED GAMES -->
-      <section class="grid-box recommend">
-        <div class="lable">
-          <h2>Recommended Games</h2>
+      <section id="home" class="page">
+        <!-- GALLERY -->
+        <div class="lable featured">
+          <h2>Featured</h2>
         </div>
         <hr />
-        <div class="grid-box rec-games"></div>
+        <div
+          id="gallery"
+          class="gallery"
+          onmouseenter="stopSlideShow()"
+          onmouseleave="startSlideShow()"
+        >
+          <button class="prev-btn">
+            <span class="material-symbols-outlined"> arrow_back_ios </span>
+          </button>
+
+          <button class="next-btn">
+            <span class="material-symbols-outlined"> arrow_forward_ios </span>
+          </button>
+        </div>
+
+        <!-- USER COLLECTION PREVIEW-->
+        <div class="lable">
+          <h2>Your Library</h2>
+        </div>
+        <hr />
+        <section id="library-preview" class="grid-box games"></section>
+
+        <!-- RECOMMENDED GAMES -->
+        <section class="grid-box recommend">
+          <div class="lable">
+            <h2>Recommended Games</h2>
+          </div>
+          <hr />
+          <div class="grid-box rec-games"></div>
+        </section>
+      </section>
+      <section id="library" class="page">
+        
       </section>
     </main>
 
@@ -120,7 +136,7 @@
     <!-- Game Card Template -->
     <template id="game-card-template">
       <div>
-        <a href="game-page.html"><img/></a>
+        <a href="game-page.html"><img /></a>
         <p></p>
       </div>
     </template>
@@ -141,6 +157,5 @@
     <template id="new-game-template">
       <a href="#new-game" class="new-game-btn">Add Game</a>
     </template>
-
   </body>
 </html>
