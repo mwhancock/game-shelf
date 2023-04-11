@@ -25,20 +25,17 @@
 
   </head>
 
-  <body class="homePage">
-    <!-- TOP NAVIGATION -->
+  <body
+  >
+    <!-- TOP NAVIGATION
     <header class="grid-box head">
-      <div class="logo">
-        <a href="index.html"
-          ><img class="logo-img" src="img/logo.png" alt="company logo"
-        /></a>
-      </div>
+      
       <input class="search" type="text" placeholder="Search..." />
       <ul class="nav-btn">
         <li><a class="top-nav-btn href=#">Sign in with BGA</a></li>
         <li><a class="top-nav-btn" href="#">Profile</a></li>
       </ul>
-    </header>
+    </header> -->
 
     <!-- MAIN BODY -->
     <main class="grid-box main-grid">
@@ -47,6 +44,11 @@
       <aside class="grid-box side-bar">
         <nav aria-label="primary-navigation">
           <ul class="nav-list grid-box">
+            <div class="logo">
+              <a href="index.html"
+                ><img class="logo-img" src="img/logo.png" alt="company logo"
+              /></a>
+            </div>
             <li class="nav-item"><a href="index.html">Home</a></li>
             <li class="nav-item"><a href="library.html">Library</a></li>
             <li class="nav-item"><a href="#">Recommended</a></li>
@@ -119,6 +121,7 @@
     <template id="game-card-template">
       <div>
         <a href="game-page.html"><img/></a>
+        <p></p>
       </div>
     </template>
 
@@ -131,7 +134,12 @@
 
     <!-- Library Button Template -->
     <template id="lib-btn-template">
-      <a href="library.html" class="lib-btn">Full Library</a>
+      <a href="#library" class="lib-btn">Full Library</a>
+    </template>
+
+    <!-- Add Game Button -->
+    <template id="new-game-template">
+      <a href="#new-game" class="new-game-btn">Add Game</a>
     </template>
 
   </body>
