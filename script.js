@@ -5,6 +5,8 @@ const libraryPreview = document.getElementById("library-preview");
 const gallery = document.getElementById("gallery");
 let slideArr;
 let lastSlide;
+let images = [];
+let names = [];
 
 // const library = document.getElementById("library");
 
@@ -37,6 +39,7 @@ libraryPreview.addEventListener('games_retrieved', (e) => {
     const gameList = e.detail.games;
     gameList.forEach((game) => {
         images.push(game.images.medium);
+        names.push(game.name);
     })
     getLibPrev();
 })
@@ -52,16 +55,16 @@ libraryPreview.addEventListener('games_retrieved', (e) => {
 
 // Boardgamegeek API
 
-fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
-    .then(res => {return res.text()})
-    .then((data) => {
-        const gameData = new DOMParser().parseFromString(data, "text/xml")
-        const gameList = gameData.querySelector("items")["children"]
-        console.log(gameList)
-        for(let game in gameList){
-            console.log(game[0])
-        }
-    })
+// fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
+//     .then(res => {return res.text()})
+//     .then((data) => {
+//         const gameData = new DOMParser().parseFromString(data, "text/xml")
+//         const gameList = gameData.querySelector("items")["children"]
+//         console.log(gameList)
+//         for(let game in gameList){
+//             console.log(game[0])
+//         }
+//     })
 
 fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=name_a_z&client_id=9RQI1WBCZA")
     .then( res => res.json() )
@@ -86,7 +89,7 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
         // count_display.dispatchEvent(gameDataRetrieved);
         gallery.dispatchEvent(gameDataRetrieved);
         libraryPreview.dispatchEvent(gameDataRetrieved);
-        library.dispatchEvent(gameDataRetrieved);
+        // library.dispatchEvent(gameDataRetrieved);
     }
 )
 .catch( err =>
@@ -102,7 +105,6 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 // Clones feature card template 7 times, adds classes and src to card,
 //  then appends to featured section of page
 
-let images = []
 
 function showFeatureCards() {
     let itemDiv, imgItem, imgPath, i, temp, tempDiv;
@@ -125,23 +127,30 @@ function showFeatureCards() {
 // Clones game card template 16 times, adds classes and src to each,
 // then appends to library preview section
 function getLibPrev(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv, libBtn;
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, libBtn, gameItem, gameName;
     temp  = document.getElementById("game-card-template");
     libBtn = document.getElementById("lib-btn-template").content.cloneNode(true);
+    addGameBtn = document.getElementById("new-game-template").content.cloneNode(true);
 
     for(i = 0; i < 16; i++){
         tempDiv = temp.content.cloneNode(true);
-        itemDiv = tempDiv.querySelector("div")
-        itemDiv.setAttribute("class", "game-card")
+        itemDiv = tempDiv.querySelector("div");
+        itemDiv.setAttribute("class", "game-card grid-box");
         imgItem = itemDiv.querySelector("img").cloneNode(true);
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
-        imgItem.setAttribute("alt", "a picture of a game")
-        imgItem.setAttribute("class", "game-img")
-        itemDiv.append(imgItem)
-        libraryPreview.append(itemDiv)
+        imgItem.setAttribute("alt", "a picture of a game");
+        imgItem.setAttribute("class", "game-img");
+        gameItem = itemDiv.querySelector("p").cloneNode(true);
+        gameName = names[i];
+        gameItem.setAttribute("class", "game-info");
+        gameItem.innerText = `${gameName}`;
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        libraryPreview.append(itemDiv);
     }
     libraryPreview.append(libBtn);
+    libraryPreview.append(addGameBtn);
 }
 
 function getLibrary(){
@@ -156,9 +165,9 @@ function getLibrary(){
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
-        imgItem.setAttribute("class", "gae-img");
+        imgItem.setAttribute("class", "game-img");
         itemDiv.append(imgItem);
-        library.append(itemDiv)
+        library.append(itemDiv);
     }
    
 }
