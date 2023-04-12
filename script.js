@@ -3,6 +3,7 @@
 const library = document.getElementById("library");
 const libraryPreview = document.getElementById("library-preview");
 const gallery = document.getElementById("gallery");
+const home = document.getElementById("home")
 let slideArr;
 let lastSlide;
 let images = [];
@@ -32,6 +33,8 @@ gallery.addEventListener('games_retrieved', (e) => {
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
     startSlideShow();
+    localStorage.setItem(images)
+
 })
 
 // Add event listener to library preview element, then populate with images from users game list
@@ -89,6 +92,7 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
         // count_display.dispatchEvent(gameDataRetrieved);
         gallery.dispatchEvent(gameDataRetrieved);
         libraryPreview.dispatchEvent(gameDataRetrieved);
+        home.dispatchEvent(gameDataRetrieved);
         // library.dispatchEvent(gameDataRetrieved);
     }
 )
@@ -240,4 +244,16 @@ function bwdSlide() {
         slideIndex = lastSlide;
     }
     slideArr[slideIndex].style.display = "block";
+}
+
+
+
+// Tab Selector
+function pickTab(tabName){
+    let tabs;
+ tabs = Array.from(document.getElementsByClassName("page"));
+ tabs.forEach((tab) => {
+    tab.style.display = "none";
+ })
+ document.getElementById(tabName).style.display = "block";
 }

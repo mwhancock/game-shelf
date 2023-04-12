@@ -199,6 +199,7 @@ hr,
   height: 20vh;
   width: 100%;
   object-fit: cover;
+  transition: 500ms ease;
 }
 
 .game-info{
@@ -207,14 +208,24 @@ hr,
   left: -1px;
   color: var(--text-color);
   font-weight: 500;
-  font-size: 1.2vh;
+  font-size: 1.25vh;
   text-align: center;
-  height: 2rem;
+  height: 2.7vh;
+  overflow: hidden;
   padding: 0.5rem .1rem 0.2rem;
   position:absolute;
+  transition: 500ms ease;
   width: 100%;
   z-index: 1;
 }
+
+.game-card:hover .game-img{
+  height: 10vh;
+}
+.game-card:hover .game-info{
+  height:12.7vh;
+}
+
 
 .grid-box {
   display: grid;
@@ -234,7 +245,7 @@ hr,
   justify-content: center;
   grid-column: 1/2;
   transition: 600ms ease;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 500;
   height: 24vh;
   width: 2fr;
@@ -254,7 +265,7 @@ hr,
   grid-column: 1/2;
   transition: 600ms ease;
   top: 0;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 500;
   height: 24vh;
   width: 2fr;
