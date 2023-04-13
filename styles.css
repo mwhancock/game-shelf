@@ -160,6 +160,10 @@ hr,
   'opsz' 48
 }
 
+.menu-icon{
+  display: none;
+}
+
 .next-btn{
   right: 0;
 }
@@ -368,6 +372,13 @@ hr,
     height: 11vh;
     width: 95%;
     padding: 0 5%;
+  }
+
+  .menu-icon{
+    display: block;
+    position: absolute;
+    margin-right: 0.5rem;
+    margin-top: 1.23rem;
   }
 
   .side-bar{
