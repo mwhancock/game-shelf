@@ -9,8 +9,6 @@ let lastSlide;
 let images = [];
 let names = [];
 
-// const library = document.getElementById("library");
-
 // Grab our HTML Element that is going to display APi data once available
 // const count_display = document.getElementById("count-display");
 
@@ -26,15 +24,13 @@ let names = [];
 gallery.addEventListener('games_retrieved', (e) => {
     const gameList = e.detail.games;
     gameList.forEach((game) => {
-        images.push(game.images.medium)
+        images.push(game.images.medium);
     })
     showFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
     startSlideShow();
-    localStorage.setItem(images)
-
 })
 
 // Add event listener to library preview element, then populate with images from users game list
@@ -88,11 +84,10 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 )
 
 // dispatch our event using the HTML object it is attached to
-// we could also use the window object for this as well
         // count_display.dispatchEvent(gameDataRetrieved);
         gallery.dispatchEvent(gameDataRetrieved);
         libraryPreview.dispatchEvent(gameDataRetrieved);
-        home.dispatchEvent(gameDataRetrieved);
+        // home.dispatchEvent(gameDataRetrieved);
         // library.dispatchEvent(gameDataRetrieved);
     }
 )
