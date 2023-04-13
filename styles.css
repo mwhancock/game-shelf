@@ -302,8 +302,9 @@ hr,
 /* Side Navigation */
 
 .logo{
+  align-self: center;
   background: #263330ff;
-  border-radius: var(--main-border-radius) ;
+  border-radius: var(--main-border-radius);
   width: 10.5rem;
 }
 
@@ -361,7 +362,14 @@ hr,
 }
 
 
-@media (max-width: 350px){
+@media (max-width: 450px){
+  .new-game-btn, .lib-btn{
+    grid-row: 1;
+    height: 11vh;
+    width: 95%;
+    padding: 0 5%;
+  }
+
   .side-bar{
     align-items: center;
     border-radius: 0px;
@@ -372,11 +380,33 @@ hr,
     /* overflow: hidden; */
     position: absolute;
   }
+
+  .games{
+    grid-auto-flow: row;
+    overflow-y: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .game-card{
+    height: 22vh;
+    width: 100%;
+    grid-column: span 2;
+  }
+
+  .gallery{
+    /* border: 2px solid hotpink; */
+    height: 17vh;
+  }
+  
+  .featured{
+    margin-top: 12vh;
+  }
   
   .logo{
-    /* align-self: center; */
     border-radius: 15px;
     width: 6.5rem;
+    margin-left: 0.5rem;
+    margin-top: 1.23rem;
     position: absolute;
   }
 
@@ -384,7 +414,19 @@ hr,
     width: 4rem;
   }
 
+  .lib-btn{
+    grid-column: 1/2;
+  }
+
+  .nav-box{
+    display: flex;
+  }
+
   .nav-list{
     display: none;
+  }
+
+  .new-game-btn{
+    grid-column: 2/2;
   }
 }
