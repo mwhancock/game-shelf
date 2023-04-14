@@ -47,23 +47,30 @@
             /></a>
           </div>
           <ul class="nav-list grid-box">
-            
             <li>
-              <button class="nav-item" onclick="pickTab('home'), startSlideShow()">Home</button>
+              <div class="nav-item">
+              <a>Home</a>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab('library')">Library</button>
+              <div class="nav-item">
+                <a>Library</a>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab()">
-                Recommended
-              </button>
+              <div class="nav-item">
+                <a>Recommended</a>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab()">Browse</button>
+              <div class="nav-item">
+                <a>Browse</a>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab()">Forums</button>
+              <div class="nav-item">
+                <a>Forums</a>
+              </div>
             </li>
           </ul>
         </nav>
@@ -115,6 +122,15 @@
         </section>
       </section>
 
+      <!-- Library Tab -->
+      <section id="library" class="page">
+        <div class="lable">
+          <h2>Library</h2>
+        </div>
+        <hr>
+        <section id="library-body" class="grid-box games"></section>
+      </section>
+
       <!-- Recomeneded Tab -->
       <section id="recommened" class="page">
 
@@ -145,7 +161,7 @@
     <!-- Feature Card Template -->
     <template id="feature-card-template">
       <div>
-        <img />
+        <img>
       </div>
     </template>
 

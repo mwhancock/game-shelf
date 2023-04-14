@@ -1,9 +1,9 @@
 // Global variables
 
-const library = document.getElementById("library");
+// const library = document.getElementById("library-body");
 const libraryPreview = document.getElementById("library-preview");
 const gallery = document.getElementById("gallery");
-const home = document.getElementById("home")
+// const home = document.getElementById("home")
 let slideArr;
 let lastSlide;
 let images = [];
@@ -26,9 +26,10 @@ gallery.addEventListener('games_retrieved', (e) => {
     gameList.forEach((game) => {
         images.push(game.images.medium);
     })
-    showFeatureCards();
+    getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
+    console.log(slideArr)
     lastSlide = slideArr.length - 1;
     startSlideShow();
 })
@@ -43,13 +44,14 @@ libraryPreview.addEventListener('games_retrieved', (e) => {
     getLibPrev();
 })
 
-   // add event listen to library element to fire off once game collection is retrieved
-//    library.addEventListener('gamesRetrived', (e) => {
+//    add event listen to library element to fire off once game collection is retrieved
+// library.addEventListener('gamesRetrived', (e) => {
 //     const gameList = e.gamesRetrieved.games;
-//     gameList.forEach(games, () =>{
-//         images.push(game.images.medium)
+//     gameList.forEach(game, () =>{
+//         images.push(game.images.medium);
+//         names.push(game.name);
 //     })
-//     getLibrary()
+//     getLibrary();
 // })
 
 // Boardgamegeek API
@@ -105,14 +107,14 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 //  then appends to featured section of page
 
 
-function showFeatureCards() {
+function getFeatureCards() {
     let itemDiv, imgItem, imgPath, i, temp, tempDiv;
     temp = document.getElementById("feature-card-template");
 
     for (i = 0; i < 10; i++) {
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div");
-        itemDiv.setAttribute("class", "feature-card fade")
+        itemDiv.setAttribute("class", "feature-card")
         imgItem = itemDiv.querySelector("img").cloneNode(true);
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
@@ -120,6 +122,7 @@ function showFeatureCards() {
         imgItem.setAttribute("alt", "a picture of a game")
         itemDiv.append(imgItem);
         gallery.append(itemDiv);
+
     }
 }
 
@@ -152,24 +155,29 @@ function getLibPrev(){
     libraryPreview.append(addGameBtn);
 }
 
-function getLibrary(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv;
-    temp = document.getElementById("game-card-template");
+// function getLibrary(){
+//     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+//     temp = document.getElementById("game-card-template");
 
-    for(i = 0; i < images.length(); i++){
-        tempDiv = temp.content.cloneNode(true);
-        itemDiv = tempDiv.querySelector("div");
-        itemDiv.setAttribute("class", "game-card")
-        imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = images[i];
-        imgItem.setAttribute("src", imgPath);
-        imgItem.setAttribute("alt", "a picture of a game");
-        imgItem.setAttribute("class", "game-img");
-        itemDiv.append(imgItem);
-        library.append(itemDiv);
-    }
+//     for(i = 0; i < images.length(); i++){
+//         tempDiv = temp.content.cloneNode(true);
+//         itemDiv = tempDiv.querySelector("div");
+//         itemDiv.setAttribute("class", "game-card")
+//         imgItem = itemDiv.querySelector("img").cloneNode(true);
+//         imgPath = images[i];
+//         imgItem.setAttribute("src", imgPath);
+//         imgItem.setAttribute("alt", "a picture of a game");
+//         imgItem.setAttribute("class", "game-img");
+//         gameItem = itemDiv.querySelector("p").cloneNode(true);
+//         gameName = names[i];
+//         gameItem.setAttribute("class", "game-info");
+//         gameItem.innerText = `${gameName}`;
+//         itemDiv.append(imgItem);
+//         itemDiv.append(gameItem);
+//         library.append(itemDiv);
+//     }
    
-}
+// }
 
 
 
@@ -244,11 +252,11 @@ function bwdSlide() {
 
 
 // Tab Selector
-function pickTab(tabName){
-    let tabs;
- tabs = Array.from(document.getElementsByClassName("page"));
- tabs.forEach((tab) => {
-    tab.style.display = "none";
- })
- document.getElementById(tabName).style.display = "block";
-}
+// function pickTab(tabName){
+//     let tabs;
+//  tabs = Array.from(document.getElementsByClassName("page"));
+//  tabs.forEach((tab) => {
+//     tab.style.display = "none";
+//  })
+//  document.getElementById(tabName).style.display = "block";
+// }

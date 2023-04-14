@@ -210,13 +210,14 @@ hr,
 
 .game-info{
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   bottom: -1rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   left: -1px;
   color: var(--text-color);
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   height: 2.7vh;
   overflow: hidden;
@@ -249,6 +250,7 @@ hr,
 .lib-btn{
   background: var(--light-green);
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -268,6 +270,7 @@ hr,
 .new-game-btn{
   background: var(--light-green);
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -302,9 +305,10 @@ hr,
 /* Side Navigation */
 
 .logo{
-  align-self: center;
+  /* align-self: center; */
   background: #263330ff;
   border-radius: var(--main-border-radius);
+  margin: 1rem 0 0 2.3rem;
   width: 10.5rem;
 }
 
@@ -312,14 +316,16 @@ hr,
   width: 6rem;
 }
 
+.menu-icon{
+  visibility: hidden;
+}
+
 .nav-item {
-  background: none;
-  border: none;
   font-size: 1.15rem;
   font-weight: 400;
-  width: 11rem;
   padding: .5rem;
   transition: 600ms ease;
+  width: 10rem;
 }
 
 .nav-item:hover{
@@ -362,7 +368,7 @@ hr,
 }
 
 
-@media (max-width: 450px){
+/* @media (max-width: 450px){
   .new-game-btn, .lib-btn{
     grid-row: 1;
     height: 11vh;
@@ -376,9 +382,9 @@ hr,
     display: flex;
     top: -10rem;
     width: 100vw;
-    height: 11vh;
+    height: 130px;
     /* overflow: hidden; */
-    position: absolute;
+    /* position: fixed;
   }
 
   .games{
@@ -395,10 +401,10 @@ hr,
 
   .gallery{
     /* border: 2px solid hotpink; */
-    height: 17vh;
-  }
+    /* height: 17vh;
+  } */
   
-  .featured{
+  /* .featured{
     margin-top: 12vh;
   }
   
@@ -406,7 +412,7 @@ hr,
     border-radius: 15px;
     width: 6.5rem;
     margin-left: 0.5rem;
-    margin-top: 1.23rem;
+    margin-top: 12%;
     position: absolute;
   }
 
@@ -429,4 +435,12 @@ hr,
   .new-game-btn{
     grid-column: 2/2;
   }
-}
+
+  .game-card:active, .game-card:hover .game-img{
+    height: 10vh;
+  }
+  .game-card:active, .game-card:hover .game-info{
+    height:11.4vh;
+    padding-top: 0.3rem;
+  }
+} */ 
