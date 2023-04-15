@@ -51,23 +51,30 @@
             menu
           </span>
           <ul class="nav-list grid-box">
-            
             <li>
-              <button class="nav-item" onclick="pickTab('home'), startSlideShow()">Home</button>
+              <div>
+              <button class="nav-item" onclick="pickTab('home')">Home</button>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab('library')">Library</button>
+              <div>
+                <button class="nav-item" onclick="pickTab('library')">Library</button>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab()">
-                Recommended
-              </button>
+              <div>
+                <button class="nav-item" onclick="pickTab('recommended')">Recommended</button>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab()">Browse</button>
+              <div>
+                <button class="nav-item" onclick="pickTab('browse')">Browse</button>
+              </div>
             </li>
             <li>
-              <button class="nav-item" onclick="pickTab()">Forums</button>
+              <div>
+                <button class="nav-item" onclick="pickTab('forums')">Forums</button>
+              </div>
             </li>
           </ul>
         </nav>
@@ -80,61 +87,71 @@
       <hr /> -->
 
       <!-- Home Tab -->
-
-      <section id="home" class="page">
-        <!-- GALLERY -->
-        <div class="lable featured">
-          <h2>Featured</h2>
-        </div>
-        <hr />
-        <div
-          id="gallery"
-          class="gallery"
-          onmouseenter="stopSlideShow()"
-          onmouseleave="startSlideShow()"
-        >
-          <button class="prev-btn">
-            <span class="material-symbols-outlined"> arrow_back_ios </span>
-          </button>
-
-          <button class="next-btn">
-            <span class="material-symbols-outlined"> arrow_forward_ios </span>
-          </button>
-        </div>
-
-        <!-- USER COLLECTION PREVIEW-->
-        <div class="lable">
-          <h2>Your Library</h2>
-        </div>
-        <hr />
-        <section id="library-preview" class="grid-box games"></section>
-
-        <!-- RECOMMENDED GAMES -->
-        <section class="grid-box recommend">
-          <div class="lable">
-            <h2>Recommended Games</h2>
+      <div class="page-content">
+        <section id="home" class="active page">
+          <!-- GALLERY -->
+          <div class="lable featured">
+            <h2>Featured</h2>
           </div>
           <hr />
-          <div class="grid-box rec-games"></div>
+          <div
+            id="gallery"
+            class="gallery"
+            onmouseenter="stopSlideShow()"
+            onmouseleave="startSlideShow()"
+          >
+            <button class="prev-btn">
+              <span class="material-symbols-outlined"> arrow_back_ios </span>
+            </button>
+  
+            <button class="next-btn">
+              <span class="material-symbols-outlined"> arrow_forward_ios </span>
+            </button>
+          </div>
+  
+          <!-- USER COLLECTION PREVIEW-->
+          <div class="lable">
+            <h2>Library Preview</h2>
+          </div>
+          <hr />
+          <section id="library-preview" class="grid-box games"></section>
+  
+          <!-- RECOMMENDED GAMES -->
+          <section class="grid-box recommend">
+            <div class="lable">
+              <h2>Recommended Games</h2>
+            </div>
+            <hr />
+            <div class="grid-box rec-games"></div>
+          </section>
         </section>
-      </section>
-
-      <!-- Recomeneded Tab -->
-      <section id="recommened" class="page">
-
-      </section>
-
-      <!-- Browse Tab -->
-      <section id="browse" class="page">
-
-      </section>
-
-      <!-- Forum Tab -->
-      <section id="forum" class="page">
-
-      </section>
-
-     
+  
+        <!-- Library Tab -->
+        <section id="library" class="page">
+          <div class="lable">
+            <h2>Library</h2>
+          </div>
+          <hr>
+          <section id="library-body" class="grid-box lib-games"></section>
+        </section>
+  
+        <!-- Recomeneded Tab -->
+        <section id="recommended" class="page">
+          <h2 class="lable">Recommended Games</h2>
+          <hr>
+        </section>
+  
+        <!-- Browse Tab -->
+        <section id="browse" class="page">
+          <h2 class="lable">Browse Games</h2>
+          <hr>
+        </section>
+  
+        <!-- Forum Tab -->
+        <section id="forum" class="page">
+          <h2 class="lable"> Forum</h2>
+        </section>
+      </div>
     </main>
 
     <!-- FOOTER -->
@@ -149,7 +166,7 @@
     <!-- Feature Card Template -->
     <template id="feature-card-template">
       <div>
-        <img />
+        <img>
       </div>
     </template>
 
@@ -170,12 +187,12 @@
 
     <!-- Library Button Template -->
     <template id="lib-btn-template">
-      <a href="#library" class="lib-btn">Full Library</a>
+      <a href="#library" class="lib-btn" onclick="pickTab('library')">Full Library</a>
     </template>
 
     <!-- Add Game Button -->
     <template id="new-game-template">
-      <a href="#new-game" class="new-game-btn">Add Game</a>
+      <a href="#" class="new-game-btn">Add Game</a>
     </template>
   </body>
 </html>

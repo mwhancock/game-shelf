@@ -4,6 +4,7 @@
   --nav-green: #94b49f;
   --dark-green: #8dac87;
   --light-green: #b4cfb0;
+  --logo-color: #263330;
   --text-color: #384541;
   --main-border-radius: 20px;
 }
@@ -66,8 +67,14 @@ hr,
   z-index: 1;
 }
 
+.next-btn, .prev-btn{
+  color: var(--logo-color);
+  margin-top: -15%;
+  height: 10rem;
+}
+
 .next-btn:hover, .prev-btn:hover{
-  background: #b2e1d49f;
+  background: var(--light-green);
   border-radius: var(--main-border-radius);
 }
 
@@ -136,19 +143,21 @@ hr,
   position: absolute;
 }
 .gallery{
+  /* border: 2px solid hotpink; */
   height: 20rem;
   position: relative;
   margin: 0 auto;
-  width: 0rem;
+  width: 40rem;
   overflow: hidden;
   scroll-behavior: smooth;
 }
 
 .gallery-img{
-  border-radius: var(--main-border-radius);
+  /* border: 2px solid hotpink; */
   height: auto;
-  width: 100%;
-  position: absolute;
+  margin-left: 3.95rem;
+  margin-top: -2rem;
+  width: 80%;
   object-fit: cover;
 }
 
@@ -188,7 +197,7 @@ hr,
 }
 
 .game-card{
-  /* border: 2px solid hotpink; */
+  border: 2px solid hotpink;
   cursor: pointer;
   border-radius: var(--main-border-radius);
   grid-column-end: auto;
@@ -214,13 +223,14 @@ hr,
 
 .game-info{
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   bottom: -1rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   left: -1px;
   color: var(--text-color);
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   height: 2.7vh;
   overflow: hidden;
@@ -253,6 +263,7 @@ hr,
 .lib-btn{
   background: var(--light-green);
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,6 +283,7 @@ hr,
 .new-game-btn{
   background: var(--light-green);
   border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,6 +301,14 @@ hr,
   color:#30393a;
 }
 
+.page{
+  display: none;
+}
+
+.active{
+  display: block;
+}
+
 .recommend {
   margin-top: 2.5rem;
 }
@@ -303,12 +323,28 @@ hr,
 }
 
 
+/* Library */
+
+.lib-games{
+  gap: 2rem;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(6, 11rem);
+  padding: 0.5rem;
+  position: relative;
+  height: auto;
+  margin: 0 auto;
+  /* width: 20rem; */
+  /* overflow-x: auto; */
+}
+
+
 /* Side Navigation */
 
 .logo{
-  align-self: center;
-  background: #263330ff;
+  /* align-self: center; */
+  /* background: var(--logo-color); */
   border-radius: var(--main-border-radius);
+  margin: 2rem 3rem;
   width: 10.5rem;
 }
 
@@ -316,14 +352,18 @@ hr,
   width: 6rem;
 }
 
+.menu-icon{
+  visibility: hidden;
+}
+
 .nav-item {
   background: none;
   border: none;
   font-size: 1.15rem;
-  font-weight: 400;
-  width: 11rem;
+  font-weight: 500;
   padding: .5rem;
   transition: 600ms ease;
+  width: 10rem;
 }
 
 .nav-item:hover{
@@ -366,7 +406,8 @@ hr,
 }
 
 
-@media (max-width: 450px){
+ @media (max-width: 450px){
+
   .new-game-btn, .lib-btn{
     grid-row: 1;
     height: 11vh;
@@ -374,22 +415,12 @@ hr,
     padding: 0 5%;
   }
 
-  .menu-icon{
-    display: block;
-    position: absolute;
-    margin-right: 0.5rem;
-    margin-top: 1.23rem;
+  .next-btn, .prev-btn{
+    display: none;
   }
 
-  .side-bar{
-    align-items: center;
-    border-radius: 0px;
-    display: flex;
-    top: -10rem;
-    width: 100vw;
-    height: 11vh;
-    /* overflow: hidden; */
-    position: absolute;
+  .featured{
+    margin-top: 13vh;
   }
 
   .games{
@@ -406,18 +437,31 @@ hr,
 
   .gallery{
     /* border: 2px solid hotpink; */
-    height: 17vh;
-  }
+    height: 18vh;
+    width: 100%;
+  } 
   
-  .featured{
-    margin-top: 12vh;
+  .gallery-img{
+    /* border: 2px solid hotpink; */
+    height: auto;
+    margin-left: 1rem;
+    position: absolute;
+    width: 40%;
   }
+
+  .game-card:active, .game-card:hover .game-img{
+    height: 10vh;
+  }
+  .game-card:active, .game-card:hover .game-info{
+    height:11.4vh;
+    padding-top: 0.3rem;
+  }
+
   
   .logo{
-    border-radius: 15px;
     width: 6.5rem;
     margin-left: 0.5rem;
-    margin-top: 1.23rem;
+    margin-top: -0.5rem;
     position: absolute;
   }
 
@@ -427,6 +471,10 @@ hr,
 
   .lib-btn{
     grid-column: 1/2;
+  }
+
+  .menu-icon{
+    visibility: visible;
   }
 
   .nav-box{
@@ -440,4 +488,16 @@ hr,
   .new-game-btn{
     grid-column: 2/2;
   }
+
+  .side-bar{
+    align-items: center;
+    border-radius: 0px;
+    display: flex;
+    top: -10rem;
+    width: 100vw;
+    height: 130px;
+    overflow: hidden;
+    position: fixed;
+  }
+
 }
