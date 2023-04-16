@@ -8,37 +8,19 @@ let lastSlide;
 let images = [];
 let names = [];
 
-
-// Add event listener to gallery element, then populate with images from game list
-gallery.addEventListener('games_retrieved', (e) => {
+// Add event listener to window that will populate library once api is fetched
+window.addEventListener('games_retrieved', (e) => {
     const gameList = e.detail.games;
     gameList.forEach((game) => {
         images.push(game.images.medium);
+        names.push(game.name);
     })
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
     startSlideShow();
-})
-
-// Add event listen to library element to fire off once game collection is retrieved
-library.addEventListener('games_retrieved', (e) => {
-    const gameList = e.detail.games;
-    gameList.forEach((game) => {
-        images.push(game.images.medium);
-        names.push(game.name);
-    })
     getLibrary();
-})
-
-// Add event listener to library preview element, then populate with images from users game list
-libraryPreview.addEventListener('games_retrieved', (e) => {
-    const gameList = e.detail.games;
-    gameList.forEach((game) => {
-        images.push(game.images.medium);
-        names.push(game.name);
-    })
     getLibPrev();
 })
 
@@ -75,9 +57,7 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 
 // dispatch our event using the HTML object it is attached to
         // count_display.dispatchEvent(gameDataRetrieved);
-        gallery.dispatchEvent(gameDataRetrieved);
-        libraryPreview.dispatchEvent(gameDataRetrieved);
-        library.dispatchEvent(gameDataRetrieved);
+        window.dispatchEvent(gameDataRetrieved)
     }
 )
 .catch( err =>
