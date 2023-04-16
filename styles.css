@@ -145,7 +145,7 @@ hr,
 }
 
 .game-card{
-  border: 2px solid hotpink;
+  /* border: 2px solid hotpink; */
   cursor: pointer;
   border-radius: var(--main-border-radius);
   grid-column-end: auto;
@@ -162,6 +162,7 @@ hr,
   border-radius: var(--main-border-radius);
   box-shadow: 0 0 2px var(--text-color);
   position: absolute;
+  left: 0;
   top: 0;
   height: 83%;
   width: 100%;
