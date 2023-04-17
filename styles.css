@@ -1,7 +1,6 @@
 /* Global Variables */
 :root{
   --bg-color: #fff4e0;
-  --nav-green: #94b49f;
   --dark-green: #8dac87;
   --light-green: #b4cfb0;
   --logo-color: #263330;
@@ -41,12 +40,8 @@ hr,
   justify-content: center;
 }
 
-.foot {
-  background: var(--nav-green);
-}
-
 .game-info,
-.side-bar {
+.side-bar, .foot {
   background: var(--light-green);
 }
 
@@ -151,6 +146,7 @@ hr,
   grid-column-end: auto;
   height: 24vh;
   width: 100%;
+  transition: 400ms ease;
   container-type: inline-size;
 }
 
@@ -190,12 +186,35 @@ hr,
   z-index: 1;
 }
 
+.game-des{
+  /* visibility: hidden; */
+}
+
+/* .game-card:active{
+  height: 25vh;
+  width: 20vw;
+  z-index: 3;
+}
+
+.game-card:active .game-img{
+  width: 10vw;
+  height: 15vw
+}
+
+.game-card:active > p{
+  font-size: 4cqi;
+} */
+
 .game-card:hover .game-img{
-  height: 10vh;
+  height: 10.3vh;
 }
 .game-card:hover .game-info{
-  height:12.7vh;
+  height:12.9vh;
   padding-top: 0.3rem;
+}
+
+.game-card:hover .game-des{
+  visibility: visible;
 }
 
 
@@ -252,6 +271,45 @@ hr,
 
 .page{
   display: none;
+}
+
+.preview-img{
+  border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 83%;
+  width: 100%;
+  object-fit: cover;
+  transition: 500ms ease;
+}
+
+.preview-info{
+  background: var(--light-green);
+  border-radius: var(--main-border-radius);
+  box-shadow: 0 0 2px var(--text-color);
+  bottom: -1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  left: -1px;
+  color: var(--text-color);
+  font-weight: 600;
+  text-align: center;
+  height: 2.7vh;
+  overflow: hidden;
+  padding: 0.63rem 0 0.14rem;
+  position:absolute;
+  transition: 500ms ease;
+  width: 100%;
+  z-index: 1;
+}
+
+.game-card:hover .preview-info{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 75%;
 }
 
 .active{
@@ -312,7 +370,7 @@ hr,
   font-weight: 500;
   padding: .5rem;
   transition: 600ms ease;
-  width: 10rem;
+  width: 100%;
 }
 
 .nav-item:hover{
@@ -331,12 +389,12 @@ hr,
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: 0 0 3px #1d412f;
-  grid-template-columns: 1fr;
+  /* grid-template-columns: 1fr; */
   height: 70vh;
   text-align: center;
   position: fixed;
   margin: 15vh 0;
-  width: auto;
+  width: 14%;
   z-index: 10;
 }
 
@@ -422,7 +480,16 @@ hr,
     grid-column: 1/2;
   }
 
+  .lib-games{
+    height: 22vh;
+    width: 100%;
+    grid-column: span 2;
+  }
+
   .menu-icon{
+    position: absolute;
+    bottom: 1.7rem;
+    right: 1rem;
     visibility: visible;
   }
 
@@ -431,7 +498,9 @@ hr,
   }
 
   .nav-list{
-    display: none;
+    height: 3vh;
+
+    /* display: none; */
   }
 
   .new-game-btn{
@@ -442,10 +511,11 @@ hr,
     align-items: center;
     border-radius: 0px;
     display: flex;
+    /* flex-direction: column; */
     top: -10rem;
     width: 100vw;
     height: 130px;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: fixed;
   }
 
