@@ -339,11 +339,18 @@ hr,
   padding: 0.5rem;
   position: relative;
   height: auto;
-  margin: 0 auto;
+  margin-left: 10rem;
   /* width: 20rem; */
   /* overflow-x: auto; */
 }
 
+.lib-lable{
+  margin-left: 10rem;
+}
+
+.lib-hr{
+  margin-left: 30em;
+}
 
 /* Side Navigation */
 
@@ -415,60 +422,11 @@ hr,
 
  @media (max-width: 450px){
 
-  .new-game-btn, .lib-btn{
-    grid-row: 1;
-    height: 11vh;
-    width: 95%;
-    padding: 0 5%;
-  }
-
-  .next-btn, .prev-btn{
-    display: none;
-  }
-
-  .featured{
-    margin-top: 13vh;
-  }
-
-  .games{
-    grid-auto-flow: row;
-    overflow-y: auto;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .game-card{
-    height: 22vh;
-    width: 100%;
-    grid-column: span 2;
-  }
-
-  .gallery{
-    /* border: 2px solid hotpink; */
-    height: 18vh;
-    width: 100%;
-  } 
-  
-  .gallery-img{
-    /* border: 2px solid hotpink; */
-    height: auto;
-    margin-left: 1rem;
-    position: absolute;
-    width: 40%;
-  }
-
-  .game-card:active, .game-card:hover .game-img{
-    height: 10vh;
-  }
-  .game-card:active, .game-card:hover .game-info{
-    height:11.4vh;
-    padding-top: 0.3rem;
-  }
-
-  
+  /* Nav Bar */
   .logo{
     width: 6.5rem;
     margin-left: 0.5rem;
-    margin-top: -0.5rem;
+    margin-top: -1.2rem;
     position: absolute;
   }
 
@@ -476,20 +434,10 @@ hr,
     width: 4rem;
   }
 
-  .lib-btn{
-    grid-column: 1/2;
-  }
-
-  .lib-games{
-    height: 22vh;
-    width: 100%;
-    grid-column: span 2;
-  }
-
   .menu-icon{
     position: absolute;
-    bottom: 1.7rem;
-    right: 1rem;
+    bottom: 2.5rem;
+    right: 1.5rem;
     visibility: visible;
   }
 
@@ -499,12 +447,7 @@ hr,
 
   .nav-list{
     height: 3vh;
-
-    /* display: none; */
-  }
-
-  .new-game-btn{
-    grid-column: 2/2;
+    display: none;
   }
 
   .side-bar{
@@ -518,5 +461,72 @@ hr,
     /* overflow: hidden; */
     position: fixed;
   }
+
+  /* Gallery */
+  .featured{
+    margin-top: 13vh;
+  }
+
+  .gallery-img{
+    /* border: 2px solid hotpink; */
+    height: auto;
+    margin-left: 1rem;
+    position: absolute;
+    width: 40%;
+  }
+
+  .gallery{
+    /* border: 2px solid hotpink; */
+    height: 18vh;
+    width: 100%;
+  } 
+
+  /* Lirary Preview */
+  .games{
+    grid-auto-flow: row;
+    overflow-y: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .game-card{
+    height: 22vh;
+    width: 100%;
+    grid-column: span 2;
+  }
+
+  .game-card:active, .game-card:hover .game-img{
+    height: 10vh;
+  }
+  .game-card:active, .game-card:hover .game-info{
+    height:11.4vh;
+    padding-top: 0.3rem;
+  }
+
+  .lib-btn{
+    grid-column: 1/2;
+  }
+
+  .lib-games{
+    height: 22vh;
+    width: 100%;
+    grid-column: span 2;
+  }
+
+  .new-game-btn, .lib-btn{
+    grid-row: 1;
+    height: 11vh;
+    width: 95%;
+    padding: 0 5%;
+  }
+
+  .next-btn, .prev-btn{
+    display: none;
+  }
+
+  .new-game-btn{
+    grid-column: 2/2;
+  }
+
+
 
 }
