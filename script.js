@@ -7,6 +7,7 @@ let slideArr;
 let lastSlide;
 let images = [];
 let names = [];
+let descriptions = [];
 
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games_retrieved', (e) => {
@@ -14,6 +15,7 @@ window.addEventListener('games_retrieved', (e) => {
     gameList.forEach((game) => {
         images.push(game.images.medium);
         names.push(game.name);
+        descriptions.push(game.description_preview);
     })
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
@@ -48,16 +50,15 @@ fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
                     // set our API's data into custom properties of the event's detail object
                     detail:
                     {
-// we can pass anything we want as a key-value pair here, neat!
+                        // we can pass anything we want as a key-value pair here, neat!
                         count: data.count,
                         games: data.games
                     }
                 }
             )
 
-// dispatch our event using the HTML object it is attached to
-        // count_display.dispatchEvent(gameDataRetrieved);
-        window.dispatchEvent(gameDataRetrieved)
+            // dispatch our event using the HTML object it is attached to
+            window.dispatchEvent(gameDataRetrieved)
     }
 )
 .catch( err =>
@@ -109,10 +110,10 @@ function getLibPrev(){
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
-        imgItem.setAttribute("class", "game-img");
+        imgItem.setAttribute("class", "preview-img");
         gameItem = itemDiv.querySelector("p").cloneNode(true);
         gameName = names[i];
-        gameItem.setAttribute("class", "game-info");
+        gameItem.setAttribute("class", "preview-info");
         gameItem.innerText = `${gameName}`;
         itemDiv.append(imgItem);
         itemDiv.append(gameItem);
@@ -123,7 +124,7 @@ function getLibPrev(){
 }
 
 function getLibrary(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes, desItem;
     temp = document.getElementById("game-card-template");
 
     for(i = 0; i < images.length; i++){
@@ -137,11 +138,14 @@ function getLibrary(){
         imgItem.setAttribute("class", "game-img");
         gameItem = itemDiv.querySelector("p").cloneNode(true);
         gameName = names[i];
-        gameItem.setAttribute("class", "game-info");
-        gameItem.innerText = `${gameName}`;
+        desItem = itemDiv.querySelector("p").cloneNode(true);
+        gameDes = descriptions[i];
+        gameItem.setAttribute("class", "game-info game-des");
+        gameItem.innerText = `${gameName} ${gameDes}`;
         itemDiv.append(imgItem);
         itemDiv.append(gameItem);
         library.append(itemDiv);
+        console.log(itemDiv)
     }
 }
 
@@ -225,4 +229,8 @@ function pickTab(tabName){
         tab.classList.remove('active');
     })
     document.getElementById(tabName).classList.add('active');
+}
+
+function dropDown(){
+    
 }
