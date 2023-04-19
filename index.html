@@ -7,7 +7,7 @@
     <title>Game Shelf</title>
 
     <!-- STYLES -->
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -122,10 +122,10 @@
   
         <!-- Library Tab -->
         <section id="library" class="page">
-          <div class="lable">
+          <div class="lable lib-lable">
             <h2>Library</h2>
           </div>
-          <hr>
+          <hr class="lib-hr">
           <section id="library-body" class="grid-box lib-games"></section>
         </section>
   
@@ -168,6 +168,7 @@
     <template id="game-card-template">
       <div>
         <a href="game-page.html"><img /></a>
+        <h5></h5>
         <p></p>
       </div>
     </template>
@@ -180,13 +181,13 @@
     </template>
 
     <!-- Library Button Template -->
-    <template id="lib-btn-template">
+    <!-- <template id="lib-btn-template">
       <a href="#library" class="lib-btn" onclick="pickTab('library')">Full Library</a>
     </template>
 
-    <!-- Add Game Button -->
-    <template id="new-game-template">
+     Add Game Button -->
+    <!-- <template id="new-game-template">
       <a href="#" class="new-game-btn">Add Game</a>
-    </template>
+    </template> -->
   </body>
 </html>
