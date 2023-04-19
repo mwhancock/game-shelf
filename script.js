@@ -99,8 +99,8 @@ function getFeatureCards() {
 function getLibPrev(){
     let itemDiv, imgItem, imgPath, i, temp, tempDiv, libBtn, gameItem, gameName;
     temp  = document.getElementById("game-card-template");
-    libBtn = document.getElementById("lib-btn-template").content.cloneNode(true);
-    addGameBtn = document.getElementById("new-game-template").content.cloneNode(true);
+    // libBtn = document.getElementById("lib-btn-template").content.cloneNode(true);
+    // addGameBtn = document.getElementById("new-game-template").content.cloneNode(true);
 
     for(i = 0; i < 16; i++){
         tempDiv = temp.content.cloneNode(true);
@@ -111,7 +111,7 @@ function getLibPrev(){
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
         imgItem.setAttribute("class", "preview-img");
-        gameItem = itemDiv.querySelector("p").cloneNode(true);
+        gameItem = itemDiv.querySelector("h5").cloneNode(true);
         gameName = names[i];
         gameItem.setAttribute("class", "preview-info");
         gameItem.innerText = `${gameName}`;
@@ -119,8 +119,8 @@ function getLibPrev(){
         itemDiv.append(gameItem);
         libraryPreview.append(itemDiv);
     }
-    libraryPreview.append(libBtn);
-    libraryPreview.append(addGameBtn);
+    // libraryPreview.append(libBtn);
+    // libraryPreview.append(addGameBtn);
 }
 
 function getLibrary(){
@@ -130,13 +130,13 @@ function getLibrary(){
     for(i = 0; i < images.length; i++){
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div");
-        itemDiv.setAttribute("class", "game-card")
+        itemDiv.setAttribute("class", "game-card");
         imgItem = itemDiv.querySelector("img").cloneNode(true);
         imgPath = images[i];
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
         imgItem.setAttribute("class", "game-img");
-        gameItem = itemDiv.querySelector("p").cloneNode(true);
+        gameItem = itemDiv.querySelector("h5").cloneNode(true);
         gameName = names[i];
         desItem = itemDiv.querySelector("p").cloneNode(true);
         gameDes = descriptions[i];
@@ -145,7 +145,7 @@ function getLibrary(){
         itemDiv.append(imgItem);
         itemDiv.append(gameItem);
         library.append(itemDiv);
-        console.log(itemDiv)
+        // console.log(itemDiv)
     }
 }
 
