@@ -111,7 +111,7 @@ function getLibPrev(){
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
         imgItem.setAttribute("class", "preview-img");
-        gameItem = itemDiv.querySelector("h5").cloneNode(true);
+        gameItem = itemDiv.querySelector("p").cloneNode(true);
         gameName = names[i];
         gameItem.setAttribute("class", "preview-info");
         gameItem.innerText = `${gameName}`;
@@ -139,6 +139,7 @@ function getLibrary(){
         gameItem = itemDiv.querySelector("h5").cloneNode(true);
         gameName = names[i];
         desItem = itemDiv.querySelector("p").cloneNode(true);
+        console.log(itemDiv.querySelector('h5'))
         gameDes = descriptions[i];
         gameItem.setAttribute("class", "game-info game-des");
         gameItem.innerText = `${gameName} ${gameDes}`;
