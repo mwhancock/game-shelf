@@ -8,6 +8,7 @@ let lastSlide;
 let images = [];
 let names = [];
 let descriptions = [];
+let gameIds = [];
 
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games_retrieved', (e) => {
@@ -16,6 +17,8 @@ window.addEventListener('games_retrieved', (e) => {
         images.push(game.images.medium);
         names.push(game.name);
         descriptions.push(game.description_preview);
+        gameIds.push(game.id)
+
     })
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
