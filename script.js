@@ -145,7 +145,7 @@ function getLibrary(){
         console.log(itemDiv.querySelector('h5'))
         gameDes = descriptions[i];
         gameItem.setAttribute("class", "game-info game-des");
-        gameItem.innerText = `${gameName} ${gameDes}`;
+        gameItem.innerText = `${gameName} \n ${gameDes}`;
         itemDiv.append(imgItem);
         itemDiv.append(gameItem);
         library.append(itemDiv);
