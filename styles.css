@@ -21,7 +21,7 @@ a {
 }
 
 hr {
-  width: 30vw;
+  width: 35rem;
   margin-bottom: 2rem;
 }
 
@@ -75,13 +75,13 @@ hr,
 
 /* Gallery Classes */
 .featured{
-  margin-top: 17vh;
+  margin-top: 17rem;
 }
 
 .feature-card {
   cursor: pointer;
-  height: 20rem;
-  width: 40rem;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   position: absolute;
 }
@@ -136,7 +136,7 @@ hr,
   position: relative;
   height: 70rem;
   margin: 0 auto;
-  width: 50vw;
+  width: 40rem;
 }
 
 .game-card{
@@ -160,26 +160,27 @@ hr,
   position: absolute;
   left: 0;
   top: 0;
-  height: 11.3rem;
+  height: 12.3rem;
   width: 100%;
   object-fit: cover;
   transition: 500ms ease;
 }
 
 .game-info{
+  /* border: 2px solid hotpink; */
   border-radius: var(--main-border-radius);
   box-shadow: 0 0 2px var(--text-color);
   bottom: -1rem;
   display: flex;
-  align-items: flex-start;
+  align-items: startS;
   justify-content: center;
   left: -1px;
   color: var(--text-color);
   font-weight: 600;
   text-align: center;
-  height: 2.7vh;
+  height: .9rem;
   overflow: hidden;
-  padding: 0.63rem 0 0.14rem;
+  padding: 0.27rem 0 0.3rem 0;
   position:absolute;
   transition: 500ms ease;
   width: 100%;
@@ -191,26 +192,11 @@ hr,
   font-weight: 300;
 }
 
-/* .game-card:active{
-  height: 25vh;
-  width: 20vw;
-  z-index: 3;
-}
-
-.game-card:active .game-img{
-  width: 10vw;
-  height: 15vw
-}
-
-.game-card:active > p{
-  font-size: 4cqi;
-} */
-
 .game-card:hover .game-img{
-  height: 10.3vh;
+  height: 5.3rem;
 }
 .game-card:hover .game-info{
-  height:12.9vh;
+  height: 7.9rem;
   padding-top: 0.3rem;
 }
 
@@ -226,7 +212,7 @@ hr,
 
 .lable {
   justify-self: center;
-  margin-top: 9vh;
+  margin-top: 5rem;
 }
 
 /* .lib-btn{
@@ -298,9 +284,9 @@ hr,
   color: var(--text-color);
   font-weight: 600;
   text-align: center;
-  height: 2.7vh;
+  height: 1.5rem;
   overflow: hidden;
-  padding: 0.63rem 0 0.14rem;
+  padding: 0.3rem 0 0.3rem;
   position:absolute;
   transition: 500ms ease;
   width: 100%;
@@ -345,7 +331,6 @@ hr,
 /* Side Navigation */
 
 .logo{
-  /* align-self: center; */
   /* background: var(--logo-color); */
   border-radius: var(--main-border-radius);
   margin: 2rem 3rem 0;
@@ -387,10 +372,10 @@ hr,
   border-top-right-radius: 20px;
   box-shadow: 0 0 3px #1d412f;
   /* grid-template-columns: 1fr; */
-  height: 70vh;
+  height: 43rem;
   text-align: center;
   position: fixed;
-  margin: 15vh 0;
+  margin: 10rem 0;
   width: 14%;
   z-index: 10;
 }
@@ -409,114 +394,69 @@ hr,
   width: 100%;
 }
 
-/* 
- @media (max-width: 450px){
 
-  /* Nav Bar */
-  /* .logo{
-    width: 6.5rem;
-    margin-left: 0.5rem;
-    margin-top: -1.2rem;
-    position: absolute;
+@media (max-width: 576px){
+
+}
+
+@media (max-width: 768px){
+
+}
+
+@media (max-width: 992px){
+
+}
+
+@media (max-width: 1200px){
+
+  .next-btn, .prev-btn{
+    margin-top: -6rem;
   }
 
   .logo-img{
-    width: 4rem;
+    width: 5rem;
   }
 
-  .menu-icon{
-    position: absolute;
-    bottom: 2.5rem;
-    right: 1.5rem;
-    visibility: visible;
+  .gallery{
+    width:30rem;
+    height: 15rem;
   }
-
-  .nav-box{
-    display: flex;
-  }
-
-  .nav-list{
-    height: 3vh;
-    display: none;
-  } */
-
-  /* .side-bar{
-    align-items: center;
-    border-radius: 0px;
-    display: flex; */
-    /* flex-direction: column; */
-    /* top: -10rem;
-    width: 100vw;
-    height: 130px; */
-    /* overflow: hidden; */
-    /* position: fixed;
-  } */
-
-  /* Gallery */
-  /* .featured{
-    margin-top: 13vh;
-  } */
-
-  /* .gallery-img{ */
-    /* border: 2px solid hotpink; */
-    /* height: auto;
-    margin-left: 1rem;
-    position: absolute;
-    width: 40%;
-  } */
-
-  /* .gallery{ */
-    /* border: 2px solid hotpink; */
-    /* height: 18vh;
-    width: 100%;
-  }  */
-
-  /* Lirary Preview */
-  /* .games{
-    grid-auto-flow: row;
-    overflow-y: auto;
-    grid-template-columns: 1fr 1fr;
+  .gallery-img{
+    width: 74%;
   }
 
   .game-card{
-    height: 22vh;
+    height: 11.5rem;
     width: 100%;
-    grid-column: span 2;
+  }
+  
+  .game-card > p{
+    font-size: 7cqi;
   }
 
-  .game-card:active, .game-card:hover .game-img{
-    height: 10vh;
-  }
-  .game-card:active, .game-card:hover .game-info{
-    height:11.4vh;
-    padding-top: 0.3rem;
+  .game-img{
+    height: 9.3rem;
   }
 
-  .lib-btn{
-    grid-column: 1/2;
+  .game-card:hover .game-img{
+    height: 4.5rem;
+  }
+
+  .game-card:hover .game-info{
+    height: 5.67rem;
+  }
+
+  .game-info{
+    height: .9rem;
+    padding: 0.27rem 0 0.3rem 0;
+
+  }
+
+  .preview-info{
+    height: 1rem;
   }
 
   .lib-games{
-    height: 22vh;
-    width: 100%;
-    grid-column: span 2;
+    grid-template-columns: repeat(4, 10rem);
   }
-
-  .new-game-btn, .lib-btn{
-    grid-row: 1;
-    height: 11vh;
-    width: 95%;
-    padding: 0 5%;
-  }
-
-  .next-btn, .prev-btn{
-    display: none;
-  }
-
-  .new-game-btn{
-    grid-column: 2/2;
-  } */
-
-
-
 }
