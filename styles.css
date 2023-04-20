@@ -530,3 +530,47 @@ hr,
     font-size: medium;
   }
 }
+
+@media (max-width: 450px){
+  hr{
+    width: 17rem;
+  }
+
+  .games{
+    grid-template-columns: 1fr;
+    width: 12rem;
+  }
+
+  .prev-btn, .next-btn{
+    padding: 2%;
+  }
+
+  .gallery{
+    height: 12rem;
+    width: 20rem;
+  }
+  
+  .gallery-img{
+    margin-left: 2.5rem;
+  }
+
+  .lib-games{
+    grid-template-columns: 1fr;
+    margin-left: 2.3rem;
+    width: 12rem;
+  }
+
+  .nav-list{
+    /* border: 2px solid hotpink; */
+    grid-template-columns: repeat(3, 1fr);
+    gap: .2rem;
+    margin-top: 2.5rem;
+    margin-left: 6rem;
+    width: 70%;
+  }
+
+  .nav-item{
+    font-size: .8rem;
+  }
+}
+
