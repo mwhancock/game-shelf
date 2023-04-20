@@ -395,19 +395,6 @@ hr,
   width: 100%;
 }
 
-
-@media (max-width: 576px){
-
-}
-
-@media (max-width: 768px){
-
-}
-
-@media (max-width: 992px){
-
-}
-
 @media (max-width: 1200px){
 
   .next-btn, .prev-btn{
@@ -475,4 +462,28 @@ hr,
   .lib-games{
     grid-template-columns: repeat(4, 10rem);
   }
+}
+
+@media (max-width: 992px){
+  .lib-games{
+    grid-template-columns: repeat(4, 8rem);
+  }
+
+  .logo-img{
+    position: relative;
+    left: -3.9rem;
+  }
+
+  .nav-list{
+    position: relative;
+    left: -2.6rem;
+  }
+}
+
+@media (max-width: 768px){
+
+}
+
+@media (max-width: 576px){
+
 }
