@@ -509,5 +509,24 @@ hr,
 }
 
 @media (max-width: 576px){
+  hr{
+    width: 27rem
+  }
+  .games{
+    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+    width: 25rem;
+  }
+  
+  .lib-games{
+    grid-template-columns: repeat(2, 1fr);
+  }
 
+  .nav-list{
+    width: 25rem;
+  }
+
+  .nav-item{
+    font-size: medium;
+  }
 }
