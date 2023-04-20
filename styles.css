@@ -136,7 +136,7 @@ hr,
   position: relative;
   height: 70rem;
   margin: 0 auto;
-  width: 40rem;
+  width: 55rem;
 }
 
 .game-card{
@@ -266,7 +266,7 @@ hr,
   position: absolute;
   left: 0;
   top: 0;
-  height: 83%;
+  height: 12.3rem;
   width: 100%;
   object-fit: cover;
   transition: 500ms ease;
@@ -284,9 +284,10 @@ hr,
   color: var(--text-color);
   font-weight: 600;
   text-align: center;
-  height: 1.5rem;
+  height: 1.3rem;
+  margin-bottom: .8rem;
   overflow: hidden;
-  padding: 0.3rem 0 0.3rem;
+  padding: 0.27rem 0 0.3rem 0;
   position:absolute;
   transition: 500ms ease;
   width: 100%;
@@ -415,6 +416,13 @@ hr,
 
   .logo-img{
     width: 5rem;
+    position: relative;
+    left: -3rem;
+  }
+
+  .nav-list{
+    position: relative;
+    left: -1.3rem;
   }
 
   .gallery{
@@ -423,6 +431,10 @@ hr,
   }
   .gallery-img{
     width: 74%;
+  }
+
+  .games{
+    width: 40rem;
   }
 
   .game-card{
@@ -453,7 +465,11 @@ hr,
   }
 
   .preview-info{
-    height: 1rem;
+    height: 1.3rem;
+  }
+
+  .preview-img{
+    height: 9.3rem;
   }
 
   .lib-games{
