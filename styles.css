@@ -372,7 +372,6 @@ hr,
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: 0 0 3px #1d412f;
-  /* grid-template-columns: 1fr; */
   height: 43rem;
   text-align: center;
   position: fixed;
@@ -481,7 +480,32 @@ hr,
 }
 
 @media (max-width: 768px){
+  .side-bar{
+    border-radius: 0;
+    margin-top: 0;
+    width: 100%;
+    height: 5rem;
+  }
 
+  .lable{
+    margin-top: 9rem;
+  }
+
+  .logo-img{
+    top: -1.5rem;
+    margin-left: -1rem;
+    width: 4rem;
+  }
+  
+  .nav-list{
+    /* border: 2px solid hotpink; */
+    gap: .5rem;
+    grid-template-columns: repeat(5, 1fr);
+    margin-left: 7rem;
+    position: absolute;
+    top: -2rem;
+    width: 38rem;
+  }
 }
 
 @media (max-width: 576px){
