@@ -1,7 +1,7 @@
 // Global variables
 
 const library = document.getElementById("library-body");
-const libraryPreview = document.getElementById("library-preview");
+const libraryPreview = document.getElementById("recent-games");
 const gallery = document.getElementById("gallery");
 let slideArr;
 let lastSlide;
@@ -26,7 +26,7 @@ window.addEventListener('games_retrieved', (e) => {
     lastSlide = slideArr.length - 1;
     startSlideShow();
     getLibrary();
-    getLibPrev();
+    getRecentGames();
 })
 
 // Boardgamegeek API
@@ -99,11 +99,9 @@ function getFeatureCards() {
 
 // Clones game card template 16 times, adds classes and src to each,
 // then appends to library preview section
-function getLibPrev(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv, libBtn, gameItem, gameName;
+function getRecentGames(){
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
     temp  = document.getElementById("game-card-template");
-    // libBtn = document.getElementById("lib-btn-template").content.cloneNode(true);
-    // addGameBtn = document.getElementById("new-game-template").content.cloneNode(true);
 
     for(i = 0; i < 16; i++){
         tempDiv = temp.content.cloneNode(true);
@@ -122,12 +120,10 @@ function getLibPrev(){
         itemDiv.append(gameItem);
         libraryPreview.append(itemDiv);
     }
-    // libraryPreview.append(libBtn);
-    // libraryPreview.append(addGameBtn);
 }
 
 function getLibrary(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes, desItem;
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
     temp = document.getElementById("game-card-template");
 
     for(i = 0; i < images.length; i++){
@@ -141,8 +137,7 @@ function getLibrary(){
         imgItem.setAttribute("class", "game-img");
         gameItem = itemDiv.querySelector("h5").cloneNode(true);
         gameName = names[i];
-        desItem = itemDiv.querySelector("p").cloneNode(true);
-        console.log(itemDiv.querySelector('h5'))
+        // desItem = itemDiv.querySelector("p").cloneNode(true);
         gameDes = descriptions[i];
         gameItem.setAttribute("class", "game-info game-des");
         gameItem.innerText = `${gameName} \n ${gameDes}`;
@@ -233,8 +228,4 @@ function pickTab(tabName){
         tab.classList.remove('active');
     })
     document.getElementById(tabName).classList.add('active');
-}
-
-function dropDown(){
-    
 }
