@@ -47,9 +47,6 @@
               ><img class="logo-img" src="img/logo.png" alt="company logo"
             /></a>
           </div>
-          <span class="material-symbols-outlined menu-icon" onclick="dropDown">
-            menu
-          </span>
           <ul class="nav-list grid-box">
             <li>
               <div>
@@ -105,10 +102,11 @@
   
           <!-- USER COLLECTION PREVIEW-->
           <div class="lable">
-            <h2>Library Preview</h2>
+            <h2>Recent Games</h2>
           </div>
           <hr />
-          <section id="library-preview" class="grid-box games"></section>
+          <button class="new-game-btn">Add Game</button>
+          <section id="recent-games" class="grid-box games"></section>
   
           <!-- RECOMMENDED GAMES -->
           <section class="grid-box recommend">
@@ -126,6 +124,7 @@
             <h2>Library</h2>
           </div>
           <hr class="lib-hr">
+          <button class="new-game-btn">Add Game</button>
           <section id="library-body" class="grid-box lib-games"></section>
         </section>
   
@@ -179,15 +178,5 @@
         <img src="" alt="placeholder image" />
       </div>
     </template>
-
-    <!-- Library Button Template -->
-    <!-- <template id="lib-btn-template">
-      <a href="#library" class="lib-btn" onclick="pickTab('library')">Full Library</a>
-    </template>
-
-     Add Game Button -->
-    <!-- <template id="new-game-template">
-      <a href="#" class="new-game-btn">Add Game</a>
-    </template> -->
   </body>
 </html>
