@@ -59,35 +59,6 @@ fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
         console.log(`ERROR: ${err}`)
     })
 
-// fetch("https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=name_a_z&client_id=9RQI1WBCZA")
-//     .then( res => res.json() )
-//     .then( data =>
-//         { console.log(data.games)
-//             // Define the event emitter for our new custom event
-//             const gameDataRetrieved = new CustomEvent(
-//                 'games_retrieved',
-//                 {
-//                     // set our API's data into custom properties of the event's detail object
-//                     detail:
-//                     {
-//                         // we can pass anything we want as a key-value pair here, neat!
-//                         count: data.count,
-//                         games: data.games
-//                     }
-//                 }
-//             )
-
-//             // dispatch our event using the HTML object it is attached to
-            
-//         }
-// )
-// .catch( err =>
-//     {
-//         console.log('ERROR: ', err);
-//     }
-// );
-
-
 
 // TEMPLATE MANIPULATION
 
@@ -114,7 +85,7 @@ function getFeatureCards() {
     }
 }
 
-// Clones game card template 16 times, adds classes and src to each,
+// Clones game card template 8 times, adds classes and src to each,
 // then appends to library preview section
 function getRecentGames(){
     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
