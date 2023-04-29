@@ -9,30 +9,37 @@ let lastSlide;
 let images = [];
 let names = [];
 let descriptions = [];
-let gameIds = [];
+let hotList = [];
+let hotIds = [];
 
 // Add event listener to window that will populate library once api is fetched
-window.addEventListener('games-retrieved', (e) => {
+window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
     const gamePics = gameList.getElementsByTagName("image");
     const gameNames = gameList.getElementsByTagName("name");
+    const gameDes = gameList
+    console.log(gameList)
     
+    // If image exists, push it to "images" array
     for(let img in gamePics){
         if(gamePics[img].childNodes == undefined){
             continue
         }
         images.push(gamePics[img].childNodes[0].nodeValue);
     }
+
+    // If name exists, push it to "names" array
     for(let name in gameNames){
         if(gameNames[name].childNodes == undefined){
             continue
         }
         names.push(gameNames[name].childNodes[0].nodeValue);
-    }
+    }   
 
-    for(let game in gameList){
-        // console.log(gameList[game])
-    }
+    for(let des in gameDes)  {
+
+    }  
+
 
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
@@ -43,17 +50,51 @@ window.addEventListener('games-retrieved', (e) => {
     getRecentGames();
 })
 
+window.addEventListener('hot-list', e => {
+    const gameList = (e.detail.games);
+    const gameIds = gameList.getElementsByTagName("item");
+    const gamePics = (gameList.getElementsByTagName("thumbnail"));
+    for(let  id in gameIds){
+        if(gameIds[id] == undefined){
+            continue
+        }
+        hotIds.push(gameIds[id].id)
+    }
+
+    for(let img in gamePics){
+        if(gamePics[img].childNodes == undefined){
+            continue;
+        }
+        hotList.push(gamePics[img].attributes[0].nodeValue)
+    }
+
+})
+
 // Boardgamegeek API
 
 fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
     .then(res => {return res.text()})
-    .then((data) => {
+    .then(data => {
         const gameDataRetrieved = new CustomEvent("games-retrieved",{
             detail:{
                 games: new DOMParser().parseFromString(data, "text/xml")
-    }
+            }
         })
         window.dispatchEvent(gameDataRetrieved)
+    })
+    .catch(err => {
+        console.log(`ERROR: ${err}`)
+    })
+
+fetch("https://boardgamegeek.com/xmlapi2/hot?type=boardgame")    
+    .then(res => {return res.text()})
+    .then(data => {
+        const hotGames = new CustomEvent("hot-list", {
+            detail:{
+                games: new DOMParser().parseFromString(data, "text/xml")
+            }
+        })
+        window.dispatchEvent(hotGames)   
     })
     .catch(err => {
         console.log(`ERROR: ${err}`)
@@ -70,12 +111,12 @@ function getFeatureCards() {
     let itemDiv, imgItem, imgPath, i, temp, tempDiv;
     temp = document.getElementById("feature-card-template");
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 15; i++) {
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div");
         itemDiv.setAttribute("class", "feature-card")
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = images[Math.floor(Math.random() * 100)];
+        imgPath = hotList[i];
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("class", "gallery-img");
         imgItem.setAttribute("alt", "a picture of a game")
