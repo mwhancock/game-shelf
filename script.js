@@ -16,7 +16,7 @@ let hotIds = [];
 
 // XMLParser specifically for our XML Data from ChatGPT
 // Returns a proper JSON structure for us to use from the Geek API
-function parseXml(xmlString) {
+function parseMarksGamesXml(xmlString) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, "text/xml");
     const items = xmlDoc.getElementsByTagName("item");
@@ -49,6 +49,82 @@ function parseXml(xmlString) {
         };
         result.push(jsonItem);
     }
+    return result;
+}
+
+
+function parseHotGamesXml(xml) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xml, "text/xml");
+    const items = xmlDoc.getElementsByTagName("item");
+    const result = [];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const id = item?.getAttribute("id");
+        const rank = item?.getAttribute("rank");
+        const thumbnail = item?.getElementsByTagName("thumbnail")[0]?.getAttribute("value");
+        const name = item.getElementsByTagName("name")[0]?.getAttribute("value");
+        const yearpublished = item.getElementsByTagName("yearpublished")[0]?.getAttribute("value");
+        result.push({ id, rank, thumbnail, name, yearpublished });
+    }
+    return result;
+}
+
+
+
+function parseXmlFromGeek(xmlString) {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlString, "text/xml")
+    const items = xml.getElementsByTagName("item");
+    const result = [];
+
+    for (let i = 0; i < items.length; i++) 
+    {
+        const item = items[i];
+        const fields = [];
+        const childNodes = item.childNodes;
+        const topLevelAttributes = item.attributes;
+
+        for (let j = 0; j < topLevelAttributes.length; j++)
+        {
+            const topLevelAttribute = topLevelAttributes[j];
+            const fieldValue = topLevelAttribute.value;
+
+            const field = {
+                [topLevelAttribute.name]: fieldValue,
+            };
+
+            fields.push(field);
+        }
+
+        for (let j = 0; j < childNodes.length; j++)
+        {
+            const childNode = childNodes[j];
+        
+            if (childNode.nodeType !== Node.ELEMENT_NODE) {
+            continue;
+            }
+        
+            const attributes = childNode.attributes;
+
+            for (let k = 0; k < attributes.length; k++)
+            {
+                const attribute = attributes[k];
+                const fieldValue = attribute.value;
+
+                const field = {
+                    [childNode.tagName]: fieldValue,
+                };
+
+                fields.push(field);
+            }
+        }
+
+    const itemObject = Object.assign({}, ...fields)
+
+    result.push(itemObject);
+    }
+
     return result;
 }
 
@@ -121,7 +197,8 @@ window.addEventListener('hot-list', e => {
 fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
     .then(res => {return res.text()})
     .then(data => {
-        console.log(parseXml(data));
+        console.log('Mark\'s Games with Custom Parser', parseMarksGamesXml(data));
+        console.log('Mark\'s Games with Generic Parser', parseXmlFromGeek(data));
         const gameDataRetrieved = new CustomEvent("games-retrieved",{
             detail:{
                 games: new DOMParser().parseFromString(data, "text/xml")
@@ -136,6 +213,8 @@ fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
 fetch("https://boardgamegeek.com/xmlapi2/hot?type=boardgame")    
     .then(res => {return res.text()})
     .then(data => {
+        // console.log('Hot Games with Custom Parser', parseHotGamesXml(data));
+        // console.log('Hot Games with generic Parser', parseXmlFromGeek(data));
         const hotGames = new CustomEvent("hot-list", {
             detail:{
                 games: new DOMParser().parseFromString(data, "text/xml")
