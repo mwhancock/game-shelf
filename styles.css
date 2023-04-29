@@ -127,7 +127,7 @@ hr,
 /* MAIN BODY */
 
 .games {
-  /* border: 2px solid hotpink; */
+  /* border: 2px solid hotpink;f */
   gap: 2rem;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: row;
@@ -238,6 +238,10 @@ hr,
 
 .page{
   display: none;
+}
+
+.page-content{
+  margin-left: 8rem;
 }
 
 .preview-img{
