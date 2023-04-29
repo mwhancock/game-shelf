@@ -11,12 +11,13 @@ let names = [];
 let descriptions = [];
 let gameIds = [];
 
+
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games-retrieved', (e) => {
     const gameList = e.detail.games;
     const gamePics = gameList.getElementsByTagName("image");
     const gameNames = gameList.getElementsByTagName("name");
-    
+
     for(let img in gamePics){
         if(gamePics[img].childNodes == undefined){
             continue
@@ -58,6 +59,142 @@ fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
     .catch(err => {
         console.log(`ERROR: ${err}`)
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// Clarks BS
+
+
+
+
+
+// Sample Data Models
+
+    const user_game_data_obj = {
+        "game_id": {
+            id: 'number',
+            name: 'string',
+            description: 'string',
+            in_library: 'boolean',
+            play_count: 'number'
+        }
+    }
+
+    // THIS IS THE PREFERRED DATA MODEL
+    const user_game_data_arr = [
+        {
+            id: 1,
+            name: 'Settlers of Catan',
+            description: 'get tiles get paid',
+            in_library: 'boolean',
+            play_count: 'number'
+        },
+        {
+            id: 2,
+            name: 'Carcasonne',
+            description: 'build castles',
+            in_library: 'boolean',
+            play_count: 'number'
+        }
+    ]
+
+    const local_storage_game_obj =
+    {
+        id: 'number',
+        in_library: 'boolean',
+        play_count: 'number',
+        play_time: 'number'
+    }
+
+    const library_obj = {}
+
+
+    // Sample LocalStorage API
+    // Create / Read / Update / Delete 
+    // based on requirements in the Whimsical board
+    // determine which methods are needed
+
+    // Set full library
+    const setUserLibrary = (library_obj) =>
+    {
+        localStorage.setItem('user_library', library_obj);
+    }
+
+    // Get user's library
+    const getUserLibrary = () =>
+    {
+        // Warning, will need to parse JSON here
+        return localStorage.setItem('user_library', library_obj)
+    }
+
+    // add to library
+    const addGameToLibrary = (game_to_add) =>
+    {
+        localStorage.getItem('user_library').then(res => res.push(game_to_add)).then(res => localStorage.setItem('user_library', res))
+        localStorage.setItem('user_library', library_obj);
+    }
+    
+
+    // retrieve user data for single game
+    // From the 'card-click' event, retrieve the game's ID, use that to map data from storage
+    const getGameData = (id) => 
+    {
+        // Finds the first instance of a game's ID in the global game library
+        const api_game_data = bgg_games.find(game => game.id === id);
+
+        // Finds the first instance of a game's ID in the localstorage library
+        const library = getUserLibrary()
+        const user_game_data = library.find(game => game.id === id);
+
+        const user_game = Object.assign(api_game_data, user_game_data)
+
+        return user_game
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // TEMPLATE MANIPULATION
