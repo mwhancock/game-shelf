@@ -13,6 +13,50 @@ let hotList = [];
 let hotIds = [];
 
 
+
+// XMLParser specifically for our XML Data from ChatGPT
+// Returns a proper JSON structure for us to use from the Geek API
+function parseXml(xmlString) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+    const items = xmlDoc.getElementsByTagName("item");
+    const result = [];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const name = item.getElementsByTagName("name")[0].textContent.trim();
+        const yearpublished = item.getElementsByTagName("yearpublished")[0].textContent.trim();
+        const image = item.getElementsByTagName("image")[0].textContent.trim();
+        const thumbnail = item.getElementsByTagName("thumbnail")[0].textContent.trim();
+        const status = item.getElementsByTagName("status")[0].attributes;
+        const numplays = item.getElementsByTagName("numplays")[0].textContent.trim();
+        const jsonItem = {
+            name,
+            yearpublished,
+            image,
+            thumbnail,
+            status: {
+                own: status.own.value,
+                prevowned: status.prevowned.value,
+                fortrade: status.fortrade.value,
+                want: status.want.value,
+                wanttoplay: status.wanttoplay.value,
+                wanttobuy: status.wanttobuy.value,
+                wishlist: status.wishlist.value,
+                preordered: status.preordered.value,
+                lastmodified: status.lastmodified.value
+            },
+            numplays
+        };
+        result.push(jsonItem);
+    }
+    return result;
+}
+
+
+
+
+
+
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
@@ -38,7 +82,7 @@ window.addEventListener('games-retrieved', e => {
 
     for(let des in gameDes)  {
 
-    }  
+    }
 
 
     getFeatureCards();
@@ -48,6 +92,8 @@ window.addEventListener('games-retrieved', e => {
     startSlideShow();
     getLibrary();
     getRecentGames();
+
+    // geekXMLToJSON(gameList);
 })
 
 window.addEventListener('hot-list', e => {
@@ -75,6 +121,7 @@ window.addEventListener('hot-list', e => {
 fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
     .then(res => {return res.text()})
     .then(data => {
+        console.log(parseXml(data));
         const gameDataRetrieved = new CustomEvent("games-retrieved",{
             detail:{
                 games: new DOMParser().parseFromString(data, "text/xml")
@@ -99,7 +146,6 @@ fetch("https://boardgamegeek.com/xmlapi2/hot?type=boardgame")
     .catch(err => {
         console.log(`ERROR: ${err}`)
     })
-
 
 
 
