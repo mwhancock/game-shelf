@@ -506,6 +506,10 @@ hr,
     position: relative;
     left: -2.6rem;
   }
+
+  .page-content{
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 768px){
