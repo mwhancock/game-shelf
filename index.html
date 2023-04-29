@@ -79,10 +79,6 @@
 
       <!-- Home Tab -->
       <div class="page-content">
-        <div class="search_wrapper">
-          <input type="text" class="text_field" id="search_bar" placeholder="Search by Name">
-          <button id="search_button" onclick="searchAtlasByName(event)">Search</button>
-        </div>
         <section id="home" class="active page">
           <!-- GALLERY -->
           <div class="lable featured">
@@ -109,7 +105,11 @@
             <h2>Recent Games</h2>
           </div>
           <hr />
-          <button class="new-game-btn">Add Game</button>
+          <button class="new-game-btn" onclick="showSeach()">Add Game</button>
+          <div class="search_wrapper">
+            <input type="text" class="text_field" id="search_bar" placeholder="Search by Name">
+            <button id="search_button" onclick="searchAtlasByName(event)">Search</button>
+          </div>
           <section id="recent-games" class="grid-box games"></section>
   
           <!-- RECOMMENDED GAMES -->

@@ -237,11 +237,16 @@ hr,
 }
 
 .search_wrapper{
+  margin-top: -5rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60px;
+  visibility: hidden;
+  transition: 300ms ease;
+  translate: 1rem 2.7rem;
+  margin-bottom: 2.8rem;
 }
 
 #search_bar{
