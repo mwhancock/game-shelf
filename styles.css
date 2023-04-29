@@ -236,6 +236,46 @@ hr,
   cursor: pointer;
 }
 
+.search_wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+#search_bar{
+  background-color: transparent;
+  font-size: 1.5rem;
+  width: 240px;
+  border: 0px;
+  border-bottom: 1px solid black;
+  color: black;
+  margin: 10px 20px;
+  padding: 8px;
+}
+
+#search_button{
+  background: var(--light-green);
+  border-radius: 10px;
+  border-style: none;
+  box-shadow: 0 0 2px var(--text-color);
+  transition: 600ms ease;
+  top: 0;
+  margin-left: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  height: 2rem;
+  width: 3fr;
+}
+
+#search_button:hover{
+  background-color: var(--dark-green);
+  border-radius: var(--main-border-radius);
+  color:#30393a;
+  cursor: pointer;
+}
+
 .page{
   display: none;
 }
