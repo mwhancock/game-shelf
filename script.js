@@ -4,163 +4,24 @@ const library = document.getElementById("library-body");
 const libraryPreview = document.getElementById("recent-games");
 const gallery = document.getElementById("gallery");
 const addGameBtn = document.getElementsByClassName("new-game-btn")
+const clientID = `9RQI1WBCZA`;
 let slideArr;
 let lastSlide;
 let images = [];
 let names = [];
 let descriptions = [];
-let hotList = [];
-let hotIds = [];
-
-
-
-// XMLParser specifically for our XML Data from ChatGPT
-// Returns a proper JSON structure for us to use from the Geek API
-function parseMarksGamesXml(xmlString) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-    const items = xmlDoc.getElementsByTagName("item");
-    const result = [];
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const name = item.getElementsByTagName("name")[0].textContent.trim();
-        const yearpublished = item.getElementsByTagName("yearpublished")[0].textContent.trim();
-        const image = item.getElementsByTagName("image")[0].textContent.trim();
-        const thumbnail = item.getElementsByTagName("thumbnail")[0].textContent.trim();
-        const status = item.getElementsByTagName("status")[0].attributes;
-        const numplays = item.getElementsByTagName("numplays")[0].textContent.trim();
-        const jsonItem = {
-            name,
-            yearpublished,
-            image,
-            thumbnail,
-            status: {
-                own: status.own.value,
-                prevowned: status.prevowned.value,
-                fortrade: status.fortrade.value,
-                want: status.want.value,
-                wanttoplay: status.wanttoplay.value,
-                wanttobuy: status.wanttobuy.value,
-                wishlist: status.wishlist.value,
-                preordered: status.preordered.value,
-                lastmodified: status.lastmodified.value
-            },
-            numplays
-        };
-        result.push(jsonItem);
-    }
-    return result;
-}
-
-
-function parseHotGamesXml(xml) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xml, "text/xml");
-    const items = xmlDoc.getElementsByTagName("item");
-    const result = [];
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const id = item?.getAttribute("id");
-        const rank = item?.getAttribute("rank");
-        const thumbnail = item?.getElementsByTagName("thumbnail")[0]?.getAttribute("value");
-        const name = item.getElementsByTagName("name")[0]?.getAttribute("value");
-        const yearpublished = item.getElementsByTagName("yearpublished")[0]?.getAttribute("value");
-        result.push({ id, rank, thumbnail, name, yearpublished });
-    }
-    return result;
-}
-
-
-
-function parseXmlFromGeek(xmlString) {
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(xmlString, "text/xml")
-    const items = xml.getElementsByTagName("item");
-    const result = [];
-
-    for (let i = 0; i < items.length; i++) 
-    {
-        const item = items[i];
-        const fields = [];
-        const childNodes = item.childNodes;
-        const topLevelAttributes = item.attributes;
-
-        for (let j = 0; j < topLevelAttributes.length; j++)
-        {
-            const topLevelAttribute = topLevelAttributes[j];
-            const fieldValue = topLevelAttribute.value;
-
-            const field = {
-                [topLevelAttribute.name]: fieldValue,
-            };
-
-            fields.push(field);
-        }
-
-        for (let j = 0; j < childNodes.length; j++)
-        {
-            const childNode = childNodes[j];
-        
-            if (childNode.nodeType !== Node.ELEMENT_NODE) {
-            continue;
-            }
-        
-            const attributes = childNode.attributes;
-
-            for (let k = 0; k < attributes.length; k++)
-            {
-                const attribute = attributes[k];
-                const fieldValue = attribute.value;
-
-                const field = {
-                    [childNode.tagName]: fieldValue,
-                };
-
-                fields.push(field);
-            }
-        }
-
-    const itemObject = Object.assign({}, ...fields)
-
-    result.push(itemObject);
-    }
-
-    return result;
-}
-
-
-
-
+let gameIds = [];
 
 
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
-    const gamePics = gameList.getElementsByTagName("image");
-    const gameNames = gameList.getElementsByTagName("name");
-    const gameDes = gameList
-    
-    // If image exists, push it to "images" array
-    for(let img in gamePics){
-        if(gamePics[img].childNodes == undefined){
-            continue
-        }
-        images.push(gamePics[img].childNodes[0].nodeValue);
-    }
-
-    // If name exists, push it to "names" array
-    for(let name in gameNames){
-        if(gameNames[name].childNodes == undefined){
-            continue
-        }
-        names.push(gameNames[name].childNodes[0].nodeValue);
-    }   
-
-    for(let des in gameDes)  {
-
-    }
-
-
+    gameList.forEach((game) => {
+        images.push(game.images.medium);
+        names.push(game.name);
+        descriptions.push(game.description_preview);
+        gameIds.push(game.id)
+    })
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
@@ -168,63 +29,40 @@ window.addEventListener('games-retrieved', e => {
     startSlideShow();
     getLibrary();
     getRecentGames();
-
-    // geekXMLToJSON(gameList);
 })
 
-// window.addEventListener('hot-list', e => {
-//     const gameList = (e.detail.games);
-//     const gameIds = gameList.getElementsByTagName("item");
-//     const gamePics = (gameList.getElementsByTagName("thumbnail"));
-//     for(let  id in gameIds){
-//         if(gameIds[id] == undefined){
-//             continue
-//         }
-//         hotIds.push(gameIds[id].id)
-//     }
 
-//     for(let img in gamePics){
-//         if(gamePics[img].childNodes == undefined){
-//             continue;
-//         }
-//         hotList.push(gamePics[img].attributes[0].nodeValue)
-//     }
 
-// })
+fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=name_a_z&client_id=${clientID}`)
+    .then( res => res.json() )
+    .then( data =>
+        {
+            // Define the event emitter for our new custom event
+            const gameDataRetrieved = new CustomEvent(
+                'games-retrieved',
+                {
+                    // set our API's data into custom properties of the event's detail object
+                    detail:
+                    {
+                        games: data.games
+                    }
+                }
+            )
 
-// Boardgamegeek API
+            // dispatch our event using the HTML object it is attached to
+            window.dispatchEvent(gameDataRetrieved)
+    }
+)
+.catch( err =>
+    {
+        console.log('ERROR: ', err);
 
-fetch("https://boardgamegeek.com/xmlapi2/collection?username=mwhancock&own=1")
-    .then(res => {return res.text()})
-    .then(data => {
-        console.log('Mark\'s Games with Custom Parser', parseMarksGamesXml(data));
-        console.log('Mark\'s Games with Generic Parser', parseXmlFromGeek(data));
-        const gameDataRetrieved = new CustomEvent("games-retrieved",{
-            detail:{
-                games: new DOMParser().parseFromString(data, "text/xml")
-            }
-        })
-        window.dispatchEvent(gameDataRetrieved)
-    })
-    .catch(err => {
-        console.log(`ERROR: ${err}`)
-    })
+})
 
-fetch("https://boardgamegeek.com/xmlapi2/hot?type=boardgame")    
-    .then(res => {return res.text()})
-    .then(data => {
-        // console.log('Hot Games with Custom Parser', parseHotGamesXml(data));
-        // console.log('Hot Games with generic Parser', parseXmlFromGeek(data));
-        const hotGames = new CustomEvent("hot-list", {
-            detail:{
-                games: new DOMParser().parseFromString(data, "text/xml")
-            }
-        })
-        window.dispatchEvent(hotGames)   
-    })
-    .catch(err => {
-        console.log(`ERROR: ${err}`)
-    })
+
+
+
+
 
 
 
@@ -265,7 +103,7 @@ const getAtlasData = (params = 'order_by=rank&limit=100') =>
     // We can pass the params as needed to modify this generic call, refer to this API Docs here:
     // https://www.boardgameatlas.com/api/docs/search
 
-    return fetch(`https://api.boardgameatlas.com/api/search?${params}&client_id=9RQI1WBCZA`)
+    return fetch(`https://api.boardgameatlas.com/api/search?${params}&fuzzy_match&client_id=${clientID}`)
     .then( res => res.json() )
     .then( data =>
         {
@@ -606,14 +444,4 @@ function pickTab(tabName){
         tab.classList.remove('active');
     })
     document.getElementById(tabName).classList.add('active');
-}
-
-
-const addGame = document.querySelector(".new-game-btn");
-addGame.addEventListener("click", () => showSearch());
-
-
-function showSearch(){
-   let search = document.querySelector(".search_wrapper");
-   search.style.visibility = "visible";
 }
