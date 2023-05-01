@@ -10,9 +10,12 @@ let slideArr;
 let lastSlide;
 
 
+
+
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
+
     gameList.forEach((game) => {
         const gameObj = {};
         gameObj.id = game.id;
@@ -22,10 +25,15 @@ window.addEventListener('games-retrieved', e => {
         gameObj.description = game.description_preview;
         usrLibrary.push(gameObj);
     })
-    for(let i = 0; i < usrLibrary.length; i++){
-        localStorage.setItem(i, usrLibrary[i].id)
-    }
-    console.log(localStorage)
+
+    // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
+    // localStorage.setItem('user_library', JSON.stringify(usrLibrary))
+
+    // for(let i = 0; i < usrLibrary.length; i++){
+    //     localStorage.setItem(i, usrLibrary[i].id)
+    // }
+
+    // console.log(localStorage)
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
@@ -34,6 +42,14 @@ window.addEventListener('games-retrieved', e => {
     getLibrary();
     getRecentGames();
 })
+
+
+window.addEventListener('library-retrieved', e => {
+    const library = e.detail.library
+
+    console.log('Retrieved the user\s library and merged with BGA data', library)
+})
+
 
 
 
@@ -78,26 +94,9 @@ fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 
 
 
-
 /// Clarks BS
 
-
-// const sample_bga_ids = [
-//     'yqR4PtpO8X',
-//     '5H5JS0KLzK',
-//     'TAAifFP590',
-//     'fDn9rQjH9O',
-//     'RLlDWHh7hR',
-//     '6FmFeux5xH',
-//     'kPDxpJZ8PD',
-//     '7NYbgH2Z2I',
-//     'OF145SrX44',
-//     'j8LdPFmePE',
-//     'i5Oqu5VZgP',
-//     'VNBC6yq1WO',
-//     'oGVgRSAKwX',
-//     'GP7Y2xOUzj'
-// ];
+// Sample BGA API methods
 
 // Generic method for retrieving data from BGA API. defualts to top 100 ranked games
 const getAtlasData = (params = 'order_by=rank&limit=100') => 
@@ -110,6 +109,14 @@ const getAtlasData = (params = 'order_by=rank&limit=100') =>
     .then( data => {return data.games} )
     .catch( err => console.log('ERROR: ', err))
 }
+
+
+getAtlasData().then(
+    games_list => {
+        console.log('We can use this data to populate the Browse or Recommended Sections', games_list);
+    }
+)
+
 
 
 // Retrieve a list of up to 100 games based on their BGA Ids from LocalStorage
@@ -131,6 +138,7 @@ const getUserGamesByID = (user_game_ids) =>
     }
 }
 
+
 const search_input = document.getElementById('search_bar');
 
 const searchAtlasByName = (e) => {
@@ -151,54 +159,188 @@ const searchAtlasByName = (e) => {
     }
 }
 
-// Test retrieval of games list based on stored IDs
-// getUserGamesByID(sample_bga_ids).then(res => console.log(res));
 
-
-
-
-
-
-
-
-
-    // Sample LocalStorage API
-    // Create / Read / Update / Delete 
-    // based on requirements in the Whimsical board
-    // determine which methods are needed
-
-    // Set full library
-    const setUserLibrary = (library_obj) => {
-        localStorage.setItem('user_library', library_obj);
+// retrieve user data and BGA data for single game
+// From the 'card-click' event, retrieve the game's ID, use that to map data from storage
+const getGameData = (id) =>
+{
+    // Checks our global library for the game first
+    const cached_game = usrLibrary.find(game => game.id === id);
+    // return the cached data if it exists, else retrieve it from API
+    if (cached_game !== undefined) {
+        console.log('Retreived game from user\s cache')
+        return cached_game
     }
 
-    // Get user's library
-    const getUserLibrary = () => {
-        // Warning, will need to parse JSON here
-        return localStorage.setItem('user_library', library_obj)
+    else {
+        console.log('Fetching game with id: ', id)
+        let api_game = getAtlasData(`ids=${[id]}&limit=100`)
+            .then(
+                game_data => {
+                    console.log('Retrieved single game from BGA API')
+                    // returns an array, we want the first index
+                    return game_data[0]
+                }
+            )
+            .catch(
+                error => console.log('Error retrieving game with id: ', id, error)
+            )
+
+        return api_game
+    }
+}
+
+
+
+
+
+
+
+
+
+// Sample LocalStorage API
+// Create / Read / Update / Delete 
+
+// Set full library, pass in array of game objects as needed
+const setUserLibrary = (library_obj) =>
+{
+    localStorage.setItem('user_library', JSON.stringify(library_obj));
+}
+
+
+// Get user's library, retrieves entire object from LocalStorage
+const getUserLibrary = () =>
+{
+    return JSON.parse(localStorage.getItem('user_library'))
+}
+
+
+// add to library // modify existing entry
+const addGameToLibrary = (game_to_add) =>
+{
+    const current_library = getUserLibrary() ?? [];
+
+    // If no user library present, add the game to the user's library
+    if (current_library.length === 0) {
+        current_library.push(game_to_add)
     }
 
-    // add to library
-    const addGameToLibrary = (game_to_add) => {
-        localStorage.getItem('user_library').then(res => res.push(game_to_add)).then(res => localStorage.setItem('user_library', res))
-        localStorage.setItem('user_library', library_obj);
+    else {
+        // If there is a library, Check if the game exists already and retrieve index
+        const game_index = current_library.findIndex(game => game.id === game_to_add.id)
+        
+        // Modify the library_before array accordingly
+        if (game_index) current_library[game_index] = game_to_add
     }
+
+    // overwrite LocalStorage data
+    setUserLibrary(current_library)
     
+    // overwrite global cache data
+    usrLibrary = current_library
+}
 
-    // retrieve user data for single game
-    // From the 'card-click' event, retrieve the game's ID, use that to map data from storage
-    const getGameData = (id) => {
-        // Finds the first instance of a game's ID in the global game library
-        const api_game_data = bgg_games.find(game => game.id === id);
 
-        // Finds the first instance of a game's ID in the localstorage library
-        const library = getUserLibrary()
-        const user_game_data = library.find(game => game.id === id);
-
-        const user_game = Object.assign(api_game_data, user_game_data)
-
-        return user_game
+// TODO: REVIEW THIS METHOD TO SEE HOW IT FITS WITH YOUR PLANS
+// Sample call to get Game Data for a single game... Use this for populating your Modal from a click handler
+getGameData('EJe7IlhwX2').then(
+    game_data => {
+        addGameToLibrary(game_data)
+        console.log('Retrieved a single game based on ID', game_data)
     }
+);
+
+
+
+
+
+// TODO: FINISH THE METHOD
+// add to library // modify existing entry
+const removeGameFromLibrary = (game_to_remove) =>
+{
+    const current_library = getUserLibrary();
+
+    // Check if a version of the game exists already and retrieve index
+    const game_index = current_library.findIndex(game => game.id === game_to_remove.id)
+    
+    // I'll leave this method for you to fill out
+    // it is similar to add but we need to remove the index of an array if it exists
+
+    // overwrite LocalStorage data
+    setUserLibrary(current_library)
+    
+    // overwrite global cache data
+    usrLibrary = current_library
+}
+
+
+
+
+
+// Sample methods for working between data sources
+
+// Handler method for merging api with user data
+const mergeUserLibrary = (api_games, user_library) =>
+{
+    let merged_library = []
+
+    // merge our stored user data with the latest API data 
+    for(let api_game of api_games) {
+        const user_game = user_library.find(game => game.id === api_game.id)
+
+        merged_library.push(Object.assign(api_game, user_game))
+    }
+
+    return merged_library
+}
+
+
+// Method for retrieving the users library data based on LocalStorage IDs
+const fetchUserLibrary = () =>
+{
+    // Retrieve stored library data from LocalStorage
+    const user_library = getUserLibrary();
+    const ids = [];
+
+    if (!user_library) return console.log('No User Library Found in LocalStorage');
+
+    // generate an array of ids from our library array
+    user_library.forEach(
+        game_obj => ids.push(game_obj.id)
+    )
+
+    // fetch those games from BGA API
+    getUserGamesByID(ids)
+        .then( api_games =>
+            {
+                const merged_library = mergeUserLibrary(api_games, user_library);
+
+                // Store in global 'cache'
+                usrLibrary = merged_library
+                console.log(merged_library)
+
+                // Define the event emitter for our new custom event
+                const userLibraryRetrieved = new CustomEvent(
+                    'library-retrieved',
+                    {
+                        // set our merged library data into custom properties of the event's detail object
+                        detail: { library: merged_library }
+                    }
+                )
+                // dispatch our event using the HTML object it is attached to
+                window.dispatchEvent(userLibraryRetrieved)
+        }
+    )
+    .catch( err =>
+        {
+            console.log('ERROR: ', err);
+    })
+}
+
+fetchUserLibrary()
+
+
+
 
 
 
