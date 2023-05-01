@@ -48,7 +48,6 @@ fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
                     }
                 }
             )
-
             // dispatch our event using the HTML object it is attached to
             window.dispatchEvent(gameDataRetrieved)
     }
@@ -56,7 +55,6 @@ fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 .catch( err =>
     {
         console.log('ERROR: ', err);
-
 })
 
 
@@ -105,11 +103,7 @@ const getAtlasData = (params = 'order_by=rank&limit=100') =>
 
     return fetch(`https://api.boardgameatlas.com/api/search?${params}&fuzzy_match&client_id=${clientID}`)
     .then( res => res.json() )
-    .then( data =>
-        {
-            return data.games
-        }
-    )
+    .then( data => {return data.games} )
     .catch( err => console.log('ERROR: ', err))
 }
 
@@ -135,9 +129,8 @@ const getUserGamesByID = (user_game_ids) =>
 
 const search_input = document.getElementById('search_bar');
 
-const searchAtlasByName = (event) =>
-{
-    event.preventDefault();
+const searchAtlasByName = (e) => {
+    e.preventDefault();
 
     const search_term = search_input.value ?? undefined
 
@@ -201,8 +194,7 @@ const searchAtlasByName = (event) =>
         }
     ]
 
-    const local_storage_game_obj =
-    {
+    const local_storage_game_obj = {
         id: 'number',
         in_library: 'boolean',
         play_count: 'number',
@@ -218,21 +210,18 @@ const searchAtlasByName = (event) =>
     // determine which methods are needed
 
     // Set full library
-    const setUserLibrary = (library_obj) =>
-    {
+    const setUserLibrary = (library_obj) => {
         localStorage.setItem('user_library', library_obj);
     }
 
     // Get user's library
-    const getUserLibrary = () =>
-    {
+    const getUserLibrary = () => {
         // Warning, will need to parse JSON here
         return localStorage.setItem('user_library', library_obj)
     }
 
     // add to library
-    const addGameToLibrary = (game_to_add) =>
-    {
+    const addGameToLibrary = (game_to_add) => {
         localStorage.getItem('user_library').then(res => res.push(game_to_add)).then(res => localStorage.setItem('user_library', res))
         localStorage.setItem('user_library', library_obj);
     }
@@ -240,8 +229,7 @@ const searchAtlasByName = (event) =>
 
     // retrieve user data for single game
     // From the 'card-click' event, retrieve the game's ID, use that to map data from storage
-    const getGameData = (id) => 
-    {
+    const getGameData = (id) => {
         // Finds the first instance of a game's ID in the global game library
         const api_game_data = bgg_games.find(game => game.id === id);
 
@@ -364,6 +352,9 @@ function getLibrary(){
     }
 }
 
+function addToLibrary(game){
+
+}
 
 
 // SLIDESHOW AUTOMATION
