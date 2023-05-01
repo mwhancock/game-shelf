@@ -5,22 +5,22 @@ const libraryPreview = document.getElementById("recent-games");
 const gallery = document.getElementById("gallery");
 const addGameBtn = document.getElementsByClassName("new-game-btn")
 const clientID = `9RQI1WBCZA`;
+let usrLibrary = [];
 let slideArr;
 let lastSlide;
-let images = [];
-let names = [];
-let descriptions = [];
-let gameIds = [];
 
 
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
     gameList.forEach((game) => {
-        images.push(game.images.medium);
-        names.push(game.name);
-        descriptions.push(game.description_preview);
-        gameIds.push(game.id)
+        let gameObj = {};
+        gameObj.id = game.id;
+        gameObj.in_library = true;
+        gameObj.image = game.images.medium;
+        gameObj.name = game.name;
+        gameObj.description = game.description_preview;
+        usrLibrary.push(gameObj);
     })
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
@@ -158,52 +158,6 @@ const searchAtlasByName = (e) => {
 
 
 
-
-
-
-
-
-
-// Sample Data Models
-
-    const user_game_data_obj = {
-        "game_id": {
-            id: 'number',
-            name: 'string',
-            description: 'string',
-            in_library: 'boolean',
-            play_count: 'number'
-        }
-    }
-
-    // THIS IS THE PREFERRED DATA MODEL
-    const user_game_data_arr = [
-        {
-            id: 1,
-            name: 'Settlers of Catan',
-            description: 'get tiles get paid',
-            in_library: 'boolean',
-            play_count: 'number'
-        },
-        {
-            id: 2,
-            name: 'Carcasonne',
-            description: 'build castles',
-            in_library: 'boolean',
-            play_count: 'number'
-        }
-    ]
-
-    const local_storage_game_obj = {
-        id: 'number',
-        in_library: 'boolean',
-        play_count: 'number',
-        play_time: 'number'
-    }
-
-    const library_obj = {}
-
-
     // Sample LocalStorage API
     // Create / Read / Update / Delete 
     // based on requirements in the Whimsical board
@@ -291,13 +245,12 @@ function getFeatureCards() {
         itemDiv = tempDiv.querySelector("div");
         itemDiv.setAttribute("class", "feature-card")
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = images[i];
+        imgPath = usrLibrary[i].image;
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("class", "gallery-img");
         imgItem.setAttribute("alt", "a picture of a game")
         itemDiv.append(imgItem);
         gallery.append(itemDiv);
-
     }
 }
 
@@ -312,12 +265,12 @@ function getRecentGames(){
         itemDiv = tempDiv.querySelector("div");
         itemDiv.setAttribute("class", "game-card grid-box");
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = images[i];
+        imgPath = usrLibrary[i].image;
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
         imgItem.setAttribute("class", "preview-img");
         gameItem = itemDiv.querySelector("p").cloneNode(true);
-        gameName = names[i];
+        gameName = usrLibrary[i].name;
         gameItem.setAttribute("class", "preview-info");
         gameItem.innerText = `${gameName}`;
         itemDiv.append(imgItem);
@@ -330,19 +283,19 @@ function getLibrary(){
     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
     temp = document.getElementById("game-card-template");
 
-    for(i = 0; i < images.length; i++){
+    for(i = 0; i < usrLibrary.length; i++){
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div");
         itemDiv.setAttribute("class", "game-card");
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = images[i];
+        imgPath = usrLibrary[i].image;
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
         imgItem.setAttribute("class", "game-img");
         gameItem = itemDiv.querySelector("h5").cloneNode(true);
-        gameName = names[i];
+        gameName = usrLibrary[i].name;
         // desItem = itemDiv.querySelector("p").cloneNode(true);
-        gameDes = descriptions[i];
+        gameDes = usrLibrary[i].description;
         gameItem.setAttribute("class", "game-info game-des");
         gameItem.innerText = `${gameName} \n ${gameDes}`;
         itemDiv.append(imgItem);
