@@ -14,7 +14,7 @@ let lastSlide;
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
     gameList.forEach((game) => {
-        let gameObj = {};
+        const gameObj = {};
         gameObj.id = game.id;
         gameObj.in_library = true;
         gameObj.image = game.images.medium;
@@ -22,6 +22,10 @@ window.addEventListener('games-retrieved', e => {
         gameObj.description = game.description_preview;
         usrLibrary.push(gameObj);
     })
+    for(let i = 0; i < usrLibrary.length; i++){
+        localStorage.setItem(i, usrLibrary[i].id)
+    }
+    console.log(localStorage)
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
@@ -78,22 +82,22 @@ fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
 /// Clarks BS
 
 
-const sample_bga_ids = [
-    'yqR4PtpO8X',
-    '5H5JS0KLzK',
-    'TAAifFP590',
-    'fDn9rQjH9O',
-    'RLlDWHh7hR',
-    '6FmFeux5xH',
-    'kPDxpJZ8PD',
-    '7NYbgH2Z2I',
-    'OF145SrX44',
-    'j8LdPFmePE',
-    'i5Oqu5VZgP',
-    'VNBC6yq1WO',
-    'oGVgRSAKwX',
-    'GP7Y2xOUzj'
-];
+// const sample_bga_ids = [
+//     'yqR4PtpO8X',
+//     '5H5JS0KLzK',
+//     'TAAifFP590',
+//     'fDn9rQjH9O',
+//     'RLlDWHh7hR',
+//     '6FmFeux5xH',
+//     'kPDxpJZ8PD',
+//     '7NYbgH2Z2I',
+//     'OF145SrX44',
+//     'j8LdPFmePE',
+//     'i5Oqu5VZgP',
+//     'VNBC6yq1WO',
+//     'oGVgRSAKwX',
+//     'GP7Y2xOUzj'
+// ];
 
 // Generic method for retrieving data from BGA API. defualts to top 100 ranked games
 const getAtlasData = (params = 'order_by=rank&limit=100') => 
