@@ -592,7 +592,7 @@ hr,
 
   .lib-games{
     grid-template-columns: 1fr;
-    margin-left: 2.3rem;
+    margin: auto;
     width: 12rem;
   }
 
