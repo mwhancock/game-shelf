@@ -6,6 +6,7 @@ const gallery = document.getElementById("gallery");
 const addGameBtn = document.getElementsByClassName("new-game-btn")
 const clientID = `9RQI1WBCZA`;
 let usrLibrary = [];
+let localLibrary;
 let slideArr;
 let lastSlide;
 
@@ -27,11 +28,9 @@ window.addEventListener('games-retrieved', e => {
     })
 
     // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
-    // localStorage.setItem('user_library', JSON.stringify(usrLibrary))
+    localStorage.setItem('user_library', JSON.stringify(usrLibrary));
+    localLibrary = localStorage.getItem("user_library")
 
-    // for(let i = 0; i < usrLibrary.length; i++){
-    //     localStorage.setItem(i, usrLibrary[i].id)
-    // }
 
     // console.log(localStorage)
     getFeatureCards();
@@ -60,7 +59,7 @@ window.addEventListener('library-retrieved', e => {
 
 
 
-
+// If username does not exist in localStorage, prompt user to supply
 
 function getUserName(){
    let userName = localStorage.getItem("userName");
