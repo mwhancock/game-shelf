@@ -53,7 +53,50 @@ window.addEventListener('library-retrieved', e => {
 
 
 
-fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=name_a_z&client_id=${clientID}`)
+
+
+
+
+
+
+
+
+
+function getUserName(){
+   let userName = localStorage.getItem("userName");
+
+    if(userName === null){
+        userName = prompt(`Please enter your Board Game Arena username: `);
+    } else{
+        return localStorage.getItem("userName");
+    }
+    localStorage.setItem("userName", userName);
+    return localStorage.getItem("userName");
+}
+
+// Asks user to input their BGA username, 
+const user = getUserName();
+
+
+fetch(`https://api.boardgameatlas.com/api/lists?username=${user}&client_id=${clientID}`)
+    .then(res => res.json())
+    .then(data => {
+        const user = new CustomEvent('get-user-id', {
+
+             detail: {
+               userID: data.lists[1].id
+            }
+        })
+        dispatchEvent(user)
+    })
+
+
+
+
+window.addEventListener("get-user-id", e => {
+   const userID = e.detail.userID;
+
+   fetch(`https://api.boardgameatlas.com/api/search?list_id=${userID}&order_by=name_a_z&client_id=${clientID}`)
     .then( res => res.json() )
     .then( data =>
         {
@@ -76,6 +119,19 @@ fetch(`https://api.boardgameatlas.com/api/search?list_id=ydVBm1JJUr&order_by=nam
     {
         console.log('ERROR: ', err);
 })
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -378,7 +434,7 @@ fetchUserLibrary()
 
 // TEMPLATE MANIPULATION
 
-// Clones feature card template 7 times, adds classes and src to card,
+// Clones feature card template, adds classes and src to card,
 //  then appends to featured section of page(randomly selected from usr library for now)
 
 
