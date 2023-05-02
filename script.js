@@ -13,6 +13,7 @@ let lastSlide;
 // Add event listener to window that will populate library once api is fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
+    // seperate forEach out into callback function 
     gameList.forEach((game) => {
         const gameObj = {};
         gameObj.id = game.id;
@@ -22,9 +23,7 @@ window.addEventListener('games-retrieved', e => {
         gameObj.description = game.description_preview;
         usrLibrary.push(gameObj);
     })
-    for(let i = 0; i < usrLibrary.length; i++){
-        localStorage.setItem(i, usrLibrary[i].id)
-    }
+    
     console.log(localStorage)
     getFeatureCards();
     let slideCards = document.getElementsByClassName("gallery-img");
