@@ -515,6 +515,10 @@ hr,
 }
 
 @media (max-width: 768px){
+  .search_wrapper{
+    margin-top: 7rem;
+  }
+
   .side-bar{
     border-radius: 0;
     margin-top: 0;
@@ -523,7 +527,7 @@ hr,
   }
 
   .lable{
-    margin-top: 9rem;
+    margin-top: 7=5rem;
   }
 
   .logo-img{
@@ -569,6 +573,11 @@ hr,
 
 @media (max-width: 450px){
   hr{
+    width: 17rem;
+  }
+
+  .search_wrapper{
+    margin-left: 1.4rem;
     width: 17rem;
   }
 
