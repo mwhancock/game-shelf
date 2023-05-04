@@ -23,6 +23,7 @@ const getUserLibrary = () => {
 
 
 
+
 // Add event listener to window that will construct game objects and push to user library once games are fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
@@ -39,8 +40,8 @@ window.addEventListener('games-retrieved', e => {
     if(localStorage.getItem("user_library") === null){
         setUserLibrary(usrLibrary);
     }
-    getLibrary();
-    getRecentGames();
+    getLibrary;
+    getRecentGames;
 })
 
 
@@ -67,7 +68,8 @@ getAtlasData().then(
             gameObj.image = game.images.medium;
             recGames.push(gameObj);
     })
-    getFeatureCards();
+    console.log(recGames)
+    getFeatureCards;
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
@@ -104,12 +106,13 @@ function getUserName(){
    let userName = localStorage.getItem("userName");
 
     if(userName === null){
-        userName = prompt(`Please enter your Board Game Arena username: `);
+        userName = prompt(`Please enter your Board Game Arena username. Leave blank for sample library: `);
+        if(userName === ""){
+            userName = defaultUser
+        }
     } else if (userName){
         return localStorage.getItem("userName");
-    } else {
-        userName = defaultUser;
-    }
+    } 
     localStorage.setItem("userName", userName);
     return localStorage.getItem("userName");
 }
@@ -284,39 +287,39 @@ const getGameData = (id) =>
 
 
 // add to library // modify existing entry
-// const addGameToLibrary = (game_to_add) =>
-// {
-//     const current_library = getUserLibrary() ?? [];
+const addGameToLibrary = (game_to_add) =>
+{
+    const current_library = getUserLibrary() ?? [];
 
-//     // If no user library present, add the game to the user's library
-//     if (current_library.length === 0) {
-//         current_library.push(game_to_add)
-//     }
+    // If no user library present, add the game to the user's library
+    if (current_library.length === 0) {
+        current_library.push(game_to_add)
+    }
 
-//     else {
-//         // If there is a library, Check if the game exists already and retrieve index
-//         const game_index = current_library.findIndex(game => game.id === game_to_add.id)
+    else {
+        // If there is a library, Check if the game exists already and retrieve index
+        const game_index = current_library.findIndex(game => game.id === game_to_add.id)
         
-//         // Modify the library_before array accordingly
-//         if (game_index) current_library[game_index] = game_to_add
-//     }
+        // Modify the library_before array accordingly
+        if (game_index) current_library[game_index] = game_to_add
+    }
 
-//     // overwrite LocalStorage data
-//     setUserLibrary(current_library)
+    // overwrite LocalStorage data
+    setUserLibrary(current_library)
     
-//     // overwrite global cache data
-//     usrLibrary = current_library
-// }
+    // overwrite global cache data
+    usrLibrary = current_library
+}
 
 
 // TODO: REVIEW THIS METHOD TO SEE HOW IT FITS WITH YOUR PLANS
 // Sample call to get Game Data for a single game... Use this for populating your Modal from a click handler
-// getGameData('EJe7IlhwX2').then(
-//     game_data => {
-//         addGameToLibrary(game_data)
-//         console.log('Retrieved a single game based on ID', game_data)
-//     }
-// );
+getGameData('EJe7IlhwX2').then(
+    game_data => {
+        addGameToLibrary(game_data)
+        console.log('Retrieved a single game based on ID', game_data)
+    }
+);
 
 
 
@@ -324,22 +327,22 @@ const getGameData = (id) =>
 
 // TODO: FINISH THE METHOD
 // add to library // modify existing entry
-// const removeGameFromLibrary = (game_to_remove) =>
-// {
-//     const current_library = getUserLibrary();
+const removeGameFromLibrary = (game_to_remove) =>
+{
+    const current_library = getUserLibrary();
 
-//     // Check if a version of the game exists already and retrieve index
-//     const game_index = current_library.findIndex(game => game.id === game_to_remove.id)
+    // Check if a version of the game exists already and retrieve index
+    const game_index = current_library.findIndex(game => game.id === game_to_remove.id)
     
-//     // I'll leave this method for you to fill out
-//     // it is similar to add but we need to remove the index of an array if it exists
+    // I'll leave this method for you to fill out
+    // it is similar to add but we need to remove the index of an array if it exists
 
-//     // overwrite LocalStorage data
-//     setUserLibrary(current_library)
+    // overwrite LocalStorage data
+    setUserLibrary(current_library)
     
-//     // overwrite global cache data
-//     usrLibrary = current_library
-// }
+    // overwrite global cache data
+    usrLibrary = current_library
+}
 
 
 
@@ -405,7 +408,7 @@ const fetchUserLibrary = () =>
     })
 }
 
-// fetchUserLibrary()
+fetchUserLibrary()
 
 
 
@@ -449,77 +452,146 @@ const fetchUserLibrary = () =>
 // Clones feature card template, adds classes and src to card,
 //  then appends to featured section of page(randomly selected from usr library for now)
 
+function cardConstructor(numOfCards, cardType){
+    let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
+    gameTemp = document.getElementById("game-card-template");
+    featureTemp = document.getElementById("feature-card-template");
 
-function getFeatureCards() {
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv;
-    temp = document.getElementById("feature-card-template");
-
-    for (i = 0; i < 10; i++) {
-        tempDiv = temp.content.cloneNode(true);
-        itemDiv = tempDiv.querySelector("div");
-        itemDiv.setAttribute("class", "feature-card")
-        imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = recGames[i].image;
-        imgItem.setAttribute("src", imgPath);
-        imgItem.setAttribute("class", "gallery-img");
-        imgItem.setAttribute("alt", "a picture of a game")
-        itemDiv.append(imgItem);
-        gallery.append(itemDiv);
+    if(cardType === "featured"){
+        temp = featureTemp;
+    } else{
+        temp = gameTemp;
     }
-}
 
-// Clones game card template 8 times, adds classes and src to each,
-// then appends to library preview section
-function getRecentGames(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
-    temp  = document.getElementById("game-card-template");
-
-    for(i = 0; i < 8; i++){
+    for(i = 0; i < numOfCards; i++){
+        
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div");
-        itemDiv.setAttribute("class", "game-card grid-box");
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = getUserLibrary()[i].image;
-        imgItem.setAttribute("src", imgPath);
-        imgItem.setAttribute("alt", "a picture of a game");
-        imgItem.setAttribute("class", "preview-img");
-        gameItem = itemDiv.querySelector("p").cloneNode(true);
         gameName = getUserLibrary()[i].name;
-        gameItem.setAttribute("class", "preview-info");
-        gameItem.innerText = `${gameName}`;
+
+        if(cardType === "featured"){
+            imgPath = recGames[i].image;
+            imgItem.setAttribute("src", imgPath);
+            itemDiv.setAttribute("class", "feature-card");
+            imgItem.setAttribute("class", "gallery-img")
+    }
+
+        if(cardType === "recent"){    
+            itemDiv.setAttribute("class", "grid-box game-card"); 
+            imgItem.setAttribute("class", "preview-img");
+            imgPath = getUserLibrary()[i].image;
+            imgItem.setAttribute("src", imgPath);
+            imgItem.setAttribute("alt", "a picture of a game");
+            // desItem = itemDiv.querySelector("p").cloneNode(true);
+            gameItem = itemDiv.querySelector("p").cloneNode(true);
+            gameItem.setAttribute("class", "preview-info");
+            gameItem.innerText = `${gameName}`
+
+        } 
+        
+        if(cardType === "library"){ 
+            imgPath = getUserLibrary()[i].image;
+            imgItem.setAttribute("src", imgPath);
+            imgItem.setAttribute("alt", "a picture of a game");
+            imgItem.setAttribute("class", "game-img");
+            // desItem = itemDiv.querySelector("p").cloneNode(true);
+            gameItem = itemDiv.querySelector("h5").cloneNode(true);
+            gameDes = getUserLibrary()[i].description;
+            gameItem.setAttribute("class", "game-info game-des");
+            gameItem.innerText = `${gameName} \n ${gameDes}`;
+        }
+
+
         itemDiv.append(imgItem);
         itemDiv.append(gameItem);
-        libraryPreview.append(itemDiv);
-    }
-}
 
-function getLibrary(){
-    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
-    temp = document.getElementById("game-card-template");
-
-    for(i = 0; i < getUserLibrary().length; i++){
-        tempDiv = temp.content.cloneNode(true);
-        itemDiv = tempDiv.querySelector("div");
-        itemDiv.setAttribute("class", "game-card");
-        imgItem = itemDiv.querySelector("img").cloneNode(true);
-        imgPath = getUserLibrary()[i].image;
-        imgItem.setAttribute("src", imgPath);
-        imgItem.setAttribute("alt", "a picture of a game");
-        imgItem.setAttribute("class", "game-img");
-        gameItem = itemDiv.querySelector("h5").cloneNode(true);
-        gameName = getUserLibrary()[i].name;
-        // desItem = itemDiv.querySelector("p").cloneNode(true);
-        gameDes = getUserLibrary()[i].description;
-        gameItem.setAttribute("class", "game-info game-des");
-        gameItem.innerText = `${gameName} \n ${gameDes}`;
-        itemDiv.append(imgItem);
-        itemDiv.append(gameItem);
-        library.append(itemDiv);
+        if(cardType === "featured"){
+            gallery.append(itemDiv);
+            console.log(itemDiv)
+        } else if(cardType === "recent"){
+            libraryPreview.append.itemDiv
+            console.log(`This is a recent card${itemDiv}`)
+        } else if(cardType === "library"){
+            library.append(itemDiv);
+            console.log(`This is a library card${itemDiv}`)
+        }
         // console.log(itemDiv)
     }
 }
 
-function addToLibrary(game){
+
+
+// function getFeatureCards() {
+//     let itemDiv, imgItem, imgPath, i, temp, tempDiv;
+//     temp = document.getElementById("feature-card-template");
+
+//     for (i = 0; i < 10; i++) {
+//         tempDiv = temp.content.cloneNode(true);
+//         itemDiv = tempDiv.querySelector("div");
+//         itemDiv.setAttribute("class", "feature-card")
+//         imgItem = itemDiv.querySelector("img").cloneNode(true);
+//         imgPath = recGames[i].image;
+//         imgItem.setAttribute("src", imgPath);
+//         imgItem.setAttribute("class", "gallery-img");
+//         imgItem.setAttribute("alt", "a picture of a game")
+//         itemDiv.append(imgItem);
+//         gallery.append(itemDiv);
+//     }
+// }
+
+// // Clones game card template 8 times, adds classes and src to each,
+// // then appends to library preview section
+// function getRecentGames(){
+//     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+//     temp  = document.getElementById("game-card-template");
+
+//     for(i = 0; i < 8; i++){
+//         tempDiv = temp.content.cloneNode(true);
+//         itemDiv = tempDiv.querySelector("div");
+//         itemDiv.setAttribute("class", "game-card grid-box");
+//         imgItem = itemDiv.querySelector("img").cloneNode(true);
+//         imgPath = getUserLibrary()[i].image;
+//         imgItem.setAttribute("src", imgPath);
+//         imgItem.setAttribute("alt", "a picture of a game");
+//         imgItem.setAttribute("class", "preview-img");
+//         gameItem = itemDiv.querySelector("p").cloneNode(true);
+//         gameName = getUserLibrary()[i].name;
+//         gameItem.setAttribute("class", "preview-info");
+//         gameItem.innerText = `${gameName}`;
+//         itemDiv.append(imgItem);
+//         itemDiv.append(gameItem);
+//         libraryPreview.append(itemDiv);
+//     }
+// }
+
+// function getLibrary(){
+//     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
+//     temp = document.getElementById("game-card-template");
+
+//     for(i = 0; i < getUserLibrary().length; i++){
+//         tempDiv = temp.content.cloneNode(true);
+//         itemDiv = tempDiv.querySelector("div");
+//         itemDiv.setAttribute("class", "game-card");
+//         imgItem = itemDiv.querySelector("img").cloneNode(true);
+//         imgPath = getUserLibrary()[i].image;
+//         imgItem.setAttribute("src", imgPath);
+//         imgItem.setAttribute("alt", "a picture of a game");
+//         imgItem.setAttribute("class", "game-img");
+//         gameItem = itemDiv.querySelector("h5").cloneNode(true);
+//         gameName = getUserLibrary()[i].name;
+//         // desItem = itemDiv.querySelector("p").cloneNode(true);
+//         gameDes = getUserLibrary()[i].description;
+//         gameItem.setAttribute("class", "game-info game-des");
+//         gameItem.innerText = `${gameName} \n ${gameDes}`;
+//         itemDiv.append(imgItem);
+//         itemDiv.append(gameItem);
+//         library.append(itemDiv);
+//         // console.log(itemDiv)
+//     }
+// }
+
+function showResults(game){
 
 }
 
@@ -603,3 +675,8 @@ function pickTab(tabName){
     })
     document.getElementById(tabName).classList.add('active');
 }
+
+
+const getFeatureCards = cardConstructor(10, "featured");
+const getRecentGames = cardConstructor(8, "recent");
+const getLibrary = cardConstructor(getUserLibrary().length, "library");
