@@ -1,7 +1,7 @@
 // Global variables
 
 const library = document.getElementById("library-body");
-const libraryPreview = document.getElementById("recent-games");
+const recentGames = document.getElementById("recent-games");
 const gallery = document.getElementById("gallery");
 const addGameBtn = document.getElementsByClassName("new-game-btn")
 const clientID = `9RQI1WBCZA`;
@@ -40,6 +40,8 @@ window.addEventListener('games-retrieved', e => {
     if(localStorage.getItem("user_library") === null){
         setUserLibrary(usrLibrary);
     }
+    const getRecentGames = cardConstructor(8, "recent");
+    const getLibrary = cardConstructor(getUserLibrary().length, "library");
     getLibrary;
     getRecentGames;
 })
@@ -69,7 +71,8 @@ getAtlasData().then(
             recGames.push(gameObj);
     })
     console.log(recGames)
-    getFeatureCards;
+    const getFeatureCards = cardConstructor(10, "featured");
+    getFeatureCards
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
@@ -479,10 +482,11 @@ function cardConstructor(numOfCards, cardType){
 
         if(cardType === "recent"){    
             itemDiv.setAttribute("class", "grid-box game-card"); 
-            imgItem.setAttribute("class", "preview-img");
+            imgItem = itemDiv.querySelector("img").cloneNode(true);
             imgPath = getUserLibrary()[i].image;
             imgItem.setAttribute("src", imgPath);
             imgItem.setAttribute("alt", "a picture of a game");
+            imgItem.setAttribute("class", "preview-img");
             // desItem = itemDiv.querySelector("p").cloneNode(true);
             gameItem = itemDiv.querySelector("p").cloneNode(true);
             gameItem.setAttribute("class", "preview-info");
@@ -491,6 +495,7 @@ function cardConstructor(numOfCards, cardType){
         } 
         
         if(cardType === "library"){ 
+            itemDiv.setAttribute("class", "game-card");
             imgPath = getUserLibrary()[i].image;
             imgItem.setAttribute("src", imgPath);
             imgItem.setAttribute("alt", "a picture of a game");
@@ -507,89 +512,21 @@ function cardConstructor(numOfCards, cardType){
         itemDiv.append(gameItem);
 
         if(cardType === "featured"){
+
             gallery.append(itemDiv);
-            console.log(itemDiv)
+
         } else if(cardType === "recent"){
-            libraryPreview.append.itemDiv
-            console.log(`This is a recent card${itemDiv}`)
+
+            recentGames.append(itemDiv);
+
         } else if(cardType === "library"){
+
             library.append(itemDiv);
-            console.log(`This is a library card${itemDiv}`)
+
         }
         // console.log(itemDiv)
     }
 }
-
-
-
-// function getFeatureCards() {
-//     let itemDiv, imgItem, imgPath, i, temp, tempDiv;
-//     temp = document.getElementById("feature-card-template");
-
-//     for (i = 0; i < 10; i++) {
-//         tempDiv = temp.content.cloneNode(true);
-//         itemDiv = tempDiv.querySelector("div");
-//         itemDiv.setAttribute("class", "feature-card")
-//         imgItem = itemDiv.querySelector("img").cloneNode(true);
-//         imgPath = recGames[i].image;
-//         imgItem.setAttribute("src", imgPath);
-//         imgItem.setAttribute("class", "gallery-img");
-//         imgItem.setAttribute("alt", "a picture of a game")
-//         itemDiv.append(imgItem);
-//         gallery.append(itemDiv);
-//     }
-// }
-
-// // Clones game card template 8 times, adds classes and src to each,
-// // then appends to library preview section
-// function getRecentGames(){
-//     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
-//     temp  = document.getElementById("game-card-template");
-
-//     for(i = 0; i < 8; i++){
-//         tempDiv = temp.content.cloneNode(true);
-//         itemDiv = tempDiv.querySelector("div");
-//         itemDiv.setAttribute("class", "game-card grid-box");
-//         imgItem = itemDiv.querySelector("img").cloneNode(true);
-//         imgPath = getUserLibrary()[i].image;
-//         imgItem.setAttribute("src", imgPath);
-//         imgItem.setAttribute("alt", "a picture of a game");
-//         imgItem.setAttribute("class", "preview-img");
-//         gameItem = itemDiv.querySelector("p").cloneNode(true);
-//         gameName = getUserLibrary()[i].name;
-//         gameItem.setAttribute("class", "preview-info");
-//         gameItem.innerText = `${gameName}`;
-//         itemDiv.append(imgItem);
-//         itemDiv.append(gameItem);
-//         libraryPreview.append(itemDiv);
-//     }
-// }
-
-// function getLibrary(){
-//     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
-//     temp = document.getElementById("game-card-template");
-
-//     for(i = 0; i < getUserLibrary().length; i++){
-//         tempDiv = temp.content.cloneNode(true);
-//         itemDiv = tempDiv.querySelector("div");
-//         itemDiv.setAttribute("class", "game-card");
-//         imgItem = itemDiv.querySelector("img").cloneNode(true);
-//         imgPath = getUserLibrary()[i].image;
-//         imgItem.setAttribute("src", imgPath);
-//         imgItem.setAttribute("alt", "a picture of a game");
-//         imgItem.setAttribute("class", "game-img");
-//         gameItem = itemDiv.querySelector("h5").cloneNode(true);
-//         gameName = getUserLibrary()[i].name;
-//         // desItem = itemDiv.querySelector("p").cloneNode(true);
-//         gameDes = getUserLibrary()[i].description;
-//         gameItem.setAttribute("class", "game-info game-des");
-//         gameItem.innerText = `${gameName} \n ${gameDes}`;
-//         itemDiv.append(imgItem);
-//         itemDiv.append(gameItem);
-//         library.append(itemDiv);
-//         // console.log(itemDiv)
-//     }
-// }
 
 function showResults(game){
 
@@ -676,7 +613,3 @@ function pickTab(tabName){
     document.getElementById(tabName).classList.add('active');
 }
 
-
-const getFeatureCards = cardConstructor(10, "featured");
-const getRecentGames = cardConstructor(8, "recent");
-const getLibrary = cardConstructor(getUserLibrary().length, "library");
