@@ -448,8 +448,7 @@ fetchUserLibrary()
 
 // TEMPLATE MANIPULATION
 
-// Clones feature card template, adds classes and src to card,
-//  then appends to featured section of page(randomly selected from usr library for now)
+// Takes function as parameter and constructs cards based on use case requirements
 
 let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
 
@@ -476,6 +475,7 @@ function cardConstructor(constructorType, numOfCards, cardType){
         cardType.append(itemDiv);
     }
 }
+
 
 function featureConstructor(){
     imgPath = recGames[i].image;
@@ -513,8 +513,10 @@ function libraryConstructor(){
 
 
 function showResults(game){
-
+    
 }
+
+
 
 
 // SLIDESHOW AUTOMATION
