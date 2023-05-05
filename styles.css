@@ -57,7 +57,7 @@ hr,
   color: white;
   font-weight: bold;
   font-size: 18px;
-  transition: 0.6s ease;
+  transition: 400ms ease;
   user-select: none;
   z-index: 1;
 }
@@ -378,7 +378,7 @@ hr,
   font-size: 1.15rem;
   font-weight: 500;
   padding: .5rem;
-  transition: 600ms ease;
+  transition: 300ms ease;
   width: 100%;
 }
 
