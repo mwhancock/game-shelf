@@ -143,6 +143,7 @@ hr,
   /* border: 2px solid hotpink; */
   cursor: pointer;
   border-radius: var(--main-border-radius);
+  position: relative;
   grid-column-end: auto;
   height: 14.5rem;
   width: 85%;
@@ -236,6 +237,12 @@ hr,
   cursor: pointer;
 }
 
+.remove{
+  position: absolute;
+  right: 4px;
+  bottom: 1px;
+}
+
 .search_wrapper{
   margin-top: 1rem;
   width: 100%;
@@ -323,7 +330,7 @@ hr,
 .game-card:hover .preview-info{
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  width: 75%;
+  width: 80%;
 }
 
 .active{
