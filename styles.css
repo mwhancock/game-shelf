@@ -126,6 +126,10 @@ hr,
 
 /* MAIN BODY */
 
+#result_content{
+  display: none;
+}
+
 .games {
   /* border: 2px solid hotpink;f */
   gap: 2rem;
@@ -534,7 +538,7 @@ hr,
   }
 
   .lable{
-    margin-top: 7=5rem;
+    margin-top: 7.5rem;
   }
 
   .logo-img{
