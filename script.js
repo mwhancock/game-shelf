@@ -27,8 +27,6 @@ const getUserLibrary = () => {
 }
 
 
-
-
 // Add event listener to window that will construct game objects and push to user library once games are fetched
 window.addEventListener('games-retrieved', e => {
     const gameList = e.detail.games;
@@ -45,8 +43,11 @@ window.addEventListener('games-retrieved', e => {
     if(localStorage.getItem("user_library") === null){
         setUserLibrary(usrLibrary);
     }
-    cardConstructor(recentConstrucor, 8, recentGames);
-    cardConstructor(libraryConstructor, getUserLibrary().length, library);
+    // cardConstructor(recentConstrucor, 8, recentGames);
+    // cardConstructor(libraryConstructor, getUserLibrary().length, library);
+    recentConstrucor();
+    libraryConstructor();
+    // console.log(usrLibrary)
 })
 
 
@@ -239,9 +240,12 @@ const searchAtlasByName = (e) => {
                     gameObj.name = game.name;
                     searchArr.push(gameObj);
                 })
-        })      
-        console.log(searchArr) 
-        cardConstructor(searchResultsConstructor, 8, searchResults);
+            })      
+            .then(() => {
+                console.log(searchArr); 
+                searchResultsConstructor();
+            })
+        // cardConstructor(searchResultsConstructor, 8, searchResults);
 
             } 
     catch (error) {
@@ -320,12 +324,12 @@ const addGameToLibrary = (game_to_add) =>
 
 // TODO: REVIEW THIS METHOD TO SEE HOW IT FITS WITH YOUR PLANS
 // Sample call to get Game Data for a single game... Use this for populating your Modal from a click handler
-getGameData('EJe7IlhwX2').then(
-    game_data => {
-        addGameToLibrary(game_data)
-        console.log('Retrieved a single game based on ID', game_data)
-    }
-);
+// getGameData(game).then(
+//     game_data => {
+//         addGameToLibrary(game_data)
+//         console.log('Retrieved a single game based on ID', game_data)
+//     }
+// );
 
 
 
@@ -338,7 +342,7 @@ const removeGameFromLibrary = (game_to_remove) =>
     const current_library = getUserLibrary();
 
     // Check if a version of the game exists already and retrieve index
-    const game_index = current_library.findIndex(game => game.id === game_to_remove.id)
+    const game_index = current_library.findIndex(game => game.id === game_to_remove.id);
     
     // I'll leave this method for you to fill out
     // it is similar to add but we need to remove the index of an array if it exists
@@ -414,7 +418,7 @@ const fetchUserLibrary = () =>
     })
 }
 
-// fetchUserLibrary()
+fetchUserLibrary()
 
 
 
@@ -522,16 +526,35 @@ function libraryConstructor(){
 
 
 function searchResultsConstructor(){
-    itemDiv.setAttribute("class", "grid-box game-card");
-    imgItem = itemDiv.querySelector("img").cloneNode(true);
-    imgPath = searchArr[i].image;
-    imgItem.setAttribute("src", imgPath);
-    imgItem.setAttribute("alt", "Game image");
-    imgItem.setAttribute("class", "preview-img");
-    gameItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem.setAttribute("class", "preview-info");
-    gameItem.innerText = `${gameName}`;
-    document.getElementById("result_content").style.display = "block";
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+    temp = document.getElementById("game-card-template");
+
+    for(i = 0; i < 8; i++){
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        itemDiv.setAttribute("class", "grid-box game-card");setUserLib
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = searchArr[i].image;
+        imgItem.setAttribute("src", imgPath);
+        imgItem.setAttribute("alt", "Game image");
+        imgItem.setAttribute("class", "preview-img");
+        gameItem = itemDiv.querySelector("p").cloneNode(true);
+        gameItem.setAttribute("class", "preview-info");
+        gameName = searchArr[i].name;
+        gameItem.innerText = `${gameName}`;
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        searchResults.append(itemDiv);
+        document.getElementById("result_content").style.display = "block";
+
+    }
+    
+}
+
+function clearSearch(){
+    searchArr = [];
+    document.getElementById("result_content").style.display = "none";
 }
 
 
