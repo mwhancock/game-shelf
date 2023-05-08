@@ -171,22 +171,6 @@ window.addEventListener("get-user-id", e => {
 
 
 
-// search.addEventListener("search_results", e => {
-//     const gameList = e.detail.games;
-//     gameList.forEach(game => {
-//         const gameObj = {};
-//         gameObj.id = game.id;
-//         gameObj.image = game.images.medium;
-//         gameObj.name = game.name;
-//         gameObj.description = game.description_preview;
-//         searchArr.push(gameObj);
-//     })
-//     cardConstructor(searchResultsConstructor, 8, searchResults);
-// })
-
-
-
-
 
 
 
@@ -311,6 +295,7 @@ const getGameData = (id) =>
 const addGameToLibrary = (game_to_add) =>
 {
     const current_library = getUserLibrary() ?? [];
+    console.log(current_library)
 
     // If no user library present, add the game to the user's library
     if (current_library.length === 0) {
