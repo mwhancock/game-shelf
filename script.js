@@ -3,11 +3,16 @@
 const library = document.getElementById("library-body");
 const recentGames = document.getElementById("recent-games");
 const gallery = document.getElementById("gallery");
-const addGameBtn = document.getElementsByClassName("new-game-btn")
+const searchResults = document.getElementById("search_results");
+const search = document.getElementById("search_button");
+const addGameBtn = document.getElementsByClassName("new-game-btn");
 const clientID = `9RQI1WBCZA`;
+const defaultUser = "mwhancock"
+let userName = localStorage.getItem("userName");
 let usrLibrary = [];
 let recGames = [];
 let localLibrary;
+let searchArr = [];
 let slideArr;
 let lastSlide;
 
@@ -101,9 +106,6 @@ window.addEventListener('library-retrieved', e => {
 // Provides default user if none provided
 
 function getUserName(){
-   const defaultUser = "mwhancock"
-   let userName = localStorage.getItem("userName");
-
     if(userName === null){
         userName = prompt(`Please enter your Board Game Arena username. Leave blank for sample library: `);
         if(userName === ""){
@@ -130,9 +132,9 @@ fetch(`https://api.boardgameatlas.com/api/lists?username=${user}&client_id=${cli
                userID: data.lists[1].id
             }
         })
-        dispatchEvent(user)
+        dispatchEvent(user) 
     }) .catch( err => {
-             console.log(`ERROR: ${err}`)
+             console.log(`ERROR: ${err }`)
     })
 
 
@@ -169,7 +171,18 @@ window.addEventListener("get-user-id", e => {
 
 
 
-
+// search.addEventListener("search_results", e => {
+//     const gameList = e.detail.games;
+//     gameList.forEach(game => {
+//         const gameObj = {};
+//         gameObj.id = game.id;
+//         gameObj.image = game.images.medium;
+//         gameObj.name = game.name;
+//         gameObj.description = game.description_preview;
+//         searchArr.push(gameObj);
+//     })
+//     cardConstructor(searchResultsConstructor, 8, searchResults);
+// })
 
 
 
@@ -234,14 +247,23 @@ const searchAtlasByName = (e) => {
     try{
         getAtlasData(`name=${search_term}&fuzzy_match=true&order_by=name&limit=100`)
         .then(
-            res => console.log(res)
-        );
-    }
+            res => {
+                res.forEach(game => {
+                    const gameObj = {};
+                    gameObj.id = game.id;
+                    gameObj.image = game.images.medium;
+                    gameObj.name = game.name;
+                    searchArr.push(gameObj);
+                })
+        })      
+        console.log(searchArr) 
+        cardConstructor(searchResultsConstructor, 8, searchResults);
+
+            } 
     catch (error) {
         console.log('Error retrieving User Games by ID', error)
     }
 }
-
 
 // retrieve user data and BGA data for single game
 // From the 'card-click' event, retrieve the game's ID, use that to map data from storage
@@ -407,8 +429,7 @@ const fetchUserLibrary = () =>
     })
 }
 
-fetchUserLibrary()
-
+// fetchUserLibrary()
 
 
 
@@ -463,11 +484,14 @@ function cardConstructor(constructorType, numOfCards, cardType){
     }
 
     for(i = 0; i < numOfCards; i++){
-        
         tempDiv = temp.content.cloneNode(true);
         itemDiv = tempDiv.querySelector("div");
         imgItem = itemDiv.querySelector("img").cloneNode(true);
-        gameName = getUserLibrary()[i].name;
+        if(cardType != searchResults){
+            gameName = getUserLibrary()[i].name;
+        } else{
+            gameName = searchArr[i].name;
+        }
         constructorType();
 
         itemDiv.append(imgItem);
@@ -512,8 +536,17 @@ function libraryConstructor(){
 
 
 
-function showResults(game){
-    
+function searchResultsConstructor(){
+    itemDiv.setAttribute("class", "grid-box game-card");
+    imgItem = itemDiv.querySelector("img").cloneNode(true);
+    imgPath = searchArr[i].image;
+    imgItem.setAttribute("src", imgPath);
+    imgItem.setAttribute("alt", "Game image");
+    imgItem.setAttribute("class", "preview-img");
+    gameItem = itemDiv.querySelector("p").cloneNode(true);
+    gameItem.setAttribute("class", "preview-info");
+    gameItem.innerText = `${gameName}`;
+    document.getElementById("result_content").style.display = "block";
 }
 
 
