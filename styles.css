@@ -128,6 +128,8 @@ hr,
 
 #result_content{
   display: none;
+  height: 43rem;
+  overflow: hidden;
 }
 
 .games {
@@ -241,7 +243,7 @@ hr,
   cursor: pointer;
 }
 
-.remove{
+.game-btn{
   position: absolute;
   right: 4px;
   bottom: 1px;
