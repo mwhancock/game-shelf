@@ -45,8 +45,10 @@ window.addEventListener('games-retrieved', e => {
     if(localStorage.getItem("user_library") === null){
         setUserLibrary(usrLibrary);
     }
-    cardConstructor(recentConstrucor, 8, recentGames);
-    cardConstructor(libraryConstructor, getUserLibrary().length, library);
+    // cardConstructor(recentConstrucor, 8, recentGames);
+    // cardConstructor(libraryConstructor, getUserLibrary().length, library);
+    recentConstrucor();
+    libraryConstructor();
 })
 
 
@@ -73,7 +75,8 @@ getAtlasData().then(
             gameObj.image = game.images.medium;
             recGames.push(gameObj);
     })
-    cardConstructor(featureConstructor, 10, gallery);
+    // cardConstructor(featureConstructor, 10, gallery);
+    featureConstructor();
     let slideCards = document.getElementsByClassName("gallery-img");
     slideArr = Array.from(slideCards);
     lastSlide = slideArr.length - 1;
@@ -239,9 +242,10 @@ const searchAtlasByName = (e) => {
                     gameObj.name = game.name;
                     searchArr.push(gameObj);
                 })
-        })      
-        console.log(searchArr) 
-        cardConstructor(searchResultsConstructor, 8, searchResults);
+            })      
+            console.log(searchArr); 
+            searchResultsConstructor();
+        // cardConstructor(searchResultsConstructor, 8, searchResults);
 
             } 
     catch (error) {
@@ -456,82 +460,138 @@ const fetchUserLibrary = () =>
 
 // Takes function as parameter and constructs cards based on use case requirements
 
-let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
+// let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
 
-function cardConstructor(constructorType, numOfCards, cardType){
-    gameTemp = document.getElementById("game-card-template");
-    featureTemp = document.getElementById("feature-card-template");
+// function cardConstructor(constructorType, numOfCards, cardType){
+//     gameTemp = document.getElementById("game-card-template");
+//     featureTemp = document.getElementById("feature-card-template");
 
-    if(cardType === gallery){
-        temp = featureTemp;
-    } else{
-        temp = gameTemp;
-    }
+//     if(cardType === gallery){
+//         temp = featureTemp;
+//     } else{
+//         temp = gameTemp;
+//     }
 
-    for(i = 0; i < numOfCards; i++){
-        tempDiv = temp.content.cloneNode(true);
-        itemDiv = tempDiv.querySelector("div");
-        imgItem = itemDiv.querySelector("img").cloneNode(true);
-        if(cardType != searchResults){
-            gameName = getUserLibrary()[i].name;
-        } else{
-            gameName = searchArr[i].name;
-        }
-        constructorType();
+//     for(i = 0; i < numOfCards; i++){
+//         tempDiv = temp.content.cloneNode(true);
+//         itemDiv = tempDiv.querySelector("div");
+//         imgItem = itemDiv.querySelector("img").cloneNode(true);
+//         if(cardType != searchResults){
+//             gameName = getUserLibrary()[i].name;
+//         } else{
+//             gameName = searchArr[i].name;
+//         }
+//         constructorType();
 
-        itemDiv.append(imgItem);
-        itemDiv.append(gameItem);
-        cardType.append(itemDiv);
-    }
-}
+//         itemDiv.append(imgItem);
+//         itemDiv.append(gameItem);
+//         cardType.append(itemDiv);
+//     }
+// }
 
 
 function featureConstructor(){
-    imgPath = recGames[i].image;
-    imgItem.setAttribute("src", imgPath);
-    itemDiv.setAttribute("class", "feature-card");
-    imgItem.setAttribute("class", "gallery-img");
+    let itemDiv, imgItem, imgPath, i, temp,tempDiv, gameItem;
+    temp= document.getElementById("feature-card-template");
+
+    for(i = 0; i < 14; i++){
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = recGames[i].image;    
+        imgItem.setAttribute("src", imgPath);
+        itemDiv.setAttribute("class", "feature-card");
+        imgItem.setAttribute("class", "gallery-img");
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        gallery.append(itemDiv);
+    }
 }
 
 function recentConstrucor(){
-    itemDiv.setAttribute("class", "grid-box game-card"); 
-    imgItem = itemDiv.querySelector("img").cloneNode(true);
-    imgPath = getUserLibrary()[i].image;
-    imgItem.setAttribute("src", imgPath);
-    imgItem.setAttribute("alt", "a picture of a game");
-    imgItem.setAttribute("class", "preview-img");
-    gameItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem.setAttribute("class", "preview-info");
-    gameItem.innerText = `${gameName}`;
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+    temp = document.getElementById("game-card-template");
+
+    for(i = 0; i < 8; i++){
+
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);        
+        itemDiv.setAttribute("class", "grid-box game-card"); 
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = getUserLibrary()[i].image;
+        imgItem.setAttribute("src", imgPath);
+        imgItem.setAttribute("alt", "a picture of a game");
+        imgItem.setAttribute("class", "preview-img");
+        gameName = getUserLibrary()[i].name;
+        gameItem = itemDiv.querySelector("p").cloneNode(true);
+        gameItem.setAttribute("class", "preview-info");
+        gameItem.innerText = `${gameName}`;
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        recentGames.append(itemDiv);
+    }
 }
 
 
 function libraryConstructor(){
-    itemDiv.setAttribute("class", "game-card");
-    imgPath = getUserLibrary()[i].image;
-    imgItem.setAttribute("src", imgPath);
-    imgItem.setAttribute("alt", "a picture of a game");
-    imgItem.setAttribute("class", "game-img");
-    // desItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem = itemDiv.querySelector("h5").cloneNode(true);
-    gameDes = getUserLibrary()[i].description;
-    gameItem.setAttribute("class", "game-info game-des");
-    gameItem.innerText = `${gameName} \n ${gameDes}`;    
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
+    temp = document.getElementById("game-card-template");
+
+    for(i = 0; i < getUserLibrary().length; i++){        
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        itemDiv.setAttribute("class", "game-card");
+        imgPath = getUserLibrary()[i].image;
+        imgItem.setAttribute("src", imgPath);
+        imgItem.setAttribute("alt", "a picture of a game");
+        imgItem.setAttribute("class", "game-img");
+        // desItem = itemDiv.querySelector("p").cloneNode(true);
+        gameItem = itemDiv.querySelector("h5").cloneNode(true);
+        gameName = getUserLibrary()[i].name;
+        gameDes = getUserLibrary()[i].description;
+        gameItem.setAttribute("class", "game-info game-des");
+        gameItem.innerText = `${gameName} \n ${gameDes}`; 
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        library.append(itemDiv);   
+
+    }
 }
 
 
 
 function searchResultsConstructor(){
-    itemDiv.setAttribute("class", "grid-box game-card");
-    imgItem = itemDiv.querySelector("img").cloneNode(true);
-    imgPath = searchArr[i].image;
-    imgItem.setAttribute("src", imgPath);
-    imgItem.setAttribute("alt", "Game image");
-    imgItem.setAttribute("class", "preview-img");
-    gameItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem.setAttribute("class", "preview-info");
-    gameItem.innerText = `${gameName}`;
-    document.getElementById("result_content").style.display = "block";
+    let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+    temp = document.getElementById("game-card-template");
+
+    for(i = 0; i < 8; i++){
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        itemDiv.setAttribute("class", "grid-box game-card");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        imgPath = searchArr[i].image;
+        imgItem.setAttribute("src", imgPath);
+        imgItem.setAttribute("alt", "Game image");
+        imgItem.setAttribute("class", "preview-img");
+        gameItem = itemDiv.querySelector("p").cloneNode(true);
+        gameItem.setAttribute("class", "preview-info");
+        gameName = searchArr[i].name;
+        gameItem.innerText = `${gameName}`;
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        searchResults.append(itemDiv);
+        document.getElementById("result_content").style.display = "block";
+
+    }
+    
+}
+
+function clearSearch(){
+    searchArr = [];
+    document.getElementById("result_content").style.display = "none";
 }
 
 
