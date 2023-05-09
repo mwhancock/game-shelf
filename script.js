@@ -150,7 +150,7 @@ fetch(`https://api.boardgameatlas.com/api/lists?username=${user}&client_id=${cli
 
 
 // Fetches user library
-window.addEventListener("get-user-id", e => {
+window.addEventListener("get-user-id", () => {
 //    const userID = e.detail.userID;
 
 //    fetch(`https://api.boardgameatlas.com/api/search?list_id=${userID}&order_by=name_a_z&client_id=${clientID}`)
@@ -218,20 +218,24 @@ const checkLibraryOrGetData = async (user_name) =>
     {
         console.log('retrieving user library for ', user_name)
         //Create API call to fetch users owned game list ID 
-        const bga_library = await getUserBGALibrary(user_name).then(
+        const bga_library = await getUserBGALibrary(user).then(
             data => data
             )
             // Stash the results in the user library in localStorage
             setUserLibrary(bga_library);
-        libraryRetrieved(bga_library);
+            libraryRetrieved(bga_library);
+            console.log(localLibrary)
+
     }
     // Retrieve generic "library" data from BGA if they don't supply a username AND don't have a cached library
-    else if (cached_library == null && !user_name) {
+    else if (cached_library == null && !user) {
         console.log('retrieving a generic game library for testing')
         getAtlasData().then(
             generic_library => {
                 setUserLibrary(generic_library);
                 libraryRetrieved(generic_library)
+                console.log(localLibrary)
+
             }
             )
     }
@@ -241,7 +245,7 @@ const checkLibraryOrGetData = async (user_name) =>
         libraryRetrieved(cached_library)
     }
 }
-checkLibraryOrGetData();
+checkLibraryOrGetData(user);
 })
 
 
@@ -405,12 +409,12 @@ const addGameToLibrary = (game_to_add) =>
 
 // TODO: REVIEW THIS METHOD TO SEE HOW IT FITS WITH YOUR PLANS
 // Sample call to get Game Data for a single game... Use this for populating your Modal from a click handler
-getGameData('EJe7IlhwX2').then(
-    game_data => {
-        addGameToLibrary(game_data)
-        console.log('Retrieved a single game based on ID', game_data)
-    }
-);
+// getGameData('EJe7IlhwX2').then(
+//     game_data => {
+//         addGameToLibrary(game_data)
+//         console.log('Retrieved a single game based on ID', game_data)
+//     }
+// );
 
 
 
@@ -499,7 +503,7 @@ const fetchUserLibrary = () =>
     })
 }
 
-// fetchUserLibrary()
+fetchUserLibrary()
 
 
 
@@ -637,7 +641,8 @@ function libraryConstructor(){
         itemDiv.append(imgItem);
         itemDiv.append(gameItem);
         library.append(itemDiv);   
-
+        console.log(localLibrary)
+        
     }
 }
 
