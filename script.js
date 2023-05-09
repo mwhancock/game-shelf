@@ -22,8 +22,14 @@ const setUserLibrary = (lib) => {
     localStorage.setItem("user_library", JSON.stringify(lib));
 }
 
-const getUserLibrary = () => {
-  return JSON.parse(localStorage.getItem("user_library"))
+const getUserLibrary = () => 
+{
+    // array of JSONified Game data or undefined
+    const possible_library = localStorage.getItem("user_library")
+    if (possible_library === null) {
+        return JSON.parse(possible_library)
+    }
+    return console.log('No user Library found')
 }
 
 
@@ -69,10 +75,11 @@ const getAtlasData = (params = 'order_by=rank&limit=100') => {
 // Fetches top 100 games on BGA and creates array of game objects
 getAtlasData().then(
     games_list => {
+        // console.log(games_list)
         games_list.forEach((game) => {
             const gameObj = {};
             gameObj.id = game.id;
-            gameObj.image = game.images.medium;
+            gameObj.image = game?.images?.medium;
             recGames.push(gameObj);
     })
     // cardConstructor(featureConstructor, 10, gallery);
@@ -89,7 +96,7 @@ getAtlasData().then(
 
 
 
-window.addEventListener('library-retrieved', e => {
+window.addEventListener('user-library-retrieved', e => {
     const library = e.detail.library
 
     console.log('Retrieved the user\s library and merged with BGA data', library)
@@ -112,7 +119,7 @@ function getUserName(){
     if(userName === null){
         userName = prompt(`Please enter your Board Game Arena username. Leave blank for sample library: `);
         if(userName === ""){
-            userName = defaultUser
+            userName = defaultUser;
         }
     } else if (userName){
         return localStorage.getItem("userName");
@@ -144,32 +151,98 @@ fetch(`https://api.boardgameatlas.com/api/lists?username=${user}&client_id=${cli
 
 // Fetches user library
 window.addEventListener("get-user-id", e => {
-   const userID = e.detail.userID;
+//    const userID = e.detail.userID;
 
-   fetch(`https://api.boardgameatlas.com/api/search?list_id=${userID}&order_by=name_a_z&client_id=${clientID}`)
-    .then( res => res.json() )
-    .then( data =>
+//    fetch(`https://api.boardgameatlas.com/api/search?list_id=${userID}&order_by=name_a_z&client_id=${clientID}`)
+//     .then( res => res.json() )
+//     .then( data =>
+//         {
+//             // Define the event emitter for our new custom event
+//             const gameDataRetrieved = new CustomEvent(
+//                 'games-retrieved',
+//                 {
+//                     // set our API's data into custom properties of the event's detail object
+//                     detail:
+//                     {
+//                         games: data.games
+//                     }
+//                 }
+//             )
+//             // dispatch our event using the HTML object it is attached to
+//             window.dispatchEvent(gameDataRetrieved)
+//     }
+// )
+// .catch( err => {
+//         console.log(`ERROR: ${err}`);
+// })
+
+
+
+// Callback handler for retrieving user game list from BGA Account based on username
+const getUserBGALibrary = async (user_name) =>
+{
+    if(!user_name) return console.log('Please provide a valid BGA username');
+    //Create API call to fetch users owned game list ID 
+    await fetch(`https://api.boardgameatlas.com/api/lists?username=${user_name}&client_id=${clientID}`)
+    .then(res => res.json())
+    .then(async data =>
         {
-            // Define the event emitter for our new custom event
-            const gameDataRetrieved = new CustomEvent(
-                'games-retrieved',
-                {
-                    // set our API's data into custom properties of the event's detail object
-                    detail:
-                    {
-                        games: data.games
-                    }
-                }
-            )
-            // dispatch our event using the HTML object it is attached to
-            window.dispatchEvent(gameDataRetrieved)
-    }
-)
-.catch( err => {
-        console.log(`ERROR: ${err}`);
-})
-})
+            return await fetch(`https://api.boardgameatlas.com/api/search?list_id=${data.lists[1].id}&order_by=name_a_z&client_id=${clientID}`)
+            .then( res => res.json() )
+            .then( user_games => user_games.games)
+            .catch( err =>console.log(`ERROR: ${err}`))
+        }).catch( err => {
+            console.log(`ERROR: ${err }`)
+    })
+}
 
+// 'Session Handler' that should be called first to check app data and return events appropriately
+const checkLibraryOrGetData = async (user_name) =>
+{
+    // Check to see if user has been on the site before
+    // either an array of games from localStorage OR null
+    let cached_library = getUserLibrary();
+    const libraryRetrieved = (library_data) => {
+        const custom_event = new CustomEvent(
+            'user-library-retrieved',
+            {
+                // set our API's data into custom properties of the event's detail object
+                detail: { games: library_data }
+            }
+        )
+        // dispatch our event using the HTML object it is attached to
+        window.dispatchEvent(custom_event)
+    } 
+    // Retrieve the user's library from BGA IF they supply an account name AND they don't have a cached library
+    if (cached_library == null && user_name)
+    {
+        console.log('retrieving user library for ', user_name)
+        //Create API call to fetch users owned game list ID 
+        const bga_library = await getUserBGALibrary(user_name).then(
+            data => data
+            )
+            // Stash the results in the user library in localStorage
+            setUserLibrary(bga_library);
+        libraryRetrieved(bga_library);
+    }
+    // Retrieve generic "library" data from BGA if they don't supply a username AND don't have a cached library
+    else if (cached_library == null && !user_name) {
+        console.log('retrieving a generic game library for testing')
+        getAtlasData().then(
+            generic_library => {
+                setUserLibrary(generic_library);
+                libraryRetrieved(generic_library)
+            }
+            )
+    }
+    // if we have a cached_library, return the games from that
+    else if (cached_library !== null) {
+        console.log('got user\'s library from cache')
+        libraryRetrieved(cached_library)
+    }
+}
+checkLibraryOrGetData();
+})
 
 
 
@@ -272,6 +345,7 @@ const getGameData = (id) =>
                 game_data => {
                     console.log('Retrieved single game from BGA API')
                     // returns an array, we want the first index
+                    console.log(game_data[0])
                     return game_data[0]
                 }
             )
@@ -308,7 +382,7 @@ const addGameToLibrary = (game_to_add) =>
 
     else {
         // If there is a library, Check if the game exists already and retrieve index
-        const game_index = current_library.findIndex(game => game.id === game_to_add.id)
+        const game_index = current_library.findIndex(game => game.id === game_to_add.id);
         
         // Modify the library_before array accordingly
         if (game_index) current_library[game_index] = game_to_add
