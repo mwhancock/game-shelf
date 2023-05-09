@@ -53,7 +53,7 @@ window.addEventListener('games-retrieved', e => {
     }
     // cardConstructor(recentConstrucor, 8, recentGames);
     // cardConstructor(libraryConstructor, getUserLibrary().length, library);
-    recentConstrucor();
+    recentConstructor();
     libraryConstructor();
 })
 
@@ -129,11 +129,11 @@ function getUserName(){
 }
 
 // Asks user to input their BGA username, 
-const user = getUserName();
+// const user = getUserName();
 
 
 //Create API call to fetch users owned game list ID 
-fetch(`https://api.boardgameatlas.com/api/lists?username=${user}&client_id=${clientID}`)
+fetch(`https://api.boardgameatlas.com/api/lists?username=${getUserName()}&client_id=${clientID}`)
     .then(res => res.json())
     .then(data => {
         const user = new CustomEvent('get-user-id', {
@@ -218,7 +218,7 @@ const checkLibraryOrGetData = async (user_name) =>
     {
         console.log('retrieving user library for ', user_name)
         //Create API call to fetch users owned game list ID 
-        const bga_library = await getUserBGALibrary(user).then(
+        const bga_library = await getUserBGALibrary(getUserName()).then(
             data => data
             )
             // Stash the results in the user library in localStorage
@@ -245,7 +245,7 @@ const checkLibraryOrGetData = async (user_name) =>
         libraryRetrieved(cached_library)
     }
 }
-checkLibraryOrGetData(user);
+checkLibraryOrGetData(getUserName());
 })
 
 
@@ -593,7 +593,7 @@ function featureConstructor(){
     }
 }
 
-function recentConstrucor(){
+function recentConstructor(){
     let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
     temp = document.getElementById("game-card-template");
 
@@ -603,7 +603,6 @@ function recentConstrucor(){
         itemDiv = tempDiv.querySelector("div");
         imgItem = itemDiv.querySelector("img").cloneNode(true);        
         itemDiv.setAttribute("class", "grid-box game-card"); 
-        imgItem = itemDiv.querySelector("img").cloneNode(true);
         imgPath = getUserLibrary()[i].image;
         imgItem.setAttribute("src", imgPath);
         imgItem.setAttribute("alt", "a picture of a game");
