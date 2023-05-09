@@ -315,10 +315,13 @@ const searchAtlasByName = (e) => {
                     gameObj.name = game.name;
                     searchArr.push(gameObj);
                 })
-            })      
+            })
+        .then(() => {
+
             console.log(searchArr); 
             searchResultsConstructor();
-        // cardConstructor(searchResultsConstructor, 8, searchResults);
+            // cardConstructor(searchResultsConstructor, 8, searchResults);
+        })    
 
             } 
     catch (error) {
@@ -346,7 +349,11 @@ const getGameData = (id) =>
                     console.log('Retrieved single game from BGA API')
                     // returns an array, we want the first index
                     console.log(game_data[0])
-                    return game_data[0]
+                }
+                )
+                .then (
+                    () => {
+                        return game_data[0];
                 }
             )
             .catch(
