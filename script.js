@@ -33,7 +33,6 @@ const getUserLibrary = () => {
 // Add event listener to window that will construct game objects and push to user library once games are fetched
 window.addEventListener("games-retrieved", (e) => {
   const gameList = e.detail.games;
-  console.log(gameList);
 
   gameList.forEach((game) => {
     // console.log(game)
@@ -146,7 +145,7 @@ window.addEventListener("get-user-id", () => {
           .then((res) => res.json())
 
         //   ---------This is returning user library------------
-          .then((user_games) => user_games.games)
+          .then((user_games) => {usrLibrary = user_games.games})
           .catch((err) => console.log(`ERROR: ${err}`));
       })
       .catch((err) => {
@@ -165,23 +164,20 @@ window.addEventListener("get-user-id", () => {
         detail: { games: library_data },
       });
       // dispatch our event using the HTML object it is attached to
-      console.log(custom_event.detail.games);
       window.dispatchEvent(custom_event);
     };
     // Retrieve the user's library from BGA IF they supply an account name AND they don't have a cached library
-    if (cached_library == null && user_name) {
+    if (cached_library == undefined && user_name) {
       console.log("retrieving user library for ", user_name);
       //Create API call to fetch users owned game list ID
 
-    //   -----------This is not returning user library, instead reurning undefined----------
-      const bga_library = await getUserBGALibrary(user_name).then(
-        (data => {data})
-      );
+
+      await getUserBGALibrary(user_name);
+      const bga_library = usrLibrary;
+
       // Stash the results in the user library in localStorage
-      console.log(`bga library ${bga_library}`)
       setUserLibrary(bga_library);
       libraryRetrieved(bga_library);
-      console.log(localLibrary);
     }
     // Retrieve generic "library" data from BGA if they don't supply a username AND don't have a cached library
     else if (cached_library == null && !user_name) {
@@ -451,11 +447,11 @@ function recentConstructor() {
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     itemDiv.setAttribute("class", "grid-box game-card");
-    imgPath = getUserLibrary()[i].image;
+    imgPath = usrLibrary[i].images.medium;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.setAttribute("class", "preview-img");
-    gameName = getUserLibrary()[i].name;
+    gameName = usrLibrary[i].name;
     gameItem = itemDiv.querySelector("p").cloneNode(true);
     gameItem.setAttribute("class", "preview-info");
     gameItem.innerText = `${gameName}`;
@@ -469,25 +465,24 @@ function libraryConstructor() {
   let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
   temp = document.getElementById("game-card-template");
 
-  for (i = 0; i < getUserLibrary().length; i++) {
+  for (i = 0; i < usrLibrary.length -1; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     itemDiv.setAttribute("class", "game-card");
-    imgPath = getUserLibrary()[i].image;
+    imgPath = usrLibrary[i].images.medium;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.setAttribute("class", "game-img");
     // desItem = itemDiv.querySelector("p").cloneNode(true);
     gameItem = itemDiv.querySelector("h5").cloneNode(true);
-    gameName = getUserLibrary()[i].name;
-    gameDes = getUserLibrary()[i].description;
+    gameName = usrLibrary[i].name;
+    gameDes = usrLibrary[i].description_preview;
     gameItem.setAttribute("class", "game-info game-des");
     gameItem.innerText = `${gameName} \n ${gameDes}`;
     itemDiv.append(imgItem);
     itemDiv.append(gameItem);
     library.append(itemDiv);
-    console.log(localLibrary);
   }
 }
 
