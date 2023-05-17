@@ -194,11 +194,11 @@ hr,
   z-index: 100;
 }
 
-.game-info > p{
+.game-card  .game-des{
   display: none;
 }
 
-.game-info:hover > p{
+.game-card:hover .game-des{
   display: block;
   font-size: 12px;
   font-weight: 300;

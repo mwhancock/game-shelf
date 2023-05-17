@@ -473,8 +473,12 @@ function libraryConstructor() {
     gameItem = itemDiv.querySelector("h5").cloneNode(true);
     gameName = usrLibrary[i].name;
     gameDes = usrLibrary[i].description_preview;
+    if(gameDes === ""){
+      gameDes = "No description currently available";
+    }
     desItem.innerText = `${gameDes}`
     gameItem.setAttribute("class", "game-info");
+    desItem.setAttribute("class", "game-des");
     gameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(gameItem);
