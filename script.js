@@ -11,7 +11,6 @@ const defaultUser = "mwhancock";
 let userName = localStorage.getItem("userName");
 let usrLibrary = [];
 let recGames = [];
-let localLibrary;
 let searchArr = [];
 let slideArr;
 let lastSlide;
@@ -35,7 +34,6 @@ window.addEventListener("games-retrieved", (e) => {
   const gameList = e.detail.games;
 
   gameList.forEach((game) => {
-    // console.log(game)
     const gameObj = {};
     gameObj.id = game.id;
     gameObj.in_library = true;
@@ -44,10 +42,9 @@ window.addEventListener("games-retrieved", (e) => {
     gameObj.description = game.description_preview;
     usrLibrary.push(gameObj);
   });
-  // if(localStorage.getItem("user_library") === undefined){
-  //     setUserLibrary(usrLibrary);
-  // }
-  // console.log(usrLibrary);
+  if(localStorage.getItem("user_library") === undefined){
+      setUserLibrary(usrLibrary);
+  }
   // cardConstructor(recentConstrucor, 8, recentGames);
   // cardConstructor(libraryConstructor, getUserLibrary().length, library);
   recentConstructor();
@@ -185,7 +182,6 @@ window.addEventListener("get-user-id", () => {
       getAtlasData().then((generic_library) => {
         setUserLibrary(generic_library);
         libraryRetrieved(generic_library);
-        console.log(localLibrary);
       });
     }
     // if we have a cached_library, return the games from that
@@ -242,7 +238,6 @@ const searchAtlasByName = (e) => {
         });
       })
       .then(() => {
-        console.log(searchArr);
         searchResultsConstructor();
         // cardConstructor(searchResultsConstructor, 8, searchResults);
       });
@@ -392,34 +387,34 @@ const fetchUserLibrary = () => {
 
 // Takes function as parameter and constructs cards based on use case requirements
 
-// let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
+let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
 
-// function cardConstructor(constructorType, numOfCards, cardType){
-//     gameTemp = document.getElementById("game-card-template");
-//     featureTemp = document.getElementById("feature-card-template");
+function cardConstructor(constructorType, numOfCards, cardType){
+    gameTemp = document.getElementById("game-card-template");
+    featureTemp = document.getElementById("feature-card-template");
 
-//     if(cardType === gallery){
-//         temp = featureTemp;
-//     } else{
-//         temp = gameTemp;
-//     }
+    if(cardType === gallery){
+        temp = featureTemp;
+    } else{
+        temp = gameTemp;
+    }
 
-//     for(i = 0; i < numOfCards; i++){
-//         tempDiv = temp.content.cloneNode(true);
-//         itemDiv = tempDiv.querySelector("div");
-//         imgItem = itemDiv.querySelector("img").cloneNode(true);
-//         if(cardType != searchResults){
-//             gameName = getUserLibrary()[i].name;
-//         } else{
-//             gameName = searchArr[i].name;
-//         }
-//         constructorType();
+    for(i = 0; i < numOfCards; i++){
+        tempDiv = temp.content.cloneNode(true);
+        itemDiv = tempDiv.querySelector("div");
+        imgItem = itemDiv.querySelector("img").cloneNode(true);
+        if(cardType != searchResults){
+            gameName = getUserLibrary()[i].name;
+        } else{
+            gameName = searchArr[i].name;
+        }
+        constructorType();
 
-//         itemDiv.append(imgItem);
-//         itemDiv.append(gameItem);
-//         cardType.append(itemDiv);
-//     }
-// }
+        itemDiv.append(imgItem);
+        itemDiv.append(gameItem);
+        cardType.append(itemDiv);
+    }
+}
 
 function featureConstructor() {
   let itemDiv, imgItem, imgPath, i, temp, tempDiv;
@@ -462,10 +457,10 @@ function recentConstructor() {
 }
 
 function libraryConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes, desItem;
   temp = document.getElementById("game-card-template");
 
-  for (i = 0; i < usrLibrary.length -1; i++) {
+  for (i = 0; i < usrLibrary.length; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
@@ -474,14 +469,16 @@ function libraryConstructor() {
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.setAttribute("class", "game-img");
-    // desItem = itemDiv.querySelector("p").cloneNode(true);
+    desItem = itemDiv.querySelector("p").cloneNode(true);
     gameItem = itemDiv.querySelector("h5").cloneNode(true);
     gameName = usrLibrary[i].name;
     gameDes = usrLibrary[i].description_preview;
-    gameItem.setAttribute("class", "game-info game-des");
-    gameItem.innerText = `${gameName} \n ${gameDes}`;
+    desItem.innerText = `${gameDes}`
+    gameItem.setAttribute("class", "game-info");
+    gameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(gameItem);
+    gameItem.append(desItem);
     library.append(itemDiv);
   }
 }
@@ -590,4 +587,8 @@ function pickTab(tabName) {
     tab.classList.remove("active");
   });
   document.getElementById(tabName).classList.add("active");
+}
+
+const gameModal = () => {
+  
 }
