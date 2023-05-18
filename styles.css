@@ -129,7 +129,19 @@ hr,
 #result_content{
   display: none;
   height: 45rem;
-  overflow: hidden;
+  overflow-y: auto;
+}
+
+.search-lable{
+  background: var(--bg-color);
+  justify-self: center;
+  margin-bottom: .5rem;
+  padding-top: .5rem;
+  position: sticky;
+  top: 1rem;
+  height: 5rem;
+  width: 100%;
+  z-index: 100;
 }
 
 .games {
@@ -200,6 +212,8 @@ hr,
 
 .game-card:hover .game-des{
   display: block;
+  margin: auto;
+  width: 90%;
   font-size: 12px;
   font-weight: 300;
 }
@@ -227,27 +241,6 @@ hr,
   margin-top: 5rem;
 }
 
-.new-game-btn{
-  background: var(--light-green);
-  border-radius: 10px;
-  border-style: none;
-  box-shadow: 0 0 2px var(--text-color);
-  transition: 600ms ease;
-  top: 0;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  height: 2rem;
-  width: 3fr;
-}
-
-.new-game-btn:hover{
-  background-color: var(--dark-green);
-  border-radius: var(--main-border-radius);
-  color:#30393a;
-  cursor: pointer;
-}
-
 .game-btn{
   position: absolute;
   right: 4px;
@@ -255,9 +248,6 @@ hr,
 }
 
 .search_wrapper{
-  background: var(--bg-color);
-  position: sticky;
-  top: 0;
   padding: 1rem 0;
   width: 100%;
   display: flex;
@@ -268,16 +258,17 @@ hr,
 }
 
 #search_bar{
-  background-color: var(--light-green);
+  background-color: var(--bg-color);
   border-radius: 50px;
   cursor: pointer;
   font-size: 1rem;
-  width: 25rem;
+  width: 80%;
   border: none;
   box-shadow: 0 0 3px 1px var(--dark-green);
   color: black;
   margin: 10px 0;
   padding: 8px;
+  cursor: text;
 }
 
 #search_button{
@@ -287,15 +278,13 @@ hr,
   transition: 600ms ease;
   top: 0;
   margin-left: -3.7rem;
-  font-size: 1rem;
+  font-size: .75rem;
   font-weight: 500;
   height: 2rem;
-  width: 3fr;
+  /* width: 3fr; */
 }
 
 #search_button:hover{
-  background-color: var(--dark-green);
-  border-radius: var(--main-border-radius);
   color:#30393a;
   cursor: pointer;
 }
@@ -425,7 +414,7 @@ hr,
   position: fixed;
   margin: 10rem 0;
   width: 14%;
-  z-index: 10;
+  z-index: 1000;
 }
 
 /* FOOTER */

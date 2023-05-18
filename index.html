@@ -38,20 +38,27 @@
               ><img class="logo-img" src="img/logo.png" alt="company logo"
             /></a>
           </div>
-          <ul class="nav-list grid-box">
-            <li>
-              <div>
-              <button class="nav-item" onclick="pickTab('home')">Home</button>
-              </div>
-            </li>
-            <li>
-              <div>
-                <button class="nav-item" onclick="pickTab('library')">Library</button>
-              </div>
-            </li>
-            <li>
-              <div>
-                <button class="nav-item" onclick="pickTab('recommended')">Recommended</button>
+           <div class="search_wrapper">
+                  <input type="text" class="text_field" id="search_bar">
+                  <button id="search_button" onclick="searchAtlasByName(event)">Search</button>
+                </div>
+          <!-- <span class="material-symbols-outlined">
+            menu
+          </span> -->
+            <ul class="nav-list grid-box">
+              <li>
+                <div>
+                  <button class="nav-item" onclick="pickTab('home')">Home</button>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <button class="nav-item" onclick="pickTab('library')">Library</button>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <button class="nav-item" onclick="pickTab('recommended')">Recommended</button>
               </div>
             </li>
             <li>
@@ -70,16 +77,14 @@
 
       <!-- Home Tab -->
       <div class="page-content">
-        <div class="search_wrapper">
-          <input type="text" class="text_field" id="search_bar" placeholder="Search for game...">
-          <button id="search_button" onclick="searchAtlasByName(event)">Search</button>
-        </div>
         <section id="home" class="active page">
           <section id="result_content">
-            <div class="lable">
-              <h2>Search Results</h2>
+            <div class="search-lable">
+                <div>
+                  <h2>Search Results</h2>
+                </div>
+                <hr />
             </div>
-            <hr />
             <section id="search_results" class="grid-box games">
             </section>
           </section>
@@ -109,7 +114,6 @@
             <h2>Recent Games</h2>
           </div>
           <hr />
-          <!-- <button class="new-game-btn">Add Game</button> -->
           <section id="recent-games" class="grid-box games"></section>
   
           <!-- RECOMMENDED GAMES -->
