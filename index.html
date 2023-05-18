@@ -39,8 +39,10 @@
             /></a>
           </div>
            <div class="search_wrapper">
-                  <input type="text" class="text_field" id="search_bar" onkeyup="searchGame(event)">
-                  <button id="search_button" onclick="searchGame(event)">Search</button>
+                  <input type="text" class="text_field" id="search_bar" onfocus="this.value=''" onkeyup="searchGame(event)" placeholder="Search...">
+                  <button id="search_button" onclick="searchGame(event)"><span class="material-symbols-outlined">
+                    search
+                    </span></button>
                 </div>
           <!-- <span class="material-symbols-outlined">
             menu

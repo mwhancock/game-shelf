@@ -3,6 +3,7 @@
 const library = document.getElementById("library-body");
 const recentGames = document.getElementById("recent-games");
 const gallery = document.getElementById("gallery");
+const galleryImg  = document.getElementsByClassName("gallery-img");
 const searchResults = document.getElementById("search_results");
 const search = document.getElementById("search_button");
 const addGameBtn = document.getElementsByClassName("new-game-btn");

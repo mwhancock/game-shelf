@@ -92,7 +92,6 @@ hr,
   margin: 0 auto;
   width: 40rem;
   overflow: hidden;
-  scroll-behavior: smooth;
 }
 
 .gallery-img{
@@ -275,15 +274,12 @@ hr,
 
 #search_button{
   background: none;
-  border-radius: 50px;
-  border-style: none;
-  transition: 600ms ease;
-  top: 0;
-  margin-left: -3.7rem;
+  border: none;
+  margin-top: .125rem;
+  margin-left: -2.75rem;
   font-size: .75rem;
   font-weight: 500;
   height: 2rem;
-  /* width: 3fr; */
 }
 
 #search_button:hover{
