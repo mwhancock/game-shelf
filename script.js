@@ -491,7 +491,7 @@ function searchResultsConstructor() {
   let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
   temp = document.getElementById("game-card-template");
 
-  for (i = 0; i < 8; i++) {
+  for (i = 0; i < searchArr.length; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
@@ -510,11 +510,12 @@ function searchResultsConstructor() {
     searchResults.append(itemDiv);
     document.getElementById("result_content").style.display = "block";
   }
+  searchArr = [];
 }
 
 function clearSearch() {
-  searchArr = [];
   document.getElementById("result_content").style.display = "none";
+  searchResults.innerHTML = "";
 }
 
 // SLIDESHOW AUTOMATION
@@ -595,4 +596,14 @@ function pickTab(tabName) {
 
 const gameModal = () => {
   
+}
+
+const searchGame = (e) => {
+  clearSearch();
+  if(e.type === "click"){
+    searchAtlasByName(e);
+  }
+  if(e.key === "Enter"){
+    searchAtlasByName(e);
+  }
 }

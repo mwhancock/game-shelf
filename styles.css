@@ -131,14 +131,16 @@ hr,
   height: 45rem;
   overflow-y: auto;
 }
+#search_results{
+  margin-top: 2rem;
+}
 
 .search-lable{
   background: var(--bg-color);
   justify-self: center;
-  margin-bottom: .5rem;
-  padding-top: .5rem;
+  padding: 1.5rem 0 1.5rem;
   position: sticky;
-  top: 1rem;
+  top: 0;
   height: 5rem;
   width: 100%;
   z-index: 100;
