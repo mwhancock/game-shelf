@@ -615,11 +615,5 @@ const searchGame = (e) => {
 // Hamburger menu functionality
 
 hamMenu.addEventListener("click", () => {
-  if(navList.classList.contains("show")){
-    navList.classList.remove("show");
-    navList.classList.add("hide");
-  } else {
-    navList.classList.remove("hide");
-    navList.classList.add("show");
-  }
+    navList.classList.toggle("show");
 })
