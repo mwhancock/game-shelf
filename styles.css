@@ -111,8 +111,8 @@ hr,
   'opsz' 48
 }
 
-.menu-icon{
-  display: none;
+.menu{
+  visibility: hidden;
 }
 
 .next-btn{
@@ -523,10 +523,19 @@ hr,
   }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px){  
+  .dropdown{
+    border: 2px solid black;
+    background: var(--light-green);
+    height: 30rem;
+  }
+
   .search_wrapper{
     background: none;
-    top: 5.07rem;
+    top: .55rem;
+    left: 9rem;
+    position: absolute;
+    width: 30rem;
   }
 
   .side-bar{
@@ -546,20 +555,54 @@ hr,
     width: 4rem;
   }
   
-  .nav-list{
-    /* border: 2px solid hotpink; */
-    gap: .5rem;
-    grid-template-columns: repeat(5, 1fr);
-    margin-left: 7rem;
+  .menu{
+    visibility: visible;
     position: absolute;
-    top: -2rem;
-    width: 38rem;
+    top: 1.65rem;
+    left: 45rem;
+    cursor: pointer;
+    z-index: 200;
+  }
+
+  .nav-list{
+    background: var(--dark-green);
+    gap: 3rem;
+    grid-template-rows: repeat(5, 5rem);
+    font-size: 1.8rem;
+    margin-left: 51rem;
+    margin-top: -6.2rem;
+    padding-top: 2rem;
+    height: 55rem;
+    width: 15rem;
+    transition: right 1000ms ease;
+    z-index: 100;
+  }
+
+  .nav-list.show{
+    /* display: block; */
+    margin-left: 33.2rem;
+  }
+
+  .nav-list.hide{
+    /* display: none; */
+    margin-left: 51rem;
+  }
+
+  .nav-item{
+    margin-top: 3.5rem;
+    margin-left: -2.3rem;
   }
 }
 
 @media (max-width: 576px){
   hr{
     width: 20rem
+  }
+
+  .search-wrapper{
+    border: 2px solid hotpink;
+    left: 0;
+    width: 5rem;
   }
 
   .games{
@@ -579,6 +622,7 @@ hr,
   .nav-item{
     font-size: medium;
   }
+
 }
 
 @media (max-width: 450px){
@@ -587,8 +631,8 @@ hr,
   }
 
   .search_wrapper{
-    margin-left: 1.4rem;
     width: 17rem;
+    margin-left: -2.5rem;
   }
 
   .games{
@@ -616,16 +660,29 @@ hr,
   }
 
   .nav-list{
-    /* border: 2px solid hotpink; */
-    grid-template-columns: repeat(3, 1fr);
-    gap: .2remf;
-    margin-top: 2.5rem;
-    margin-left: 6rem;
-    width: 70%;
+    gap: 2rem;
+    margin-left: 18.5rem;
+    height: 55rem;
+    width: 10rem;
+    z-index: 100;
+  }
+
+  .nav-list.show{
+    margin-left: 18.5rem;
+  }
+
+  .nav-list.hide{
+    margin-left: 37rem;
   }
 
   .nav-item{
-    font-size: .8rem;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+  }
+
+  .menu{
+    left: 25rem;
+    z-index: 200;
   }
 }
 

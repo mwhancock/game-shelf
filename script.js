@@ -7,7 +7,9 @@ const galleryImg  = document.getElementsByClassName("gallery-img");
 const searchResults = document.getElementById("search_results");
 const search = document.getElementById("search_button");
 const addGameBtn = document.getElementsByClassName("new-game-btn");
-const clientID = `9RQI1WBCZA`;
+const hamMenu = document.getElementById("ham-menu");
+const navList = document.getElementById("nav-list");
+const clientID = '9RQI1WBCZA';
 const defaultUser = "mwhancock";
 let userName = localStorage.getItem("userName");
 let usrLibrary = [];
@@ -443,7 +445,7 @@ function recentConstructor() {
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     itemDiv.setAttribute("class", "grid-box game-card");
-    imgPath = usrLibrary[i].images.medium;
+    imgPath = usrLibrary[i] .images.medium;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.setAttribute("class", "preview-img");
@@ -608,3 +610,16 @@ const searchGame = (e) => {
     searchAtlasByName(e);
   }
 }
+
+
+// Hamburger menu functionality
+
+hamMenu.addEventListener("click", () => {
+  if(navList.classList.contains("show")){
+    navList.classList.remove("show");
+    navList.classList.add("hide");
+  } else {
+    navList.classList.remove("hide");
+    navList.classList.add("show");
+  }
+})
