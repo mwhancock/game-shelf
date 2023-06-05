@@ -35,6 +35,7 @@ const getUserLibrary = () => {
 // Add event listener to window that will construct game objects and push to user library once games are fetched
 window.addEventListener("games-retrieved", (e) => {
   const gameList = e.detail.games;
+  console.log(gameList)
 
   gameList.forEach((game) => {
     const gameObj = {};
@@ -94,8 +95,10 @@ window.addEventListener("user-library-retrieved", (e) => {
 
 function getUserName() {
   if (userName === null) {
+    // welcomeDialog();
+    // fetchLibraryID();
     userName = prompt(
-      `Please enter your Board Game Arena username. Leave blank for sample library: `
+      `This is a site to manage your board game collection, track plays, and connect with local game groups. If you have a Board Game Atlas account, enter your username below to import your library, otherwise leave the field blank to browse a demo library.`
     );
     if (userName === "") {
       userName = defaultUser;
@@ -108,13 +111,13 @@ function getUserName() {
 }
 
 // Asks user to input their BGA username,
-const userInput = getUserName();
-userInput;
+userName = getUserName()
 
 //Create API call to fetch users owned game list ID
+
 fetch(
-  `https://api.boardgameatlas.com/api/lists?username=${userInput}&client_id=${clientID}`
-)
+  `https://api.boardgameatlas.com/api/lists?username=${userName}&client_id=${clientID}`
+  )
   .then((res) => res.json())
   .then((data) => {
     const user = new CustomEvent("get-user-id", {
@@ -127,6 +130,7 @@ fetch(
   .catch((err) => {
     console.log(`ERROR: ${err}`);
   });
+  
 
 // Fetches user library
 window.addEventListener("get-user-id", () => {
@@ -145,7 +149,8 @@ window.addEventListener("get-user-id", () => {
           .then((res) => res.json())
 
         //   ---------This is returning user library------------
-          .then((user_games) => {usrLibrary = user_games.games})
+          .then((user_games) => {usrLibrary = user_games.games;})
+
           .catch((err) => console.log(`ERROR: ${err}`));
       })
       .catch((err) => {
@@ -193,7 +198,7 @@ window.addEventListener("get-user-id", () => {
       libraryRetrieved(cached_library);
     }
   };
-  checkLibraryOrGetData(userInput);
+  checkLibraryOrGetData(userName);
 });
 
 /// Clarks BS
@@ -617,3 +622,34 @@ const searchGame = (e) => {
 hamMenu.addEventListener("click", () => {
     navList.classList.toggle("show");
 })
+
+
+// const welcomeDialog = () => {
+
+//   // Check if the modal has been shown before
+//   // if (!localStorage.getItem('modalShown')) {
+//   //   // Get a reference to the modal and the close button
+//     const modal = document.getElementById('modal');
+//     const closeButton = document.getElementById('close-btn');
+//     const userInput = document.getElementById("user-input");
+//     // Show the modal
+//     modal.showModal();
+    
+//     // Add an event listener to the close button
+//     closeButton.addEventListener('click', () => {
+//       // Close the modal
+//       const inputValue = userInput.value
+
+//       console.log(inputValue);
+
+//       modal.close();
+      
+//       // Set the flag in localStorage to indicate the modal has been shown
+//       // localStorage.setItem('modalShown', true);
+//     });
+//   }
+// }
+
+// welcomeDialog()
+
+  
