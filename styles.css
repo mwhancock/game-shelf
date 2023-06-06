@@ -15,6 +15,7 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  position: relative;
 }
 
 a {
@@ -571,29 +572,31 @@ dialog::backdrop {
   }
 }
 
-@media (max-width: 768px){  
-  .dropdown{
+@media (max-width: 810px){  
+  /* .dropdown{
     border: 2px solid black;
     background: var(--light-green);
-    height: 30rem;
+    height: 100%;
+  } */
+
+  .nav-box{
+    display: flex;
+    width: 70%;
   }
 
   .side-bar{
     border-radius: 0;
     display: flex;
-    flex-direction: column;
     margin-top: 0;
-    position: relative;
     width: 100%;
     height: 5rem;
   }
 
   .search-wrapper{
     background: none;
-    top: .55rem;
-    /* left: 9rem; */
-    /* position: absolute;  */
-    width: 65%;
+    /* top: .55rem; */
+    margin-left: 5rem;
+    width: 45%;
   }
 
   .lable{
@@ -602,7 +605,6 @@ dialog::backdrop {
 
   .logo-img{
     top: -1.5rem;
-    margin-left: -1rem;
     width: 4rem;
   }
   
@@ -610,33 +612,32 @@ dialog::backdrop {
     visibility: visible;
     position: absolute;
     top: 1.65rem;
-    left: 45rem;
+    right: 2rem;
     cursor: pointer;
     z-index: 200;
   }
 
   .nav-list{
     background: var(--dark-green);
-    gap: 3rem;
+    box-shadow: 0 0 1px 2px var(--text-color);
     grid-template-rows: repeat(5, 5rem);
-    font-size: 1.8rem;
-    margin-left: 51rem;
-    margin-top: -6.2rem;
     padding-top: 2rem;
     position: fixed;
+    margin-left: 55rem;
     height: 55rem;
-    width: 15rem;
+    width: 31%;
     transition: right 1000ms ease-out;
     z-index: 100;
   }
 
   .nav-list.show{
     /* display: block; */
-    margin-left: 33.2rem;
+    margin-left: 70%;
   }
 
 
   .nav-item{
+    font-size: 1.3rem;
     margin-top: 3.5rem;
     margin-left: -2.3rem;
   }
@@ -652,10 +653,8 @@ dialog::backdrop {
     width: 20rem
   }
 
-  .search-wrapper{
-    border: 2px solid hotpink;
-    left: 0;
-    width: 5rem;
+  #search_bar{
+    width: 100%;
   }
 
   .games{
@@ -668,12 +667,12 @@ dialog::backdrop {
     grid-template-columns: repeat(2, 10rem);
   }
 
-  .nav-list{
-    width: 25rem;
+  .logo{
+    margin-left: 3.5rem;
   }
 
-  .nav-item{
-    font-size: medium;
+  .nav-list.show{
+    margin-left: 24.85rem;
   }
 
 }
@@ -712,26 +711,19 @@ dialog::backdrop {
     width: 12rem;
   }
 
-  .nav-list{
-    gap: 2rem;
-    margin-left: 37rem;
-    height: 55rem;
-    width: 10rem;
-    z-index: 100;
-  }
-
   .nav-list.show{
-    margin-left: 18.5rem;
+    padding-right: 1rem;
+    margin-left: 66%;
   }
 
 
   .nav-item{
-    margin-top: 3rem;
     font-size: 1.2rem;
+    margin-top: 3rem;
   }
 
   .menu{
-    left: 25rem;
+    left: 90%;
     z-index: 200;
   }
 }

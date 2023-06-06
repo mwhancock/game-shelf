@@ -9,6 +9,7 @@ const search = document.getElementById("search_button");
 const addGameBtn = document.getElementsByClassName("new-game-btn");
 const hamMenu = document.getElementById("ham-menu");
 const navList = document.getElementById("nav-list");
+const navItem = document.getElementsByClassName("nav-item");
 const clientID = '9RQI1WBCZA';
 const defaultUser = "mwhancock";
 let userName = localStorage.getItem("userName");
@@ -621,6 +622,10 @@ const searchGame = (e) => {
 
 hamMenu.addEventListener("click", () => {
     navList.classList.toggle("show");
+})
+
+navItem.addEventListener("click", () => {
+  navList.classList.toggle("show");
 })
 
 
