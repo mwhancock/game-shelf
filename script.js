@@ -435,6 +435,9 @@ function featureConstructor() {
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     imgPath = recGames[i].image;
     imgItem.setAttribute("src", imgPath);
+    if(i === 0){
+      itemDiv.setAttribute("class", "active")
+    }
     itemDiv.setAttribute("class", "feature-card");
     imgItem.setAttribute("class", "gallery-img");
     itemDiv.append(imgItem);
@@ -529,7 +532,7 @@ function clearSearch() {
 
 // SLIDESHOW AUTOMATION
 
-// Declare variables needed for slideshow
+
 
 let slideIndex = 0;
 let timer;
@@ -555,6 +558,9 @@ function slideShow() {
   slideArr[slideIndex].style.display = "block";
 }
 
+
+
+
 // Manual controls for slide show
 
 // Add event listener to the next button that calls the next slide when clicked
@@ -565,7 +571,9 @@ nextSlide.addEventListener("click", () => {
 
 // Add event listener to the previous button that calls the previous slide when clicked
 const prevSlide = document.querySelector(".prev-btn");
-prevSlide.addEventListener("click", () => bwdSlide());
+prevSlide.addEventListener("click", () => {
+  bwdSlide();
+});
 
 // Gets the index of the last item in the slide array
 
@@ -603,9 +611,9 @@ function pickTab(tabName) {
   document.getElementById(tabName).classList.add("active");
 }
 
-const gameModal = () => {
+// const gameModal = () => {
   
-}
+// }
 
 const searchGame = (e) => {
   clearSearch();
@@ -618,15 +626,22 @@ const searchGame = (e) => {
 }
 
 
+
+
+
+
+
+
+
 // Hamburger menu functionality
 
 hamMenu.addEventListener("click", () => {
     navList.classList.toggle("show");
 })
 
-navItem.addEventListener("click", () => {
-  navList.classList.toggle("show");
-})
+// navItem.addEventListener("click", () => {
+//   navList.classList.toggle("show");
+// })
 
 
 // const welcomeDialog = () => {
@@ -656,5 +671,6 @@ navItem.addEventListener("click", () => {
 // }
 
 // welcomeDialog()
+
 
   

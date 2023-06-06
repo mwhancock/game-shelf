@@ -132,7 +132,10 @@ dialog::backdrop {
   width: 100%;
   overflow: hidden;
   position: absolute;
-}
+  /* transform: translateX(100%);
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out; */
+} 
+
 .gallery{
   height: 20rem;
   position: relative;
@@ -614,14 +617,13 @@ dialog::backdrop {
     margin-left: 55rem;
     height: 55rem;
     width: 31%;
-    transition: right 1000ms ease-out;
+    transition: margin-left 300ms ease-out;
     z-index: 100;
   }
 
   .nav-list.show{
     margin-left: 70%;
   }
-
 
   .nav-item{
     font-size: 1.3rem;
@@ -696,6 +698,10 @@ dialog::backdrop {
     grid-template-columns: 1fr;
     margin: auto;
     width: 12rem;
+  }
+
+  .logo{
+    margin-left: 4rem;
   }
 
   .nav-list.show{
