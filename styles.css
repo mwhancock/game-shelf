@@ -132,9 +132,23 @@ dialog::backdrop {
   width: 100%;
   overflow: hidden;
   position: absolute;
-  /* transform: translateX(100%);
+  animation-duration: 400ms;
+  animation-name: slidein slideout;
+  animation-iteration-count: infinite;
+  /* transform: 
+  translateX(100%);
   transition: transform 500ms ease-in-out, opacity 500ms ease-in-out; */
 } 
+
+@keyframes slidein{
+  from{
+    margin-left: -20rem;
+  }
+
+  to{
+    margin-left: 0rem;
+  }
+}
 
 .gallery{
   height: 20rem;
