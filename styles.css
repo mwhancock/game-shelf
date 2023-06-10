@@ -1,6 +1,7 @@
 /* GLOBAL VARIABLES */
 :root{
-  --accent-color: #F77302;
+  --accent-color: #825574;
+  --alt-accent-color: #CFB0C5;
   --bg-color: #fff4e0;
   --dark-green: #8dac87;
   --light-green: #b4cfb0;
@@ -16,6 +17,7 @@ body {
   padding: 0;
   text-align: center;
   position: relative;
+  height: 100vh;
 }
 
 a {
@@ -27,9 +29,6 @@ hr {
   margin-bottom: 2rem;
 }
 
-li {
-  list-style: none;
-}
 
 /* GROUPED SELECTORS */
 a, hr, p,
@@ -37,13 +36,8 @@ a, hr, p,
   color: var(--text-color);
 }
 
-hr,
-.main-grid {
-  justify-content: center;
-}
-
 .game-info,
-.side-bar, .foot {
+.foot {
   background: var(--light-green);
 }
 
@@ -51,12 +45,13 @@ hr,
   background: none;
   border: none;
   cursor: pointer;
+  height: 10rem;
   position: absolute;
   top: 58%;
   width: auto;
-  margin-top: -3.2rem;
+  margin-top: -15%;
   padding: 16px;
-  color: white;
+  color: var(--logo-color);
   font-weight: bold;
   font-size: 18px;
   transition: 400ms ease;
@@ -64,14 +59,9 @@ hr,
   z-index: 1;
 }
 
-.next-btn, .prev-btn{
-  color: var(--logo-color);
-  margin-top: -15%;
-  height: 10rem;
-}
 
 .next-btn:hover, .prev-btn:hover{
-  background: var(--light-green);
+  background: var(--dark-green);
   border-radius: var(--main-border-radius);
 }
 
@@ -83,19 +73,6 @@ hr,
   width: 50%;
   height: 60%;
   z-index: 500;
-}
-#modal > input {
-  background-color: var(--bg-color);
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1rem;
-  width: 40%;
-  border: none;
-  box-shadow: 0 0 3px 1px black;
-  color: black;
-  margin: 20px 0;
-  padding: 8px;
-  cursor: text; 
 }
 
 #modal > p {
@@ -113,7 +90,7 @@ dialog::backdrop {
 }
 
 #close-btn {
-  background: var(--bg-color);
+  background: var(--accent-color);
   border: 1px solid black;
   border-radius: 10px;
   height: 2rem;
@@ -122,12 +99,11 @@ dialog::backdrop {
 }
 
 /* GALLERY */
-.featured{
-  margin-top: 17rem;
-}
+
 
 .feature-card {
   cursor: pointer;
+  display: grid;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -151,18 +127,21 @@ dialog::backdrop {
 }
 
 .gallery{
-  height: 20rem;
+  background: var(--light-green);
+  border-radius: var(--main-border-radius);
+  height: 30rem;
+  padding: 0 1rem;
   position: relative;
   margin: 0 auto;
-  width: 40rem;
+  width: 60rem;
   overflow: hidden;
 }
 
 .gallery-img{
-  height: auto;
+  border-radius: var(--main-border-radius);
+  height: 25rem;
   margin-left: 3.95rem;
-  margin-top: -2rem;
-  width: 80%;
+  width: 25rem;
   object-fit: cover;
 }
 
@@ -179,14 +158,18 @@ dialog::backdrop {
 }
 
 .next-btn{
-  right: 0;
+  right: .5rem;
 }
 
 .prev-btn{
-  left: 0;
+  left: .5rem;
 }
 
 /* MAIN BODY */
+
+.page-content{
+  margin-top: 7rem;
+}
 
 #result_content{
   display: none;
@@ -194,7 +177,7 @@ dialog::backdrop {
   overflow-y: auto;
 }
 #search_results{
-  margin-top: 2rem;
+  margin-top: 5rem;
 }
 
 .search-lable{
@@ -252,7 +235,7 @@ dialog::backdrop {
   box-shadow: 0 0 2px var(--text-color);
   bottom: -1rem;
   display: grid;
-  align-items: startS;
+  align-items: start;
   justify-content: center;
   left: -1px;
   color: var(--text-color);
@@ -267,93 +250,19 @@ dialog::backdrop {
   z-index: 100;
 }
 
-.game-card  .game-des{
-  display: none;
-}
-
-.game-card:hover .game-des{
-  display: block;
-  margin: auto;
-  width: 90%;
-  font-size: 12px;
-  font-weight: 300;
-}
-
-.game-card:hover .game-img{
-  height: 5.3rem;
-}
-.game-card:hover .game-info{
-  height: 7.9rem;
-  padding-top: 0.3rem;
-}
-
-.game-card:hover .game-des{
-  visibility: visible;
-}
-
-
 .grid-box {
   display: grid;
   position: relative;
 }
 
 .lable {
-  justify-self: center;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .game-btn{
   position: absolute;
   right: 4px;
   bottom: 1px;
-}
-
-.search_wrapper{
-  padding: 1rem 0;
-  margin-top: 1rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  z-index: 100;
-}
-
-#search_bar{
-  background-color: var(--bg-color);
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1rem;
-  width: 80%;
-  border: none;
-  box-shadow: 0 0 3px 1px var(--dark-green);
-  color: black;
-  margin: 10px 0;
-  padding: 8px;
-  cursor: text;
-}
-
-#search_button{
-  background: none;
-  border: none;
-  margin-top: .125rem;
-  margin-left: -2.75rem;
-  font-size: .75rem;
-  font-weight: 500;
-  height: 2rem;
-}
-
-#search_button:hover{
-  color:#30393a;
-  cursor: pointer;
-}
-
-.page{
-  display: none;
-}
-
-.page-content{
-  margin-left: 8rem;
 }
 
 .preview-img{
@@ -390,12 +299,6 @@ dialog::backdrop {
   z-index: 1;
 }
 
-.game-card:hover .preview-info{
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  width: 80%;
-}
-
 .active{
   display: block;
 }
@@ -428,9 +331,10 @@ dialog::backdrop {
 /* NAVIGATION */
 
 .logo{
+  position: absolute;
   border-radius: var(--main-border-radius);
-  margin: 2rem 3rem 0;
-  width: 10.5rem;
+  left: .5rem;
+  z-index: 210;
 }
 
 .logo-img {
@@ -441,51 +345,69 @@ dialog::backdrop {
   visibility: hidden;
 }
 
-.nav-item {
+.nav-box{
+  background: var(--dark-green);
+  box-shadow: 0 0 3px #1d412f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  margin-top: 0;
+  width: 100%;
+  height: 7rem;
+  z-index: 200; 
+}
+
+.search_wrapper{
+  /* margin-top: 3rem; */
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  z-index: 100;
+}
+
+#search_bar{
+  background-color: whitesmoke;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 80%;
+  border: none;
+  box-shadow: 0 0 3px 1px var(--dark-green);
+  color: black;
+  padding: 1rem;
+  cursor: text;
+}
+
+#search_button{
   background: none;
   border: none;
-  font-size: 1.15rem;
+  margin-left: -2.75rem;
+  font-size: .75rem;
   font-weight: 500;
-  padding: .5rem;
-  transition: 300ms ease;
-  width: 100%;
+  height: 2rem;
 }
 
-.nav-item:hover{
-  background-color: var(--dark-green);
+#search_button:hover{
+  color:#30393a;
   cursor: pointer;
-  border-radius: 50px;
-}
-
-.nav-list {
-  gap: 3.45rem;
-  margin: 0 2.3rem 0 0;
-  max-height: 100%;
-}
-
-.side-bar {
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 0 3px #1d412f;
-  height: 43rem;
-  text-align: center;
-  position: fixed;
-  margin: 10rem 0;
-  width: 14%;
-  z-index: 1000;
 }
 
 /* FOOTER */
 .copy {
   font-size: small;
-  margin-top: 2.2rem;
+  position: relative;
+  top: 2.2rem;
 }
 
 .foot {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
-  position: absolute;
+  /* position: absolute; */
+  bottom: 0;
   width: 100%;
 }
 
@@ -502,13 +424,8 @@ dialog::backdrop {
 
   .logo-img{
     width: 5rem;
-    position: relative;
+    position: fixed;
     left: -3rem;
-  }
-
-  .nav-list{
-    position: relative;
-    left: -1.3rem;
   }
 
   .gallery{
@@ -573,11 +490,6 @@ dialog::backdrop {
     left: -3.9rem;
   }
 
-  .nav-list{
-    position: relative;
-    left: -2.6rem;
-  }
-
   .page-content{
     margin-left: 0;
   }
@@ -588,14 +500,6 @@ dialog::backdrop {
   .nav-box{
     display: flex;
     width: 70%;
-  }
-
-  .side-bar{
-    border-radius: 0;
-    display: flex;
-    margin-top: 0;
-    width: 100%;
-    height: 5rem;
   }
 
   .search-wrapper{
@@ -613,42 +517,6 @@ dialog::backdrop {
     width: 4rem;
   }
   
-  .menu{
-    visibility: visible;
-    position: absolute;
-    top: 1.65rem;
-    right: 2rem;
-    cursor: pointer;
-    z-index: 200;
-  }
-
-  .nav-list{
-    background: var(--dark-green);
-    box-shadow: 0 0 1px 2px var(--text-color);
-    grid-template-rows: repeat(5, 5rem);
-    padding-top: 2rem;
-    position: fixed;
-    margin-left: 55rem;
-    height: 55rem;
-    width: 31%;
-    transition: margin-left 300ms ease-out;
-    z-index: 100;
-  }
-
-  .nav-list.show{
-    margin-left: 70%;
-  }
-
-  .nav-item{
-    font-size: 1.3rem;
-    margin-top: 3.5rem;
-    margin-left: -2.3rem;
-  }
-
-  .nav-item:hover{
-    background: #748c71;
-  }
-
 }
 
 @media (max-width: 576px){
@@ -672,10 +540,6 @@ dialog::backdrop {
 
   .logo{
     margin-left: 3.5rem;
-  }
-
-  .nav-list.show{
-    margin-left: 24.85rem;
   }
 
 }
@@ -716,22 +580,6 @@ dialog::backdrop {
 
   .logo{
     margin-left: 4rem;
-  }
-
-  .nav-list.show{
-    padding-right: 1rem;
-    margin-left: 66%;
-  }
-
-
-  .nav-item{
-    font-size: 1.2rem;
-    margin-top: 3rem;
-  }
-
-  .menu{
-    left: 90%;
-    z-index: 200;
   }
 }
 

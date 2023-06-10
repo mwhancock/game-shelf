@@ -26,65 +26,39 @@
       <!-- WELCOME MODAL -->
       <dialog id="modal">
         <h2 class="lable">Welcome to Game Shelf</h2>
-        <p>This is a site to manage your board game collection, track plays, and connect with local game groups. <br /> <br /> If you have a Board Game Atlas account, enter your username below to import your library, otherwise leave the field blank to browse a demo library.</p>   
-        <input id="user-input" type="text" placeholder="Board Game Atlas username...">
+        <p>I am site to manage your board game collection, track plays, and connect with local game groups.</p>
         <button id="close-btn">
           <span">
-            OK
+            Close
           </span>
         </button>
       </dialog>
       
-      <!-- SIDE NAVIGATION -->
-      <aside class="side-bar">
+      <!--  NAVIGATION -->
+
+    
+
         <nav class="nav-box" aria-label="primary-navigation">
           <div class="logo">
             <a href="index.html"
               ><img class="logo-img" src="img/logo.png" alt="company logo"
             /></a>
           </div>
-           <div class="search_wrapper">
-                  <input type="text" class="text_field" id="search_bar" onfocus="this.value=''" onkeyup="searchGame(event)" placeholder="Search...">
-                  <button id="search_button" onclick="searchGame(event)"><span class="material-symbols-outlined">
-                    search
-                    </span></button>
-                </div>
-          <span id="ham-menu" class="material-symbols-outlined menu">
-            menu
-          </span>
-            <ul id="nav-list" class="nav-list grid-box">
-              <li>
-                <div>
-                  <button class="nav-item" onclick="pickTab('home')">Home</button>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <button class="nav-item" onclick="pickTab('library')">Library</button>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <button class="nav-item" onclick="pickTab('recommended')">Recommended</button>
-              </div>
-            </li>
-            <li>
-              <div>
-                <button class="nav-item" onclick="pickTab('browse')">Browse</button>
-              </div>
-            </li>
-            <li>
-              <div>
-                <button class="nav-item" onclick="pickTab('forums')">Forums</button>
-              </div>
-            </li>
-          </ul>
+          
+          <div class="search_wrapper">
+              <input type="text" class="text_field" id="search_bar" onfocus="this.value=''" onkeyup="searchGame(event)" placeholder="Search...">
+              <button id="search_button" onclick="searchGame(event)">
+                <span class="material-symbols-outlined">
+                search
+                </span>
+              </button>
+          </div>
+
         </nav>
-      </aside>
 
       <!-- Home Tab -->
       <div class="page-content">
-        <section id="home" class="active page">
+        <section id="home" class="page">
           <section id="result_content">
             <div class="search-lable">
                 <div>
@@ -104,8 +78,6 @@
           <div
             id="gallery"
             class="gallery"
-            onmouseenter="stopSlideShow()"
-            onmouseleave="startSlideShow()"
           >
             <button class="prev-btn">
               <span class="material-symbols-outlined"> arrow_back_ios </span>
@@ -116,24 +88,9 @@
             </button>
           </div>
   
-          <!-- RECENT GAMES PREVIEW-->
-          <div class="lable">
-            <h2>Recent Games</h2>
-          </div>
-          <hr />
-          <section id="recent-games" class="grid-box games"></section>
   
-          <!-- RECOMMENDED GAMES -->
-          <section class="grid-box recommend">
-            <div class="lable">
-              <h2>Recommended Games</h2>
-            </div>
-            <hr />
-            <div class="grid-box rec-games"></div>
-          </section>
-        </section>
-  
-        <!-- Library Tab -->
+         
+        <!-- Library -->
         <section id="library" class="page">
           <section id="result_content">
             <div class="lable">
@@ -151,23 +108,6 @@
           <section id="library-body" class="grid-box lib-games"></section>
         </section>
   
-        <!-- Recomeneded Tab -->
-        <section id="recommended" class="page">
-          <h2 class="lable">Recommended Games</h2>
-          <hr>
-        </section>
-  
-        <!-- Browse Tab -->
-        <section id="browse" class="page">
-          <h2 class="lable">Browse Games</h2>
-          <hr>
-        </section>
-  
-        <!-- Forum Tab -->
-        <section id="forum" class="page">
-          <h2 class="lable"> Forum</h2>
-        </section>
-      </div>
     </main>
 
     <!-- FOOTER -->
@@ -198,13 +138,6 @@
             add
           </span>
         </dialog>
-      </div>
-    </template>
-
-    <!-- Recommended Game Card Template -->
-    <template id="rec-game-card-template">
-      <div class="rec-game-card">
-        <img src="" alt="placeholder image" />
       </div>
     </template>
   </body>
