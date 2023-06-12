@@ -13,6 +13,8 @@ const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
 let searchArr = [];
+let hotList = [];
+let hotListIds = [];
 let slideArr;
 let lastSlide;
 
@@ -24,11 +26,106 @@ const setUserLibrary = (lib) => {
 const getUserLibrary = () => {
   // array of JSONified Game data or undefined
   const possible_library = localStorage.getItem("user_library");
-  if (possible_library === undefined) {
+  if (possible_library === undefined){
     return JSON.parse(possible_library);
   }
   return console.log("No user Library found");
 };
+
+// const setHotList = (hot) => {
+//   localStorage.setItem("hot_list", hot)
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // geekXMLToJSON(gameList);
+
+// window.addEventListener('hot-list', e => {
+//     const gameList = (e.detail.games);
+//     const gameIds = gameList.getElementsByTagName("item");
+//     for(let  id in gameIds){
+//         if(gameIds[id] == undefined){
+//             continue
+//         }
+//         hotListIds.push(gameIds[id].id)
+//     }
+
+//     for(let id in hotListIds){
+//       fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${id}`)
+//         .then(res => {return res.text()})
+//         .then(data => {
+//           let game = new DOMParser().parseFromString(data, "text/xml")
+//           hotList.push(game)
+//         })
+//     }
+//     console.log(hotList)
+
+// })
+
+// // Boardgamegeek API
+
+// fetch("https://boardgamegeek.com/xmlapi2/hot?type=boardgame")    
+//     .then(res => {return res.text()})
+//     .then(data => {
+//         // console.log('Hot Games with Custom Parser', parseHotGamesXml(data));
+//         // console.log('Hot Games with generic Parser', parseXmlFromGeek(data));
+//         const hotGames = new CustomEvent("hot-list", {
+//             detail:{
+//                 games: new DOMParser().parseFromString(data, "text/xml")
+//             }
+//         })
+//         window.dispatchEvent(hotGames)   
+//     })
+//     .catch(err => {
+//         console.log(`ERROR: ${err}`)
+//     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Generic method for retrieving data from BGA API. defualts to top 100 ranked games
@@ -47,15 +144,24 @@ const getAtlasData = (params = "order_by=rank&limit=100") => {
 getAtlasData("order_by=rank&limit=15").then((games_list) => {
   // console.log(games_list)
   games_list.forEach((game) => {
+    // console.log(game.name)
+    // console.log(game.description_preview)
     const gameObj = {};
     gameObj.id = game.id;
-    gameObj.image = game?.images?.medium;
+    gameObj.image = game?.images?.large;
+    gameObj.name = game.name;
+    gameObj.description = game.description_preview;
     recGames.push(gameObj);
   });
+
   // cardConstructor(featureConstructor, 10, gallery);
   featureConstructor();
-  let slideCards = document.getElementsByClassName("gallery-img");
+  let slideCards = document.getElementsByClassName("feature-card");
   slideArr = Array.from(slideCards);
+  slideArr.forEach((slide) => {
+    slide.style.display = "none";
+  });
+  slideArr[0].style.display = "block";
   lastSlide = slideArr.length - 1;
 });
 
@@ -189,37 +295,43 @@ const fetchUserLibrary = () => {
 
 // Takes function as parameter and constructs cards based on use case requirements
 
-let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, gameItem, gameName, gameDes;
+// let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, nameItem, gameName, gameDes;
 
-function cardConstructor(constructorType, numOfCards, cardType){
-    gameTemp = document.getElementById("game-card-template");
-    featureTemp = document.getElementById("feature-card-template");
+// function cardConstructor(constructorType, numOfCards, cardType){
+//     gameTemp = document.getElementById("game-card-template");
+//     featureTemp = document.getElementById("feature-card-template");
 
-    if(cardType === gallery){
-        temp = featureTemp;
-    } else{
-        temp = gameTemp;
-    }
+//     if(cardType === gallery){
+//         temp = featureTemp;
+//     } else{
+//         temp = gameTemp;
+//     }
 
-    for(i = 0; i < numOfCards; i++){
-        tempDiv = temp.content.cloneNode(true);
-        itemDiv = tempDiv.querySelector("div");
-        imgItem = itemDiv.querySelector("img").cloneNode(true);
-        if(cardType != searchResults){
-            gameName = getUserLibrary()[i].name;
-        } else{
-            gameName = searchArr[i].name;
-        }
-        constructorType();
+//     for(i = 0; i < numOfCards; i++){
+//         tempDiv = temp.content.cloneNode(true);
+//         itemDiv = tempDiv.querySelector("div");
+//         imgItem = itemDiv.querySelector("img").cloneNode(true);
+//         if(cardType != searchResults){
+//             gameName = getUserLibrary()[i].name;
+//         } else{
+//             gameName = searchArr[i].name;
+//         }
+//         constructorType();
 
-        itemDiv.append(imgItem);
-        itemDiv.append(gameItem);
-        cardType.append(itemDiv);
-    }
-}
+//         itemDiv.append(imgItem);
+//         itemDiv.append(gameItem);
+//         cardType.append(itemDiv);
+//     }
+// }
+
+
+
+
+
+
 
 function featureConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem;
   temp = document.getElementById("feature-card-template");
 
   for (i = 0; i < 14; i++) {
@@ -228,88 +340,80 @@ function featureConstructor() {
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     imgPath = recGames[i].image;
     imgItem.setAttribute("src", imgPath);
-    if(i === 0){
-      itemDiv.setAttribute("class", "active")
+    desItem = itemDiv.querySelector("p").cloneNode(true);
+    nameItem = itemDiv.querySelector("h2").cloneNode(true);
+    gameName = recGames[i].name;
+    // console.log(gameName)
+    gameDes = recGames[i].description;
+    // console.log(gameDes)
+    if(gameDes === ""){
+      gameDes = "No description currently available"
+    }else{
+      gameDes = `${shortenParagraph(gameDes, 425)}.`
     }
-    itemDiv.setAttribute("class", "feature-card");
-    imgItem.setAttribute("class", "gallery-img");
+    desItem.innerText = `${gameDes}`;
+    nameItem.classList.add("feature-name");
+    nameItem.innerText = `${gameName}`
+    // desItem.classList.add("feature-des");
+    itemDiv.setAttribute("id", "desBox")
+    itemDiv.classList.add("feature-card");
+    imgItem.classList.add("gallery-img");
     itemDiv.append(imgItem);
+    itemDiv.append(nameItem);
+    itemDiv.append(desItem);
     gallery.append(itemDiv);
   }
 }
 
-function recentConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
-  temp = document.getElementById("game-card-template");
-
-  for (i = 0; i < 8; i++) {
-    tempDiv = temp.content.cloneNode(true);
-    itemDiv = tempDiv.querySelector("div");
-    imgItem = itemDiv.querySelector("img").cloneNode(true);
-    itemDiv.setAttribute("class", "grid-box game-card");
-    imgPath = usrLibrary[i] .images.medium;
-    imgItem.setAttribute("src", imgPath);
-    imgItem.setAttribute("alt", "a picture of a game");
-    imgItem.setAttribute("class", "preview-img");
-    gameName = usrLibrary[i].name;
-    gameItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem.setAttribute("class", "preview-info");
-    gameItem.innerText = `${gameName}`;
-    itemDiv.append(imgItem);
-    itemDiv.append(gameItem);
-    recentGames.append(itemDiv);
-  }
-}
 
 function libraryConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName, gameDes, desItem;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem;
   temp = document.getElementById("game-card-template");
 
   for (i = 0; i < usrLibrary.length; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    itemDiv.setAttribute("class", "game-card");
+    itemDiv.classList.add("game-card");
     imgPath = usrLibrary[i].images.medium;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
-    imgItem.setAttribute("class", "game-img");
+    imgItem.classList.add("game-img");
     desItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem = itemDiv.querySelector("h5").cloneNode(true);
+    nameItem = itemDiv.querySelector("h5").cloneNode(true);
     gameName = usrLibrary[i].name;
     gameDes = usrLibrary[i].description_preview;
     if(gameDes === ""){
       gameDes = "No description currently available";
-    }
+    } 
     desItem.innerText = `${gameDes}`
-    gameItem.setAttribute("class", "game-info");
-    desItem.setAttribute("class", "game-des");
-    gameItem.innerText = `${gameName}`;
+    nameItem.classList.add("game-info");
+    nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
-    itemDiv.append(gameItem);
-    gameItem.append(desItem);
+    itemDiv.append(nameItem);
+    nameItem.append(desItem);
     library.append(itemDiv);
   }
 }
 
 function searchResultsConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, gameItem, gameName;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName;
   temp = document.getElementById("game-card-template");
 
   for (i = 0; i < searchArr.length; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    itemDiv.setAttribute("class", "grid-box game-card");
+    itemDiv.classList.add("grid-box game-card");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     imgPath = searchArr[i].image;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "Game image");
-    imgItem.setAttribute("class", "preview-img");
-    gameItem = itemDiv.querySelector("p").cloneNode(true);
-    gameItem.setAttribute("class", "preview-info");
+    imgItem.classList.add("preview-img");
+    nameItem = itemDiv.querySelector("p").cloneNode(true);
+    nameItem.classList.add("preview-info");
     gameName = searchArr[i].name;
-    gameItem.innerText = `${gameName}`;
+    nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(gameItem);
     searchResults.append(itemDiv);
@@ -322,6 +426,33 @@ function clearSearch() {
   document.getElementById("result_content").style.display = "none";
   searchResults.innerHTML = "";
 }
+
+
+//Shortens game description to fit on game card
+
+const shortenParagraph = (text, limit) => {
+
+  if(text.length <= limit){
+    return text; //If description already fits on card, returns
+  }
+
+  //Find the nearest period within the character limit
+  let periodIndex = text.lastIndexOf(".", limit);
+
+  if(periodIndex != -1){
+    //Slices description at the nearest period to character limit
+    text = text.slice(0, periodIndex + 1);
+  }else {
+    //If no period, slices at character limit
+    text = text.slice(0, limit);
+  }
+
+  //Remove trailing spaces
+  text = text.replace(/[.\s]+$/, "");
+
+  return text;
+}
+
 
 // SLIDESHOW AUTOMATION
 
@@ -350,6 +481,7 @@ prevSlide.addEventListener("click", () => {
 function fwdSlide() {
   slideArr.forEach((slide) => {
     slide.style.display = "none";
+
   });
   slideIndex++;
   if (slideIndex >= slideArr.length) {
