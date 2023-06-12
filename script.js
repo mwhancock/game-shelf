@@ -348,8 +348,8 @@ function featureConstructor() {
     // console.log(gameDes)
     if(gameDes === ""){
       gameDes = "No description currently available"
-    }else{
-      gameDes = `${shortenParagraph(gameDes, 425)}.`
+     } else{
+      gameDes = `${shortenParagraph(gameDes, textLimit(screenWidth))}.`
     }
     desItem.innerText = `${gameDes}`;
     nameItem.classList.add("feature-name");
@@ -404,7 +404,7 @@ function searchResultsConstructor() {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    itemDiv.classList.add("grid-box game-card");
+    itemDiv.classList.add("grid-box", "game-card");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     imgPath = searchArr[i].image;
     imgItem.setAttribute("src", imgPath);
@@ -415,7 +415,7 @@ function searchResultsConstructor() {
     gameName = searchArr[i].name;
     nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
-    itemDiv.append(gameItem);
+    itemDiv.append(nameItem);
     searchResults.append(itemDiv);
     document.getElementById("result_content").style.display = "block";
   }
@@ -429,6 +429,17 @@ function clearSearch() {
 
 
 //Shortens game description to fit on game card
+let screenWidth = window.innerWidth;
+
+const textLimit = (width) => {
+  if(width >= 710){
+    return 694;
+  } else if(width >= 576){
+    return 562;
+  } else if(width >= 400){
+    return 425
+  }
+}
 
 const shortenParagraph = (text, limit) => {
 
