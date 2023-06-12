@@ -25,7 +25,7 @@ a {
 }
 
 hr {
-  width: 35rem;
+  width: 17rem;
   margin-bottom: 2rem;
 }
 
@@ -47,10 +47,9 @@ a, hr, p,
   cursor: pointer;
   height: 10rem;
   position: absolute;
-  top: 58%;
+  top: 42%;
   width: auto;
-  margin-top: -15%;
-  padding: 16px;
+  padding: .5rem;
   color: var(--logo-color);
   font-weight: bold;
   font-size: 18px;
@@ -100,21 +99,32 @@ dialog::backdrop {
 
 /* GALLERY */
 
+/* #feature-card-template{
+  display: grid;
+  grid-template-columns: repeat(2);
+} */
+
+.feature-name, .feature-des{
+  color: var(--text-color);
+}
 
 .feature-card {
   cursor: pointer;
-  display: grid;
-  height: 100%;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 40rem;
+  width: 90%;
   overflow: hidden;
   position: absolute;
-  animation-duration: 400ms;
+  /* animation-duration: 400ms;
   animation-name: slidein slideout;
-  animation-iteration-count: infinite;
+  animation-iteration-count: infinite; */
   /* transform: 
-  translateX(100%);
-  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out; */
+  translateX(100%);*/
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out; 
 } 
+
+/* .feature-card */
 
 @keyframes slidein{
   from{
@@ -127,22 +137,23 @@ dialog::backdrop {
 }
 
 .gallery{
+  display: flex;
+  justify-content: center;
   background: var(--light-green);
   border-radius: var(--main-border-radius);
-  height: 30rem;
+  height: 40rem;
   padding: 0 1rem;
   position: relative;
   margin: 0 auto;
-  width: 60rem;
-  overflow: hidden;
+  width: 72%;
 }
 
 .gallery-img{
   border-radius: var(--main-border-radius);
-  height: 25rem;
-  margin-left: 3.95rem;
-  width: 25rem;
+  height: 19rem;
+  width: 19rem;
   object-fit: cover;
+  margin-top: -.5rem;
 }
 
 .material-symbols-outlined {
@@ -158,17 +169,18 @@ dialog::backdrop {
 }
 
 .next-btn{
-  right: .5rem;
+  right: .25rem;
 }
 
 .prev-btn{
-  left: .5rem;
+  left: .25rem;
 }
 
 /* MAIN BODY */
 
 .page-content{
   margin-top: 7rem;
+  width: 100vw;
 }
 
 #result_content{
@@ -259,6 +271,10 @@ dialog::backdrop {
   margin-top: 3rem;
 }
 
+.featured{
+  margin-top: -1rem;
+}
+
 .game-btn{
   position: absolute;
   right: 4px;
@@ -333,12 +349,12 @@ dialog::backdrop {
 .logo{
   position: absolute;
   border-radius: var(--main-border-radius);
-  left: .5rem;
+  left: 1rem;
   z-index: 210;
 }
 
 .logo-img {
-  width: 6rem;
+  width: 4rem;
 }
 
 .menu-icon{
@@ -354,13 +370,13 @@ dialog::backdrop {
   position: fixed;
   margin-top: 0;
   width: 100%;
-  height: 7rem;
+  height: 5rem;
   z-index: 200; 
 }
 
 .search_wrapper{
   /* margin-top: 3rem; */
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -373,12 +389,13 @@ dialog::backdrop {
   border-radius: 50px;
   cursor: pointer;
   font-size: 1rem;
-  width: 80%;
+  width: 50%;
   border: none;
-  box-shadow: 0 0 3px 1px var(--dark-green);
+  box-shadow: 0 0 3px 1px grey;
   color: black;
-  padding: 1rem;
+  padding: .5rem 0 .5rem .75rem;
   cursor: text;
+  /* margin-left: 4rem; */
 }
 
 #search_button{
@@ -413,7 +430,7 @@ dialog::backdrop {
 
 
 /* MEDIA QUERIES */
-@media (max-width: 1200px){
+/* @media (max-width: 1200px){
   hr{
     width: 28rem;
   }
@@ -581,5 +598,5 @@ dialog::backdrop {
   .logo{
     margin-left: 4rem;
   }
-}
+} */
 
