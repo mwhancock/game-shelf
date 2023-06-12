@@ -434,6 +434,57 @@ dialog::backdrop {
 
 
 /* MEDIA QUERIES */
+
+
+@media (min-width: 810px){
+  .feature-card {
+    height: 25rem;
+    width: 90%;
+  } 
+  
+  .gallery{
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    background: var(--light-green);
+    border-radius: var(--main-border-radius);
+    height: 25rem;
+    padding: 0 1rem;
+    position: relative;
+    /* margin: 0 auto; */
+    width: 85%;
+  }
+  
+  .gallery-img{
+    border-radius: var(--main-border-radius);
+    height: 20rem;
+    width: 20rem;
+    object-fit: cover;
+    margin-left: -19rem;
+    margin-top: .05rem;
+  }
+
+  .feature-des, .feature-name{
+    margin-left: 20rem;
+    margin-top: -20rem;
+    }
+
+    .feature-name{
+      width: 10rem;
+    }
+  
+  .next-btn{
+    margin-top: -2.5rem;
+    right: .5rem;
+  }
+  
+  .prev-btn{
+    margin-top: -2.5rem;
+    left: .5rem;
+  }
+}
+
+
+
 /* @media (max-width: 1200px){
   hr{
     width: 28rem;
