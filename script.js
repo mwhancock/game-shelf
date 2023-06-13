@@ -142,10 +142,7 @@ const getAtlasData = (params = "order_by=rank&limit=100") => {
 
 // Fetches top 100 games on BGA and creates array of game objects
 getAtlasData("order_by=rank&limit=15").then((games_list) => {
-  // console.log(games_list)
   games_list.forEach((game) => {
-    // console.log(game.name)
-    // console.log(game.description_preview)
     const gameObj = {};
     gameObj.id = game.id;
     gameObj.image = game?.images?.large;
@@ -154,7 +151,6 @@ getAtlasData("order_by=rank&limit=15").then((games_list) => {
     recGames.push(gameObj);
   });
 
-  // cardConstructor(featureConstructor, 10, gallery);
   featureConstructor();
   let slideCards = document.getElementsByClassName("feature-card");
   slideArr = Array.from(slideCards);
@@ -186,7 +182,6 @@ const searchAtlasByName = (e) => {
       })
       .then(() => {
         searchResultsConstructor();
-        // cardConstructor(searchResultsConstructor, 8, searchResults);
       });
   } catch (error) {
     console.log("Error retrieving User Games by ID", error);
@@ -293,41 +288,7 @@ const fetchUserLibrary = () => {
 };
 
 
-// Takes function as parameter and constructs cards based on use case requirements
-
-// let itemDiv, imgItem, imgPath, i, temp, gameTemp, featureTemp, tempDiv, nameItem, gameName, gameDes;
-
-// function cardConstructor(constructorType, numOfCards, cardType){
-//     gameTemp = document.getElementById("game-card-template");
-//     featureTemp = document.getElementById("feature-card-template");
-
-//     if(cardType === gallery){
-//         temp = featureTemp;
-//     } else{
-//         temp = gameTemp;
-//     }
-
-//     for(i = 0; i < numOfCards; i++){
-//         tempDiv = temp.content.cloneNode(true);
-//         itemDiv = tempDiv.querySelector("div");
-//         imgItem = itemDiv.querySelector("img").cloneNode(true);
-//         if(cardType != searchResults){
-//             gameName = getUserLibrary()[i].name;
-//         } else{
-//             gameName = searchArr[i].name;
-//         }
-//         constructorType();
-
-//         itemDiv.append(imgItem);
-//         itemDiv.append(gameItem);
-//         cardType.append(itemDiv);
-//     }
-// }
-
-
-
-
-
+//Card Constructors
 
 
 function featureConstructor() {
@@ -343,9 +304,7 @@ function featureConstructor() {
     desItem = itemDiv.querySelector("p").cloneNode(true);
     nameItem = itemDiv.querySelector("h2").cloneNode(true);
     gameName = recGames[i].name;
-    // console.log(gameName)
     gameDes = recGames[i].description;
-    // console.log(gameDes)
     if(gameDes === ""){
       gameDes = "No description currently available"
      } else{
@@ -354,7 +313,7 @@ function featureConstructor() {
     desItem.innerText = `${gameDes}`;
     nameItem.classList.add("feature-name");
     nameItem.innerText = `${gameName}`
-    // desItem.classList.add("feature-des");
+    desItem.classList.add("feature-des");
     itemDiv.setAttribute("id", "desBox")
     itemDiv.classList.add("feature-card");
     imgItem.classList.add("gallery-img");
@@ -432,7 +391,9 @@ function clearSearch() {
 let screenWidth = window.innerWidth;
 
 const textLimit = (width) => {
-  if(width >= 710){
+  if(width >= 992){
+    return 713;
+  } else if(width >= 710){
     return 694;
   } else if(width >= 576){
     return 562;

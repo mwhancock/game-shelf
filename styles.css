@@ -8,6 +8,7 @@
   --logo-color: #263330;
   --text-color: #384541;
   --main-border-radius: 20px;
+  --box-shadow: 0 0 2px var(--text-color);
 }
 /* ELEMENT TAGS */
 body {
@@ -141,6 +142,7 @@ dialog::backdrop {
   justify-content: center;
   background: var(--light-green);
   border-radius: var(--main-border-radius);
+  box-shadow: var(--box-shadow);
   height: 40rem;
   padding: 0 1rem;
   position: relative;
@@ -188,14 +190,15 @@ dialog::backdrop {
   height: 45rem;
   overflow-y: auto;
 }
+
 #search_results{
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .search-lable{
   background: var(--bg-color);
   justify-self: center;
-  padding: 1.5rem 0 1.5rem;
+  padding: .5rem 0 1rem;
   position: sticky;
   top: 0;
   height: 5rem;
@@ -232,7 +235,7 @@ dialog::backdrop {
 
 .game-img{
   border-radius: var(--main-border-radius);
-  box-shadow: 0 0 2px var(--text-color);
+  box-shadow: var(--box-shadow);
   position: absolute;
   left: 0;
   top: 0;
@@ -244,7 +247,7 @@ dialog::backdrop {
 
 .game-info{
   border-radius: var(--main-border-radius);
-  box-shadow: 0 0 2px var(--text-color);
+  box-shadow: var(--box-shadow);
   bottom: -1rem;
   display: grid;
   align-items: start;
@@ -283,7 +286,7 @@ dialog::backdrop {
 
 .preview-img{
   border-radius: var(--main-border-radius);
-  box-shadow: 0 0 2px var(--text-color);
+  box-shadow: var(--box-shadow);
   position: absolute;
   left: 0;
   top: 0;
@@ -296,7 +299,7 @@ dialog::backdrop {
 .preview-info{
   background: var(--light-green);
   border-radius: var(--main-border-radius);
-  box-shadow: 0 0 2px var(--text-color);
+  box-shadow: var(--box-shadow);
   bottom: -1rem;
   display: flex;
   align-items: flex-start;
@@ -434,23 +437,32 @@ dialog::backdrop {
 
 
 /* MEDIA QUERIES */
+@media (min-width: 360px){
+  .gallery-img{
+    width: 16rem;
+    height: 16rem;
+  }
+}
 
+@media (min-width: 420px){
+  .gallery-img{
+    width: 19rem;
+    height: 19rem;;
+  }
+}
 
-@media (min-width: 810px){
+@media (min-width: 800px){
   .feature-card {
     height: 25rem;
     width: 90%;
   } 
   
   .gallery{
-    /* display: grid; */
-    /* grid-template-columns: 1fr 1fr; */
     background: var(--light-green);
     border-radius: var(--main-border-radius);
     height: 25rem;
     padding: 0 1rem;
     position: relative;
-    /* margin: 0 auto; */
     width: 85%;
   }
   
@@ -459,17 +471,18 @@ dialog::backdrop {
     height: 20rem;
     width: 20rem;
     object-fit: cover;
-    margin-left: -19rem;
+    margin-left: -18rem;
     margin-top: .05rem;
   }
 
-  .feature-des, .feature-name{
-    margin-left: 20rem;
+  .feature-name{
+    margin-left: 24rem;
     margin-top: -20rem;
     }
 
-    .feature-name{
-      width: 10rem;
+    .feature-des{
+      width: 15rem;
+      margin-left: 24rem;
     }
   
   .next-btn{
@@ -482,6 +495,70 @@ dialog::backdrop {
     left: .5rem;
   }
 }
+
+
+@media (min-width: 992px){
+  .gallery-img{
+    margin-left: -27.6rem;
+  }
+
+  .feature-des{
+    width: 25rem;
+  }
+}
+
+@media (min-width: 1200px){
+  .feature-name{
+    margin-left: 27rem;
+  }
+
+  .gallery-img{
+    margin-left: -34rem;
+    width: 25rem;
+  }
+
+  .feature-des{
+    width: 30rem;
+    margin-left: 27rem;
+  }
+}
+
+@media (min-width: 1400px){
+  .feature-name{
+    margin-left: 25rem;
+  }
+
+  .feature-des{
+    margin-left: 25rem;
+  }
+
+  .gallery{
+    width: 70%;
+  }
+
+  .gallery-img{
+    width: 22rem;
+  }
+  }
+
+  @media (min-width: 1900px){
+    .feature-name{
+      margin-left: 33rem;
+    }
+
+    .feature-des{
+      margin-left: 33rem;
+    }
+
+    .gallery{
+      width: 60%;
+    }
+
+    .gallery-img{
+      width: 30rem;
+      margin-left: -36rem;
+    }
+  }
 
 
 
