@@ -363,18 +363,19 @@ function searchResultsConstructor() {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    itemDiv.classList.add("grid-box", "game-card");
+    itemDiv.classList.add("game-card");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     imgPath = searchArr[i].image;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "Game image");
     imgItem.classList.add("preview-img");
-    nameItem = itemDiv.querySelector("p").cloneNode(true);
-    nameItem.classList.add("preview-info");
+    nameItem = itemDiv.querySelector("h4").cloneNode(true);
+    nameItem.classList.add("game-name");
     gameName = searchArr[i].name;
     nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(nameItem);
+    itemDiv.setAttribute("id", searchArr[i].id)
     searchResults.append(itemDiv);
     document.getElementById("result_content").style.display = "block";
   }
@@ -515,7 +516,4 @@ const welcomeDialog = () => {
   }
 }
 
-welcomeDialog()
-
-
-  
+welcomeDialog()  

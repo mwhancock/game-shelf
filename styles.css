@@ -188,11 +188,11 @@ dialog::backdrop {
 #result_content{
   display: none;
   height: 45rem;
-  overflow-y: auto;
 }
 
 #search_results{
   margin-top: 1rem;
+  overflow-y: auto;
 }
 
 .search-lable{
@@ -206,27 +206,37 @@ dialog::backdrop {
   z-index: 100;
 }
 
+/* .search-list{
+  background: whitesmoke;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.search-card{
+
+} */
+
 .games {
-  gap: 2rem;
-  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  grid-template-columns: 1fr;
   grid-auto-flow: row;
   justify-content: space-around;
-  padding: 0.5rem;
   position: relative;
   height: 35rem;
-  margin: 0 auto;
-  width: 55rem;
+  left: .75rem;
+  width: 24rem;
 }
 
 .game-card{
-  cursor: pointer;
+  background: var(--light-green);
   border-radius: var(--main-border-radius);
+  cursor: pointer;
+  display: flex;
   position: relative;
-  grid-column-end: auto;
-  height: 14.5rem;
-  width: 85%;
+  height: 10rem;
+  /* width: 22rem; */
   transition: 400ms ease;
-  container-type: inline-size;
+  /* container-type: inline-size; */
 }
 
 .game-card > p{
@@ -249,10 +259,6 @@ dialog::backdrop {
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
   bottom: -1rem;
-  display: grid;
-  align-items: start;
-  justify-content: center;
-  left: -1px;
   color: var(--text-color);
   font-weight: 600;
   text-align: center;
@@ -288,33 +294,22 @@ dialog::backdrop {
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 12.3rem;
-  width: 100%;
+  left: 0.5rem;
+  top: 3rem;
+  height: 9rem;
+  width: 9rem;
   object-fit: cover;
-  transition: 500ms ease;
 }
 
-.preview-info{
-  background: var(--light-green);
-  border-radius: var(--main-border-radius);
-  box-shadow: var(--box-shadow);
-  bottom: -1rem;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  left: -1px;
+.game-name{
   color: var(--text-color);
   font-weight: 600;
-  text-align: center;
   height: 1.3rem;
-  margin-bottom: .8rem;
+  /* margin-top: .2rem; */
   overflow: hidden;
-  padding: 0.27rem 0 0.3rem 0;
-  position:absolute;
-  transition: 500ms ease;
-  width: 100%;
+  /* padding: 0.27rem 0 0.3rem 0; */
+  /* position:absolute; */
+  width: 10rem;
   z-index: 1;
 }
 
@@ -559,176 +554,4 @@ dialog::backdrop {
       margin-left: -36rem;
     }
   }
-
-
-
-/* @media (max-width: 1200px){
-  hr{
-    width: 28rem;
-  }
-
-  .next-btn, .prev-btn{
-    margin-top: -6rem;
-  }
-
-  .logo-img{
-    width: 5rem;
-    position: fixed;
-    left: -3rem;
-  }
-
-  .gallery{
-    width:30rem;
-    height: 15rem;
-  }
-  .gallery-img{
-    width: 74%;
-  }
-
-  .games{
-    width: 40rem;
-  }
-
-  .game-card{
-    height: 11.5rem;
-    width: 100%;
-  }
-  
-  .game-card > p{
-    font-size: 7cqi;
-  }
-
-  .game-img{
-    height: 9.3rem;
-  }
-
-  .game-card:hover .game-img{
-    height: 4.5rem;
-  }
-
-  .game-card:hover .game-info{
-    height: 5.67rem;
-  }
-
-  .game-info{
-    height: .9rem;
-    padding: 0.27rem 0 0.3rem 0;
-
-  }
-
-  .preview-info{
-    height: 1.3rem;
-  }
-
-  .preview-img{
-    height: 9.3rem;
-  }
-
-  .lib-games{
-    grid-template-columns: repeat(4, 10rem);
-  }
-}
-
-@media (max-width: 992px){
-  .lib-games{
-    grid-template-columns: repeat(4, 8rem);
-  }
-
-  .logo-img{
-    position: relative;
-    left: -3.9rem;
-  }
-
-  .page-content{
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 810px){  
-
-  .nav-box{
-    display: flex;
-    width: 70%;
-  }
-
-  .search-wrapper{
-    background: none;
-    margin-left: 5rem;
-    width: 45%;
-  }
-
-  .lable{
-    margin-top: 7.5rem;
-  }
-
-  .logo-img{
-    top: -1.5rem;
-    width: 4rem;
-  }
-  
-}
-
-@media (max-width: 576px){
-  hr{
-    width: 20rem
-  }
-
-  #search_bar{
-    width: 100%;
-  }
-
-  .games{
-    grid-template-columns: repeat(2, 10rem);
-    height: 100%;
-    width: 20rem;
-  }
-  
-  .lib-games{
-    grid-template-columns: repeat(2, 10rem);
-  }
-
-  .logo{
-    margin-left: 3.5rem;
-  }
-
-}
-
-@media (max-width: 450px){
-  hr{
-    width: 17rem;
-  }
-
-  .search_wrapper{
-    width: 17rem;
-    margin-left: -2.5rem;
-  }
-
-  .games{
-    grid-template-columns: 1fr;
-    width: 12rem;
-  }
-
-  .prev-btn, .next-btn{
-    padding: 2%;
-  }
-
-  .gallery{
-    height: 12rem;
-    width: 20rem;
-  }
-  
-  .gallery-img{
-    margin-left: 2.5rem;
-  }
-
-  .lib-games{
-    grid-template-columns: 1fr;
-    margin: auto;
-    width: 12rem;
-  }
-
-  .logo{
-    margin-left: 4rem;
-  }
-} */
 
