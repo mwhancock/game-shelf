@@ -356,7 +356,7 @@ function libraryConstructor() {
 }
 
 function searchResultsConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, addBtn;
   temp = document.getElementById("game-card-template");
 
   for (i = 0; i < searchArr.length; i++) {
@@ -365,6 +365,9 @@ function searchResultsConstructor() {
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     itemDiv.classList.add("game-card");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
+    addBtn = itemDiv.querySelector("button").cloneNode(true);
+    addBtn.classList.add("add-btn");
+    addBtn.innerText = "Add"
     imgPath = searchArr[i].image;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "Game image");
@@ -375,6 +378,7 @@ function searchResultsConstructor() {
     nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(nameItem);
+    itemDiv.append(addBtn)
     itemDiv.setAttribute("id", searchArr[i].id)
     searchResults.append(itemDiv);
     document.getElementById("result_content").style.display = "block";
