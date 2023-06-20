@@ -161,7 +161,7 @@ dialog::backdrop {
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
-  'wght' 400,
+  'wght' 700,
   'GRAD' 0,
   'opsz' 48
 }
@@ -545,6 +545,31 @@ dialog::backdrop {
   .feature-des{
     width: 25rem;
   }
+
+
+
+
+
+
+.games {
+  grid-template-columns: 1fr 1fr;
+  margin-left: 1rem;
+  width: 95%;
+}
+
+.preview-img{
+  width: 12.5rem;
+}
+
+.game-name{
+  margin-left: 55%;
+  width: 10rem;
+}
+
+.add-btn{
+  margin-left: 55%;
+}
+
 }
 
 @media (min-width: 1200px){
@@ -560,6 +585,18 @@ dialog::backdrop {
   .feature-des{
     width: 30rem;
     margin-left: 27rem;
+  }
+
+  .preview-img{
+    width: 16rem;
+  }
+
+  .game-name{
+    margin-left: 60%;
+  }
+
+  .add-btn{
+    margin-left: 60%;
   }
 }
 
@@ -579,6 +616,10 @@ dialog::backdrop {
   .gallery-img{
     width: 22rem;
   }
+
+  .games{
+    margin-left: 1.5%;
+  }
   }
 
   @media (min-width: 1900px){
@@ -597,6 +638,11 @@ dialog::backdrop {
     .gallery-img{
       width: 30rem;
       margin-left: -36rem;
+    }
+
+    .games{
+      width: 70%;
+      margin-left: 14.5%;
     }
   }
 
