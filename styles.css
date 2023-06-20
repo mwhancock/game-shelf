@@ -206,15 +206,22 @@ dialog::backdrop {
   z-index: 100;
 }
 
-/* .search-list{
-  background: whitesmoke;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.close-btn{
+  border: none;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  background: var(--accent-color);
+  position: absolute;
+  margin-left: 6.6rem;
+  margin-top: -1.7rem;
+  display: inline-block;
+  transition: background 300ms;
 }
 
-.search-card{
-
-} */
+.close-btn:hover{
+  cursor: pointer;
+  background: var(--alt-accent-color);
+}
 
 .games {
   gap: 1rem;
@@ -458,10 +465,25 @@ dialog::backdrop {
 }
 
 @media (min-width: 800px){
+  .add-btn{
+    margin-left: 60%;
+    padding: 1.5rem 4rem;
+  }
+
   .feature-card {
     height: 25rem;
     width: 90%;
   } 
+
+  .games{
+    width: 70%;
+    margin-left: 15%;
+  }
+  .game-name{
+    margin-left: 60%;
+    height: 4rem;
+    overflow: hidden;
+  }
   
   .gallery{
     background: var(--light-green);
@@ -486,24 +508,36 @@ dialog::backdrop {
     margin-top: -20rem;
     }
 
-    .feature-des{
-      width: 15rem;
-      margin-left: 24rem;
-    }
-  
+  .feature-des{
+    width: 15rem;
+    margin-left: 24rem;
+  }
+
   .next-btn{
     margin-top: -2.5rem;
     right: .5rem;
   }
   
+  .search-lable{
+    margin-top: -2rem;
+  }
+
+
   .prev-btn{
     margin-top: -2.5rem;
     left: .5rem;
+  }
+
+  .preview-img{
+    width: 16em;
   }
 }
 
 
 @media (min-width: 992px){
+  .close-btn{
+    margin-top: -1.4rem;
+  }
   .gallery-img{
     margin-left: -27.6rem;
   }

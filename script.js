@@ -495,8 +495,6 @@ const searchGame = (e) => {
 
 
 
-
-
 const welcomeDialog = () => {
 
   // Check if the modal has been shown before
@@ -521,3 +519,7 @@ const welcomeDialog = () => {
 }
 
 welcomeDialog()  
+
+document.getElementById("close-search").addEventListener("click", () => {
+  clearSearch();
+})
