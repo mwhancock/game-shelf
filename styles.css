@@ -198,9 +198,9 @@ dialog::backdrop {
 .search-lable{
   background: var(--bg-color);
   justify-self: center;
-  padding: .5rem 0 1rem;
+  padding: .5rem 0 1.25rem;
   position: sticky;
-  top: 0;
+  top: 5rem;
   height: 5rem;
   width: 100%;
   z-index: 100;
@@ -213,7 +213,7 @@ dialog::backdrop {
   background: var(--accent-color);
   position: absolute;
   margin-left: 6.6rem;
-  margin-top: -1.7rem;
+  margin-top: -1.5rem;
   display: inline-block;
   transition: background 300ms;
 }
@@ -546,29 +546,24 @@ dialog::backdrop {
     width: 25rem;
   }
 
+  .games {
+    grid-template-columns: 1fr 1fr;
+    margin-left: 1rem;
+    width: 95%;
+  }
 
+  .preview-img{
+    width: 12.5rem;
+  }
 
+  .game-name{
+    margin-left: 55%;
+    width: 10rem;
+  }
 
-
-
-.games {
-  grid-template-columns: 1fr 1fr;
-  margin-left: 1rem;
-  width: 95%;
-}
-
-.preview-img{
-  width: 12.5rem;
-}
-
-.game-name{
-  margin-left: 55%;
-  width: 10rem;
-}
-
-.add-btn{
-  margin-left: 55%;
-}
+  .add-btn{
+    margin-left: 55%;
+  }
 
 }
 
