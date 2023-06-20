@@ -437,6 +437,7 @@ dialog::backdrop {
   font-size: small;
   position: relative;
   top: 2.2rem;
+  margin-left: -14rem;
 }
 
 .foot {
@@ -446,6 +447,11 @@ dialog::backdrop {
   /* position: absolute; */
   bottom: 0;
   width: 100%;
+}
+
+.social-logo{
+  max-width: 2rem;
+  margin-left: .75rem;
 }
 
 
