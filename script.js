@@ -5,7 +5,6 @@ const gallery = document.getElementById("gallery");
 const galleryImg  = document.getElementsByClassName("gallery-img");
 const searchResults = document.getElementById("search_results");
 const search = document.getElementById("search_button");
-const addGameBtn = document.getElementsByClassName("new-game-btn");
 const navList = document.getElementById("nav-list");
 const navItem = document.getElementsByClassName("nav-item");
 const search_input = document.getElementById("search_bar");
@@ -35,19 +34,6 @@ const getUserLibrary = () => {
 // const setHotList = (hot) => {
 //   localStorage.setItem("hot_list", hot)
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -367,6 +353,7 @@ function searchResultsConstructor() {
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     addBtn = itemDiv.querySelector("button").cloneNode(true);
     addBtn.classList.add("add-btn");
+    addBtn.setAttribute("id", searchArr[i].id);
     addBtn.innerText = "Add"
     imgPath = searchArr[i].image;
     imgItem.setAttribute("src", imgPath);
@@ -382,9 +369,26 @@ function searchResultsConstructor() {
     itemDiv.setAttribute("id", searchArr[i].id)
     searchResults.append(itemDiv);
     document.getElementById("result_content").style.display = "block";
+  // console.log(addBtn);
+
   }
-  searchArr = [];
-}
+  const addGameBtn = document.getElementsByClassName("add-btn");
+  console.log(addGameBtn.length)
+  
+  for(let i = 0; i < addGameBtn.length; i++){
+    addGameBtn[i].addEventListener("click", (e) => {
+      console.log(recGames[i]);
+    })
+    searchArr = [];
+  }}
+  //         addGameBtn.addEventListner("onclick", (e) => {
+  //             console.log(e.target.id);
+  //             // e.preventDefault();
+  //             // const gameID = e.target.id;
+  //             // addGameToLibrary(gameID);
+
+  //           })
+// }
 
 function clearSearch() {
   document.getElementById("result_content").style.display = "none";
@@ -491,6 +495,7 @@ const searchGame = (e) => {
   if(e.key === "Enter"){
     searchAtlasByName(e);
   }
+  
 }
 
 
