@@ -19,16 +19,19 @@ let lastSlide;
 
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (lib) => {
-  localStorage.setItem("user_library", JSON.stringify(lib));
+  const currentLibrary = getUserLibrary() ?? [];
+  const newLibrary = [...currentLibrary, ...lib];
+  localStorage.setItem("user_library", JSON.stringify(newLibrary));
 };
 
 const getUserLibrary = () => {
   // array of JSONified Game data or undefined
   const possible_library = localStorage.getItem("user_library");
   if (possible_library === undefined){
+    possible_library = [];
     return JSON.parse(possible_library);
   }
-  return console.log("No user Library found");
+  return JSON.parse(possible_library);
 };
 
 // const setHotList = (hot) => {
@@ -38,7 +41,7 @@ const getUserLibrary = () => {
 
 
 
-
+console.log("User Library: ", getUserLibrary());
 
 
 
@@ -174,70 +177,40 @@ const searchAtlasByName = (e) => {
   }
 };
 
-// retrieve user data and BGA data for single game
-// From the 'card-click' event, retrieve the game's ID, use that to map data from storage
-const getGameData = (id) => {
-  // Checks our global library for the game first
-  const cached_game = usrLibrary.find((game) => game.id === id);
-  // return the cached data if it exists, else retrieve it from API
-  if (cached_game !== undefined) {
-    console.log("Retreived game from users cache");
-    return cached_game;
-  } else {
-    console.log("Fetching game with id: ", id);
-    let api_game = getAtlasData(`ids=${[id]}&limit=100`)
-      .then((game_data) => {
-        console.log("Retrieved single game from BGA API");
-        // returns an array, we want the first index
-        console.log(game_data[0]);
-      })
-      .then(() => {
-        return game_data[0];
-      })
-      .catch((error) =>
-        console.log("Error retrieving game with id: ", id, error)
-      );
-
-    return api_game;
-  }
-};
-
 // Sample LocalStorage API
 // Create / Read / Update / Delete
 
-// add to library // modify existing entry
-const addGameToLibrary = (game_to_add) => {
-  const current_library = getUserLibrary() ?? [];
-  console.log(current_library);
+// Fetch game data from BGA API based on id
 
-  // If no user library present, add the game to the user's library
-  if (current_library.length === 0) {
-    current_library.push(game_to_add);
-  } else {
-    // If there is a library, Check if the game exists already and retrieve index
-    const game_index = current_library.findIndex(
-      (game) => game.id === game_to_add.id
-    );
-
-    // Modify the library_before array accordingly
-    if (game_index) current_library[game_index] = game_to_add;
+const fetchGame = async (gameID) => {
+  const game = await fetch(`https://api.boardgameatlas.com/api/search?ids=${gameID}&client_id=${clientID}`)
+    .then((res) => res.json())
+    .then((data) => {
+      return data.games[0];
+    })
+    return game;
   }
 
-  // overwrite LocalStorage data
-  setUserLibrary(current_library);
+  // add to library // modify existing entry
+  const addGameToLibrary = async (game_to_add) => {
+    const current_library = getUserLibrary() ?? [];
+    const fetchedGame = await fetchGame(game_to_add);
+    
+    if(current_library.find(game => game.id === fetchedGame.id)){
+      console.log('Game already exists in library')
+      return
+    }
+    current_library.push(fetchedGame);
+    
+    setUserLibrary(current_library);
+    console.log(current_library)
+  }
 
-  // overwrite global cache data
-  usrLibrary = current_library;
-};
 
-// TODO: REVIEW THIS METHOD TO SEE HOW IT FITS WITH YOUR PLANS
-// Sample call to get Game Data for a single game... Use this for populating your Modal from a click handler
-// getGameData('EJe7IlhwX2').then(
-//     game_data => {
-//         addGameToLibrary(game_data)
-//         console.log('Retrieved a single game based on ID', game_data)
-//     }
-// );
+
+
+
+
 
 // TODO: FINISH THE METHOD
 // add to library // modify existing entry
@@ -373,19 +346,18 @@ function searchResultsConstructor() {
 
   }
   const addGameBtn = document.getElementsByClassName("add-btn");
-  console.log(addGameBtn.length)
+  // console.log(addGameBtn.length)
   
   for(let i = 0; i < addGameBtn.length; i++){
     addGameBtn[i].addEventListener("click", (e) => {
-      console.log(recGames[i]);
+      e.preventDefault();
+      const gameID = e.target.id;
+      addGameToLibrary(gameID);
     })
     searchArr = [];
   }}
   //         addGameBtn.addEventListner("onclick", (e) => {
   //             console.log(e.target.id);
-  //             // e.preventDefault();
-  //             // const gameID = e.target.id;
-  //             // addGameToLibrary(gameID);
 
   //           })
 // }
@@ -483,9 +455,6 @@ function bwdSlide() {
   slideArr[slideIndex].style.display = "block";
 }
 
-// const gameModal = () => {
-  
-// }
 
 const searchGame = (e) => {
   clearSearch();
