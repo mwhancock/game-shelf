@@ -10,6 +10,7 @@ const navItem = document.getElementsByClassName("nav-item");
 const search_input = document.getElementById("search_bar");
 const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
+
 let recGames = [];
 let searchArr = [];
 let hotList = [];
@@ -20,19 +21,20 @@ let lastSlide;
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (lib) => {
   const currentLibrary = getUserLibrary() ?? [];
-  const newLibrary = [...currentLibrary, ...lib];
+  const newLibrary = [...currentLibrary, lib];
   localStorage.setItem("user_library", JSON.stringify(newLibrary));
 };
 
 const getUserLibrary = () => {
   // array of JSONified Game data or undefined
-  const possible_library = localStorage.getItem("user_library");
-  if (possible_library === undefined){
-    possible_library = [];
-    return JSON.parse(possible_library);
+  let possible_library = localStorage.getItem("user_library");
+  if (possible_library === null || possible_library === undefined){
+    return [];
   }
   return JSON.parse(possible_library);
 };
+
+libraryConstructor();
 
 // const setHotList = (hot) => {
 //   localStorage.setItem("hot_list", hot)
@@ -41,7 +43,6 @@ const getUserLibrary = () => {
 
 
 
-console.log("User Library: ", getUserLibrary());
 
 
 
@@ -195,16 +196,27 @@ const fetchGame = async (gameID) => {
   const addGameToLibrary = async (game_to_add) => {
     const current_library = getUserLibrary() ?? [];
     const fetchedGame = await fetchGame(game_to_add);
+    console.log('Current Library: ', current_library);
+    console.log('Fetched Game: ', fetchedGame);
     
-    if(current_library.find(game => game.id === fetchedGame.id)){
-      console.log('Game already exists in library')
-      return
+    const existingGame = current_library.some(game => game.id === fetchedGame.id);
+
+    if(existingGame){
+
+      console.log('Game already exists in library');
+      return;
+
+    } else {
+
+      // console.log('Game added to library', usrLibrary);
+      setUserLibrary(fetchedGame);
+      console.log(`Updated Library: `, getUserLibrary());
+      libraryConstructor();
+      window.location.reload();
     }
-    current_library.push(fetchedGame);
-    
-    setUserLibrary(current_library);
-    console.log(current_library)
+
   }
+
 
 
 
@@ -229,7 +241,6 @@ const removeGameFromLibrary = (game_to_remove) => {
   setUserLibrary(current_library);
 
   // overwrite global cache data
-  usrLibrary = current_library;
 };
 
 // Method for retrieving the users library data based on LocalStorage IDs
@@ -288,19 +299,19 @@ function libraryConstructor() {
   let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem;
   temp = document.getElementById("game-card-template");
 
-  for (i = 0; i < usrLibrary.length; i++) {
+  for (i = 0; i < getUserLibrary().length; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     itemDiv.classList.add("game-card");
-    imgPath = usrLibrary[i].images.medium;
+    imgPath = getUserLibrary()[i].images.medium;
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.classList.add("game-img");
     desItem = itemDiv.querySelector("p").cloneNode(true);
-    nameItem = itemDiv.querySelector("h5").cloneNode(true);
-    gameName = usrLibrary[i].name;
-    gameDes = usrLibrary[i].description_preview;
+    nameItem = itemDiv.querySelector("h4").cloneNode(true);
+    gameName = getUserLibrary()[i].name;
+    gameDes = getUserLibrary()[i].description_preview;
     if(gameDes === ""){
       gameDes = "No description currently available";
     } 
