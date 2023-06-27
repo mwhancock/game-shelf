@@ -20,8 +20,8 @@ let lastSlide;
 
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (lib) => {
-  const currentLibrary = getUserLibrary() ?? [];
-  const newLibrary = [...currentLibrary, lib];
+  const current_library = getUserLibrary() ?? [];
+  const newLibrary = [...current_library, lib];
   localStorage.setItem("user_library", JSON.stringify(newLibrary));
 };
 
@@ -31,6 +31,7 @@ const getUserLibrary = () => {
   if (possible_library === null || possible_library === undefined){
     return [];
   }
+
   return JSON.parse(possible_library);
 };
 
@@ -212,6 +213,7 @@ const fetchGame = async (gameID) => {
       setUserLibrary(fetchedGame);
       console.log(`Updated Library: `, getUserLibrary());
       libraryConstructor();
+      document.getElementById('empty-text').display = 'none';
       window.location.reload();
     }
 
@@ -311,12 +313,12 @@ function libraryConstructor() {
     desItem = itemDiv.querySelector("p").cloneNode(true);
     nameItem = itemDiv.querySelector("h4").cloneNode(true);
     gameName = getUserLibrary()[i].name;
-    gameDes = getUserLibrary()[i].description_preview;
-    if(gameDes === ""){
-      gameDes = "No description currently available";
-    } 
-    desItem.innerText = `${gameDes}`
-    nameItem.classList.add("game-info");
+    // gameDes = getUserLibrary()[i].description_preview;
+    // if(gameDes === ""){
+    //   gameDes = "No description currently available";
+    // } 
+    // desItem.innerText = `${gameDes}`
+    nameItem.classList.add("library-game-name");
     nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(nameItem);
@@ -333,7 +335,7 @@ function searchResultsConstructor() {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    itemDiv.classList.add("game-card");
+    itemDiv.classList.add("search-card");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
     addBtn = itemDiv.querySelector("button").cloneNode(true);
     addBtn.classList.add("add-btn");
@@ -353,7 +355,6 @@ function searchResultsConstructor() {
     itemDiv.setAttribute("id", searchArr[i].id)
     searchResults.append(itemDiv);
     document.getElementById("result_content").style.display = "block";
-  // console.log(addBtn);
 
   }
   const addGameBtn = document.getElementsByClassName("add-btn");
