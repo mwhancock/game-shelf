@@ -84,14 +84,37 @@ a, hr, p,
   width: 50%;
 }
 
+
+#dialog{
+  background: var(--light-green);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 3px 3px 4px var(--accent-color);
+  margin-top: 20%;
+  width: 7rem;
+  height: 7rem;
+  z-index: 500;
+}
+
+#dialog > p {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: medium;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1rem;
+  width: 50%;
+}
+
 dialog::backdrop {
   background-color: hsla(120, 10%, 81%, 0.5);
   backdrop-filter: blur(3px);
 }
 
-#close-btn {
+.dialog-close-btn {
   background: var(--accent-color);
-  border: 1px solid black;
+  border: none;
+  box-shadow: 0 2px 5px var(--alt-accent-color);
   border-radius: 10px;
   height: 2rem;
   width: 5rem;
@@ -242,16 +265,21 @@ dialog::backdrop {
   margin-top: .5rem;
   width: 10.5rem;
   overflow-y: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .library-game-name{
   color: var(--text-color);
   font-weight: 600;
   height: 1.3rem;
-  /* margin-left: 50%; */
   margin-top: 10rem;
   width: 10rem;
   z-index: 1;
+}
+
+.feature-des{
+  text-align: left;
 }
 
 .search-card{
@@ -275,7 +303,7 @@ dialog::backdrop {
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
   position: absolute;
-  left: .7rem;
+  /* left: .7rem; */
   top: .7rem;
   height: 9rem;
   width: 9rem;
@@ -311,11 +339,11 @@ dialog::backdrop {
 
 .add-btn{
   position: absolute;
-  background: var(--alt-accent-color);
+  background: var(--accent-color);
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: var(--text-color);
+  color: var(--light-green);
   font-size: large;
   font-weight: 700;
   padding: 1rem 2rem;
@@ -325,8 +353,8 @@ dialog::backdrop {
 }
 
 .add-btn:hover{
-  background: var(--accent-color);
-  color: black;
+  background: var(--alt-accent-color);
+  color: var(--text-color);
   cursor: pointer;
 }
 
@@ -376,6 +404,7 @@ dialog::backdrop {
 }
 
 .lib-games{
+  justify-content: center;
   gap: 2rem;
   grid-auto-flow: row;
   grid-template-columns: repeat(2, 10rem);
@@ -482,40 +511,39 @@ dialog::backdrop {
     height: 16rem;
   }
 
-  .game-card{
-    margin-left: -1%;
-  }
   .lib-games{
-    gap: .35rem 1.25rem;
+    gap: .35rem 1rem;
   }
+
+  .game-card{
+    width: 10rem;
+    height: 12.6rem;}
 }
 
-@media (min-width: 420px){
+@media (min-width: 410px){
   .gallery-img{
-    width: 18.5rem;
-    height: 18.5rem;
+    width: 17.5rem;
+    height: 17.5rem;
   }
 
   .game-card{
-    margin-left: 1%;
-    width: 12rem;
-    height: 15rem;
+    width: 11rem;
+    height: 13.47rem;
   }
 
   .game-img{
-    width: 10.5rem;
-    height: 10.5rem;
+    width: 10rem;
+    height: 10rem;
     margin-left: 1px;
-    margin-top: .3rem;
   }
 
   .library-game-name{
-    margin-left: 7%;
-    margin-top: 98%;
+    margin-top: 10.5rem;
   }
 
   .lib-games{
     gap: .5rem 3rem;
+    margin-left: -4%;
   }
 }
 
@@ -528,6 +556,7 @@ dialog::backdrop {
   .feature-card {
     height: 25rem;
     width: 90%;
+    /* text-align: left; */
   } 
 
   .games{
@@ -591,6 +620,7 @@ dialog::backdrop {
   .lib-games{
     gap: 1rem;
     grid-template-columns: repeat(4, 11.5rem);
+    margin-left: 1%;
   }
 
   .game-img{
@@ -601,12 +631,10 @@ dialog::backdrop {
   }
 
   .library-game-name{
-    margin-left: 7%;
     margin-top: 98%;
   }
 
   .game-card{
-    margin-left: 1%;
     width: 11rem;
     height: 13.4rem;
   }
@@ -647,6 +675,7 @@ dialog::backdrop {
 
   .lib-games{
     grid-template-columns: repeat(5, 1fr);
+    margin-left: .5%;
   }
 
   .game-img{
@@ -657,12 +686,10 @@ dialog::backdrop {
   }
 
   .library-game-name{
-    margin-left: 7%;
     margin-top: 98%;
   }
 
   .game-card{
-    margin-left: 1%;
     width: 11rem;
     height: 13.4rem;
   }
@@ -698,7 +725,6 @@ dialog::backdrop {
 
   .lib-games{
     grid-template-columns: repeat(6, 1fr);
-    margin-left: .35%;
   }
 }
 
@@ -763,12 +789,10 @@ dialog::backdrop {
     }
   
     .library-game-name{
-      margin-left: 11.5%;
       margin-top: 98%;
     }
   
     .game-card{
-      margin-left: 1%;
       width: 13rem;
       height: 17rem;
     }

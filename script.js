@@ -204,6 +204,7 @@ const fetchGame = async (gameID) => {
 
     if(existingGame){
 
+      inLibrary()
       console.log('Game already exists in library');
       return;
 
@@ -509,3 +510,16 @@ welcomeDialog()
 document.getElementById("close-search").addEventListener("click", () => {
   clearSearch();
 })
+
+const inLibrary = () => {
+  const dialog = document.getElementById("dialog");
+  const closeButton = document.getElementById("close-dialog-btn");
+
+  dialog.show();
+
+  closeButton.addEventListener('click', () => {
+    // Close the modal
+
+    dialog.close();
+})
+}
