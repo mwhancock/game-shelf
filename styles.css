@@ -273,10 +273,13 @@ dialog::backdrop {
   color: var(--text-color);
   font-weight: 600;
   height: 1.3rem;
-  /* margin-left: 50%; */
   margin-top: 10rem;
   width: 10rem;
   z-index: 1;
+}
+
+.feature-des{
+  text-align: left;
 }
 
 .search-card{
@@ -336,11 +339,11 @@ dialog::backdrop {
 
 .add-btn{
   position: absolute;
-  background: var(--alt-accent-color);
+  background: var(--accent-color);
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: var(--text-color);
+  color: var(--light-green);
   font-size: large;
   font-weight: 700;
   padding: 1rem 2rem;
@@ -350,8 +353,8 @@ dialog::backdrop {
 }
 
 .add-btn:hover{
-  background: var(--accent-color);
-  color: black;
+  background: var(--alt-accent-color);
+  color: var(--text-color);
   cursor: pointer;
 }
 
@@ -509,14 +512,18 @@ dialog::backdrop {
   }
 
   .lib-games{
-    gap: .35rem 1.25rem;
+    gap: .35rem 1rem;
   }
+
+  .game-card{
+    width: 10rem;
+    height: 12.6rem;}
 }
 
 @media (min-width: 410px){
   .gallery-img{
-    width: 18.5rem;
-    height: 18.5rem;
+    width: 17.5rem;
+    height: 17.5rem;
   }
 
   .game-card{
@@ -528,11 +535,15 @@ dialog::backdrop {
     width: 10rem;
     height: 10rem;
     margin-left: 1px;
-    margin-top: -.4rem;
+  }
+
+  .library-game-name{
+    margin-top: 10.5rem;
   }
 
   .lib-games{
     gap: .5rem 3rem;
+    margin-left: -4%;
   }
 }
 
@@ -545,6 +556,7 @@ dialog::backdrop {
   .feature-card {
     height: 25rem;
     width: 90%;
+    /* text-align: left; */
   } 
 
   .games{
@@ -608,6 +620,7 @@ dialog::backdrop {
   .lib-games{
     gap: 1rem;
     grid-template-columns: repeat(4, 11.5rem);
+    margin-left: 1%;
   }
 
   .game-img{
@@ -618,7 +631,6 @@ dialog::backdrop {
   }
 
   .library-game-name{
-    margin-left: 7%;
     margin-top: 98%;
   }
 
@@ -663,6 +675,7 @@ dialog::backdrop {
 
   .lib-games{
     grid-template-columns: repeat(5, 1fr);
+    margin-left: .5%;
   }
 
   .game-img{
@@ -673,7 +686,6 @@ dialog::backdrop {
   }
 
   .library-game-name{
-    margin-left: 7%;
     margin-top: 98%;
   }
 
@@ -777,7 +789,6 @@ dialog::backdrop {
     }
   
     .library-game-name{
-      margin-left: 11.5%;
       margin-top: 98%;
     }
   
