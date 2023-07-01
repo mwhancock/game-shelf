@@ -81,7 +81,7 @@ a, hr, p,
   font-size: large;
   text-align: center;
   line-height: 1.5rem;
-  width: 50%;
+  width: 80%;
 }
 
 
@@ -659,7 +659,7 @@ dialog::backdrop {
 
 @media (min-width: 992px){
   #modal{
-    height: 40%;
+    height: 42%;
     width: 50%;
   }
 
@@ -756,7 +756,7 @@ dialog::backdrop {
 
 @media (min-width: 1400px){
   #modal{
-    height: 40%;
+    height: 42%;
     width: 35%;
   }
 
@@ -787,7 +787,6 @@ dialog::backdrop {
 
   @media (min-width: 1900px){
     #modal{
-      height: 40%;
       width: 27%;
     }
 

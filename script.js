@@ -510,6 +510,7 @@ const welcomeDialog = () => {
   }
 }
 
+
 welcomeDialog()  
 
 document.getElementById("close-search").addEventListener("click", () => {
