@@ -8,7 +8,7 @@
   --logo-color: #263330;
   --text-color: #384541;
   --main-border-radius: 20px;
-  --box-shadow: 0 0 2px var(--f-color);
+  --box-shadow: 0 0 2px var(--text-color);
 }
 /* ELEMENT TAGS */
 body {
@@ -130,10 +130,6 @@ dialog::backdrop {
 
 /* GALLERY */
 
-/* #feature-card-template{
-  display: grid;
-  grid-template-columns: repeat(2);
-} */
 
 .feature-name, .feature-des{
   color: var(--text-color);
@@ -147,24 +143,6 @@ dialog::backdrop {
   width: 90%;
   overflow: hidden;
   position: absolute;
-  /* animation-duration: 400ms;
-  animation-name: slidein slideout;
-  animation-iteration-count: infinite; */
-  /* transform: 
-  translateX(100%);*/
-  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out; 
-} 
-
-/* .feature-card */
-
-@keyframes slidein{
-  from{
-    margin-left: -20rem;
-  }
-
-  to{
-    margin-left: 0rem;
-  }
 }
 
 .gallery{
@@ -308,15 +286,13 @@ dialog::backdrop {
 
 .game-img{
   border-radius: var(--main-border-radius);
-  box-shadow: var(--box-shadow);
+  box-shadow: 3px 3px 7px var(--alt-accent-color);
   position: absolute;
-  /* left: .7rem; */
   top: .7rem;
   height: 9rem;
   width: 9rem;
   object-fit: cover;
   transition: 500ms ease;
-  /* display: none; */
 }
 
 .game-info{
@@ -451,7 +427,6 @@ dialog::backdrop {
 }
 
 .search_wrapper{
-  /* margin-top: 3rem; */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -471,7 +446,6 @@ dialog::backdrop {
   color: black;
   padding: .5rem 0 .5rem .75rem;
   cursor: text;
-  /* margin-left: 4rem; */
 }
 
 #search_button{
@@ -501,7 +475,6 @@ dialog::backdrop {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
-  /* position: absolute; */
   bottom: 0;
   width: 100%;
 }
@@ -573,7 +546,6 @@ dialog::backdrop {
   .feature-card {
     height: 25rem;
     width: 90%;
-    /* text-align: left; */
   } 
 
   .games{
