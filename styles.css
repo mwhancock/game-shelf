@@ -492,8 +492,9 @@ dialog::backdrop {
 .copy {
   font-size: small;
   position: relative;
-  top: 2.2rem;
-  margin-left: -14rem;
+  top: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .foot {
@@ -506,6 +507,7 @@ dialog::backdrop {
 }
 
 .social-logo{
+  margin-top: .75rem;
   max-width: 2rem;
   margin-left: .75rem;
 }
@@ -545,11 +547,10 @@ dialog::backdrop {
   .game-img{
     width: 10rem;
     height: 10rem;
-    margin-left: 1px;
   }
 
   .library-game-name{
-    margin-top: 10.5rem;
+    margin-top: 10.8rem;
   }
 
   .lib-games{
@@ -642,12 +643,10 @@ dialog::backdrop {
   .game-img{
     width: 10rem;
     height: 10rem;
-    margin-left: -3px;
-    margin-top: -3px;
   }
 
   .library-game-name{
-    margin-top: 98%;
+    margin-top: 10.8rem;
   }
 
   .game-card{
@@ -702,12 +701,6 @@ dialog::backdrop {
   .game-img{
     width: 10rem;
     height: 10rem;
-    margin-left: -3px;
-    margin-top: -3px;
-  }
-
-  .library-game-name{
-    margin-top: 98%;
   }
 
   .game-card{
@@ -795,7 +788,7 @@ dialog::backdrop {
     }
 
     .feature-des{
-      margin-left: 33rem;
+      margin-left: 35rem;
     }
 
     .gallery{
@@ -819,12 +812,10 @@ dialog::backdrop {
     .game-img{
       width: 12rem;
       height: 12rem;
-      margin-left: -3px;
-      margin-top: -3px;
     }
-  
+
     .library-game-name{
-      margin-top: 98%;
+      margin-top: 13rem;
     }
   
     .game-card{
