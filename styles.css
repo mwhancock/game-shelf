@@ -70,7 +70,7 @@ a, hr, p,
   border: none;
   border-radius: var(--main-border-radius);
   box-shadow: 0 0 3px #000;
-  width: 50%;
+  width: 80%;
   height: 60%;
   z-index: 500;
 }
@@ -116,9 +116,16 @@ dialog::backdrop {
   border: none;
   box-shadow: 0 2px 5px var(--alt-accent-color);
   border-radius: 10px;
+  color: #f3f3c7;
+  font-weight: bold;
   height: 2rem;
   width: 5rem;
   cursor: pointer;
+  transition: background 300ms; 
+}
+
+#close-btn:hover {
+  background: var(--alt-accent-color);
 }
 
 /* GALLERY */
@@ -521,6 +528,10 @@ dialog::backdrop {
 }
 
 @media (min-width: 410px){
+  #modal{
+    height: 55%;
+  }
+
   .gallery-img{
     width: 17.5rem;
     height: 17.5rem;
@@ -548,6 +559,11 @@ dialog::backdrop {
 }
 
 @media (min-width: 800px){
+  #modal{
+    height: 45%;
+    width: 55%;
+  }
+
   .add-btn{
     margin-left: 60%;
     padding: 1.5rem 4rem;
@@ -642,6 +658,11 @@ dialog::backdrop {
 
 
 @media (min-width: 992px){
+  #modal{
+    height: 40%;
+    width: 50%;
+  }
+
   .close-btn{
     margin-top: -1.4rem;
   }
@@ -697,6 +718,11 @@ dialog::backdrop {
 }
 
 @media (min-width: 1200px){
+  #modal{
+    height: 47%;
+    width: 35%;
+  }
+
   .feature-name{
     margin-left: 27rem;
   }
@@ -729,6 +755,11 @@ dialog::backdrop {
 }
 
 @media (min-width: 1400px){
+  #modal{
+    height: 40%;
+    width: 35%;
+  }
+
   .feature-name{
     margin-left: 25rem;
   }
@@ -755,6 +786,11 @@ dialog::backdrop {
 }
 
   @media (min-width: 1900px){
+    #modal{
+      height: 40%;
+      width: 27%;
+    }
+
     .feature-name{
       margin-left: 33rem;
     }

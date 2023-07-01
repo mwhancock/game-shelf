@@ -10,13 +10,13 @@ const navItem = document.getElementsByClassName("nav-item");
 const search_input = document.getElementById("search_bar");
 const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
-
 let recGames = [];
 let searchArr = [];
 let hotList = [];
 let hotListIds = [];
 let slideArr;
 let lastSlide;
+
 
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (lib) => {
@@ -31,11 +31,24 @@ const getUserLibrary = () => {
   if (possible_library === null || possible_library === undefined){
     return [];
   }
-
+  
   return JSON.parse(possible_library);
 };
 
 libraryConstructor();
+
+window.addEventListener("load", () => {
+  const emptyText = document.getElementById("empty-text");
+  if(getUserLibrary().length == 0){
+    emptyText.style.display = 'block';
+  } else {
+    emptyText.style.display = 'none';
+    }
+  });
+
+
+
+
 
 // const setHotList = (hot) => {
 //   localStorage.setItem("hot_list", hot)
@@ -210,11 +223,8 @@ const fetchGame = async (gameID) => {
 
     } else {
 
-      // console.log('Game added to library', usrLibrary);
       setUserLibrary(fetchedGame);
-      console.log(`Updated Library: `, getUserLibrary());
       libraryConstructor();
-      document.getElementById('empty-text').display = 'none';
       window.location.reload();
     }
 
@@ -359,7 +369,6 @@ function searchResultsConstructor() {
 
   }
   const addGameBtn = document.getElementsByClassName("add-btn");
-  // console.log(addGameBtn.length)
   
   for(let i = 0; i < addGameBtn.length; i++){
     addGameBtn[i].addEventListener("click", (e) => {
@@ -369,11 +378,7 @@ function searchResultsConstructor() {
     })
     searchArr = [];
   }}
-  //         addGameBtn.addEventListner("onclick", (e) => {
-  //             console.log(e.target.id);
 
-  //           })
-// }
 
 function clearSearch() {
   document.getElementById("result_content").style.display = "none";
