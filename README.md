@@ -42,9 +42,8 @@ Desktop layout:
 
 Mobile Layout:
 
-![mobile-home](https://github.com/mwhancock/game-shelf/assets/97315149/26f4f822-7d12-469b-8949-179532686cd
+![mobile-home](https://github.com/mwhancock/game-shelf/assets/97315149/26f4f822-7d12-469b-8949-179532686cd1)
 ![mobile-lib](https://github.com/mwhancock/game-shelf/assets/97315149/44cbe621-fad1-4bbc-a20a-934ce453284e)
-1)
 ![mobile-search](https://github.com/mwhancock/game-shelf/assets/97315149/cf97ead3-5d6e-4ae7-b2ca-aad67a015e51)
 
 ---
