@@ -19,9 +19,9 @@ let lastSlide;
 
 
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
-const setUserLibrary = (lib) => {
+const setUserLibrary = (game) => {
   const current_library = getUserLibrary() ?? [];
-  const newLibrary = [...current_library, lib];
+  const newLibrary = [...current_library, game];
   localStorage.setItem("user_library", JSON.stringify(newLibrary));
 };
 
@@ -35,17 +35,18 @@ const getUserLibrary = () => {
   return JSON.parse(possible_library);
 };
 
-libraryConstructor();
 
 window.addEventListener("load", () => {
   const emptyText = document.getElementById("empty-text");
-  if(getUserLibrary().length == 0){
+  
+  if(getUserLibrary().length === 0){
     emptyText.style.display = 'block';
   } else {
     emptyText.style.display = 'none';
-    }
-  });
+  }
+});
 
+libraryConstructor();
 
 
 
@@ -210,19 +211,12 @@ const fetchGame = async (gameID) => {
   const addGameToLibrary = async (game_to_add) => {
     const current_library = getUserLibrary() ?? [];
     const fetchedGame = await fetchGame(game_to_add);
-    console.log('Current Library: ', current_library);
-    console.log('Fetched Game: ', fetchedGame);
-    
     const existingGame = current_library.some(game => game.id === fetchedGame.id);
 
     if(existingGame){
-
       inLibrary()
-      console.log('Game already exists in library');
       return;
-
     } else {
-
       setUserLibrary(fetchedGame);
       libraryConstructor();
       window.location.reload();
@@ -232,43 +226,27 @@ const fetchGame = async (gameID) => {
 
 
 
-
-
-
-
-
-// TODO: FINISH THE METHOD
 // add to library // modify existing entry
 const removeGameFromLibrary = (game_to_remove) => {
   const current_library = getUserLibrary();
+  const new_library = current_library.filter(game => game.id !== game_to_remove);
 
-  // Check if a version of the game exists already and retrieve index
-  const game_index = current_library.findIndex(
-    (game) => game.id === game_to_remove.id
-  );
-
-  // I'll leave this method for you to fill out
-  // it is similar to add but we need to remove the index of an array if it exists
-
-  // overwrite LocalStorage data
-  setUserLibrary(current_library);
-
-  // overwrite global cache data
+  setUserLibrary(new_library);
 };
 
-// Method for retrieving the users library data based on LocalStorage IDs
-const fetchUserLibrary = () => {
-  // Retrieve stored library data from LocalStorage
-  const user_library = getUserLibrary();
-  const ids = [];
+// // Method for retrieving the users library data based on LocalStorage IDs
+// const fetchUserLibrary = () => {
+//   // Retrieve stored library data from LocalStorage
+//   const user_library = getUserLibrary();
+//   const ids = [];
 
-  if (!user_library)
-    return console.log("No User Library Found in LocalStorage");
+//   if (!user_library)
+//     return console.log("No User Library Found in LocalStorage");
 
-  // generate an array of ids from our library array
-  user_library.forEach((game_obj) => ids.push(game_obj.id));
+//   // generate an array of ids from our library array
+//   user_library.forEach((game_obj) => ids.push(game_obj.id));
 
-};
+// };
 
 
 //Card Constructors
@@ -509,6 +487,7 @@ const welcomeDialog = () => {
     });
   }
 }
+
 
 welcomeDialog()  
 

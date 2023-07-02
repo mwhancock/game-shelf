@@ -8,7 +8,7 @@
   --logo-color: #263330;
   --text-color: #384541;
   --main-border-radius: 20px;
-  --box-shadow: 0 0 2px var(--f-color);
+  --box-shadow: 0 0 2px var(--text-color);
 }
 /* ELEMENT TAGS */
 body {
@@ -81,7 +81,7 @@ a, hr, p,
   font-size: large;
   text-align: center;
   line-height: 1.5rem;
-  width: 50%;
+  width: 80%;
 }
 
 
@@ -130,41 +130,19 @@ dialog::backdrop {
 
 /* GALLERY */
 
-/* #feature-card-template{
-  display: grid;
-  grid-template-columns: repeat(2);
-} */
 
 .feature-name, .feature-des{
   color: var(--text-color);
 }
 
 .feature-card {
-  cursor: pointer;
+  /* cursor: pointer; */
   display: flex;
   justify-content: center;
   height: 40rem;
   width: 90%;
   overflow: hidden;
   position: absolute;
-  /* animation-duration: 400ms;
-  animation-name: slidein slideout;
-  animation-iteration-count: infinite; */
-  /* transform: 
-  translateX(100%);*/
-  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out; 
-} 
-
-/* .feature-card */
-
-@keyframes slidein{
-  from{
-    margin-left: -20rem;
-  }
-
-  to{
-    margin-left: 0rem;
-  }
 }
 
 .gallery{
@@ -266,7 +244,7 @@ dialog::backdrop {
   background: var(--light-green);
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
-  cursor: pointer;
+  /* cursor: pointer; */
   position: relative;
   height: 12.69rem;
   margin-top: .5rem;
@@ -293,7 +271,7 @@ dialog::backdrop {
   background: var(--light-green);
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
-  cursor: pointer;
+  /* cursor: pointer; */
   display: grid;
   position: relative;
   height: 10rem;
@@ -308,15 +286,13 @@ dialog::backdrop {
 
 .game-img{
   border-radius: var(--main-border-radius);
-  box-shadow: var(--box-shadow);
+  box-shadow: 3px 3px 7px var(--alt-accent-color);
   position: absolute;
-  /* left: .7rem; */
   top: .7rem;
   height: 9rem;
   width: 9rem;
   object-fit: cover;
   transition: 500ms ease;
-  /* display: none; */
 }
 
 .game-info{
@@ -350,7 +326,7 @@ dialog::backdrop {
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: var(--light-green);
+  color: #f3f3c7;
   font-size: large;
   font-weight: 700;
   padding: 1rem 2rem;
@@ -451,7 +427,6 @@ dialog::backdrop {
 }
 
 .search_wrapper{
-  /* margin-top: 3rem; */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -463,7 +438,7 @@ dialog::backdrop {
 #search_bar{
   background-color: whitesmoke;
   border-radius: 50px;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 1rem;
   width: 50%;
   border: none;
@@ -471,7 +446,6 @@ dialog::backdrop {
   color: black;
   padding: .5rem 0 .5rem .75rem;
   cursor: text;
-  /* margin-left: 4rem; */
 }
 
 #search_button{
@@ -492,20 +466,21 @@ dialog::backdrop {
 .copy {
   font-size: small;
   position: relative;
-  top: 2.2rem;
-  margin-left: -14rem;
+  top: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .foot {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
-  /* position: absolute; */
   bottom: 0;
   width: 100%;
 }
 
 .social-logo{
+  margin-top: .75rem;
   max-width: 2rem;
   margin-left: .75rem;
 }
@@ -545,11 +520,10 @@ dialog::backdrop {
   .game-img{
     width: 10rem;
     height: 10rem;
-    margin-left: 1px;
   }
 
   .library-game-name{
-    margin-top: 10.5rem;
+    margin-top: 10.8rem;
   }
 
   .lib-games{
@@ -572,7 +546,6 @@ dialog::backdrop {
   .feature-card {
     height: 25rem;
     width: 90%;
-    /* text-align: left; */
   } 
 
   .games{
@@ -642,12 +615,10 @@ dialog::backdrop {
   .game-img{
     width: 10rem;
     height: 10rem;
-    margin-left: -3px;
-    margin-top: -3px;
   }
 
   .library-game-name{
-    margin-top: 98%;
+    margin-top: 10.8rem;
   }
 
   .game-card{
@@ -659,7 +630,7 @@ dialog::backdrop {
 
 @media (min-width: 992px){
   #modal{
-    height: 40%;
+    height: 42%;
     width: 50%;
   }
 
@@ -702,12 +673,6 @@ dialog::backdrop {
   .game-img{
     width: 10rem;
     height: 10rem;
-    margin-left: -3px;
-    margin-top: -3px;
-  }
-
-  .library-game-name{
-    margin-top: 98%;
   }
 
   .game-card{
@@ -756,7 +721,7 @@ dialog::backdrop {
 
 @media (min-width: 1400px){
   #modal{
-    height: 40%;
+    height: 42%;
     width: 35%;
   }
 
@@ -787,7 +752,6 @@ dialog::backdrop {
 
   @media (min-width: 1900px){
     #modal{
-      height: 40%;
       width: 27%;
     }
 
@@ -796,7 +760,7 @@ dialog::backdrop {
     }
 
     .feature-des{
-      margin-left: 33rem;
+      margin-left: 35rem;
     }
 
     .gallery{
@@ -805,7 +769,7 @@ dialog::backdrop {
 
     .gallery-img{
       width: 30rem;
-      margin-left: -35.2rem;
+      margin-left: -35.7rem;
     }
 
     .games{
@@ -820,12 +784,10 @@ dialog::backdrop {
     .game-img{
       width: 12rem;
       height: 12rem;
-      margin-left: -3px;
-      margin-top: -3px;
     }
-  
+
     .library-game-name{
-      margin-top: 98%;
+      margin-top: 13rem;
     }
   
     .game-card{
