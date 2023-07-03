@@ -51,9 +51,6 @@ libraryConstructor();
 
 
 
-// const setHotList = (hot) => {
-//   localStorage.setItem("hot_list", hot)
-// }
 
 
 
@@ -62,6 +59,11 @@ libraryConstructor();
 
 
 
+
+
+
+
+//TEST CODE
 
     // geekXMLToJSON(gameList);
 
@@ -106,6 +108,42 @@ libraryConstructor();
 //     })
 
 
+
+
+
+
+//return a game object from the board game geek api for game by name
+// const searchBGG = (e) => {
+//   e.preventDefault();
+//   const search_term = search_input.value ?? undefined;
+//   if (!search_term) return console.warn("please provide a Search Value");
+//   try {
+//     fetch(`https://boardgamegeek.com/xmlapi2/search?query=${search_term}`)
+//       .then((res) => {
+//         return res.text();
+//       })
+//       .then((data) => {
+//         const game = parseXmlFromGeek(data);
+//         return game
+//       });
+//   } catch (error) {
+//     console.log("Error retrieving User Games by ID", error);
+//   }
+// };
+
+
+// //convert xml data from board game geek api to json
+// const parseXmlFromGeek = (xml) => {
+//   const parser = new DOMParser();
+//   const xmlData = parser.parseFromString(xml, "text/xml");
+//   const game = xmlData.getElementsByTagName("item")[0];
+//   const gameObj = {};
+//   gameObj.id = game.getAttribute("id");
+//   gameObj.name = game.getElementsByTagName("name")[0].getAttribute("value");
+//   gameObj.image = game.getElementsByTagName("image")[0].innerHTML;
+//   gameObj.description = game.getElementsByTagName("description")[0].innerHTML;
+//   return gameObj;
+// };
 
 
 
@@ -172,7 +210,7 @@ const searchAtlasByName = (e) => {
 
   const search_term = search_input.value ?? undefined;
 
-  if (!search_term) return console.warn("please provide a Search Value");
+  if (!search_term) return console.warn("Please provide a Search Value");
 
   try {
     getAtlasData(`name=${search_term}&fuzzy_match=true&order_by=name&limit=100`)
@@ -193,11 +231,8 @@ const searchAtlasByName = (e) => {
   }
 };
 
-// Sample LocalStorage API
-// Create / Read / Update / Delete
 
 // Fetch game data from BGA API based on id
-
 const fetchGame = async (gameID) => {
   const game = await fetch(`https://api.boardgameatlas.com/api/search?ids=${gameID}&client_id=${clientID}`)
     .then((res) => res.json())
@@ -249,6 +284,7 @@ const removeGameFromLibrary = (game_to_remove) => {
 // };
 
 
+
 //Card Constructors
 
 
@@ -287,7 +323,7 @@ function featureConstructor() {
 
 
 function libraryConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, desItem;
   temp = document.getElementById("game-card-template");
 
   for (i = 0; i < getUserLibrary().length; i++) {
@@ -302,11 +338,6 @@ function libraryConstructor() {
     desItem = itemDiv.querySelector("p").cloneNode(true);
     nameItem = itemDiv.querySelector("h4").cloneNode(true);
     gameName = getUserLibrary()[i].name;
-    // gameDes = getUserLibrary()[i].description_preview;
-    // if(gameDes === ""){
-    //   gameDes = "No description currently available";
-    // } 
-    // desItem.innerText = `${gameDes}`
     nameItem.classList.add("library-game-name");
     nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
@@ -424,8 +455,6 @@ prevSlide.addEventListener("click", () => {
   bwdSlide();
 });
 
-// Gets the index of the last item in the slide array
-
 // Function to move to next slide
 function fwdSlide() {
   slideArr.forEach((slide) => {
@@ -502,8 +531,6 @@ const inLibrary = () => {
   dialog.show();
 
   closeButton.addEventListener('click', () => {
-    // Close the modal
-
     dialog.close();
 })
 }
