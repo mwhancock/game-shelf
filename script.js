@@ -244,6 +244,24 @@ const fetchGame = async (gameID) => {
     return game;
   }
 
+  //sorts user library by name
+  const sortLibrary = () => {
+    const library = getUserLibrary();
+    library.sort((a, b) => {
+      let nameA = a.name.toUpperCase();
+      let nameB = b.name.toUpperCase();
+      if(nameA < nameB){
+        return -1;
+      }
+      if(nameA > nameB){
+        return 1;
+      }
+      return 0;
+    })
+    return library;
+  }
+
+
   // add to library // modify existing entry
   const addGameToLibrary = async (game_to_add) => {
     const current_library = getUserLibrary() ?? [];
@@ -256,6 +274,7 @@ const fetchGame = async (gameID) => {
     } else {
       setUserLibrary(fetchedGame);
       libraryConstructor();
+      localStorage.setItem("user_library", JSON.stringify(sortLibrary()));
       window.location.reload();
     }
 
