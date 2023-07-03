@@ -341,6 +341,28 @@ dialog::backdrop {
   cursor: pointer;
 }
 
+.remove-btn{
+  position: absolute;
+  background: var(--accent-color);
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  color: #f3f3c7;
+  font-size: large;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  margin-left: 70%;
+  top: .5rem;
+  transition: background 300ms;
+  z-index: 100;
+} 
+
+.remove-btn:hover{
+  background: var(--alt-accent-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
 .preview-img{
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
@@ -475,6 +497,7 @@ dialog::backdrop {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
+  /* position: absolute; */
   bottom: 0;
   width: 100%;
 }
