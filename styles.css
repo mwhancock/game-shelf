@@ -21,6 +21,7 @@ body {
   height: 100vh;
 }
 
+
 a {
   text-decoration: none;
 }
@@ -363,6 +364,29 @@ dialog::backdrop {
   cursor: pointer;
 }
 
+.feature-add-btn{
+  position: absolute;
+  background: var(--accent-color);
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  color: #f3f3c7;
+  font-size: large;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: .4rem 1rem;
+  /* margin-left: 1rem; */
+  top: 1rem;
+  transition: background 300ms;
+  z-index: 100;
+}
+
+.feature-add-btn:hover{
+  background: var(--alt-accent-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
 .preview-img{
   border-radius: var(--main-border-radius);
   box-shadow: var(--box-shadow);
@@ -525,6 +549,11 @@ dialog::backdrop {
     height: 12.6rem;}
 }
 
+.feature-add-btn{
+  margin-left: 6rem;
+  margin: 1rem;
+}
+
 @media (min-width: 410px){
   #modal{
     height: 55%;
@@ -553,6 +582,11 @@ dialog::backdrop {
     gap: .5rem 3rem;
     margin-left: -4%;
   }
+
+  .feature-add-btn{
+    margin-left: 7.15rem;
+  }
+  
 }
 
 @media (min-width: 800px){
@@ -648,6 +682,11 @@ dialog::backdrop {
     width: 11rem;
     height: 13.4rem;
   }
+
+  .feature-add-btn{
+    margin-left: 30rem;
+  }
+  
 }
 
 
@@ -703,6 +742,9 @@ dialog::backdrop {
     height: 13.4rem;
   }
 
+  .feature-add-btn{
+    margin-left: 35rem;
+  }
 }
 
 @media (min-width: 1200px){
@@ -740,6 +782,10 @@ dialog::backdrop {
   .lib-games{
     grid-template-columns: repeat(6, 1fr);
   }
+
+  .feature-add-btn{
+    margin-left: 41rem;
+  }
 }
 
 @media (min-width: 1400px){
@@ -770,6 +816,10 @@ dialog::backdrop {
 
   .lib-games{
     grid-template-columns: repeat(7, 1fr);
+  }
+
+  .feature-add-btn{
+    margin-left: 39rem;
   }
 }
 
@@ -816,6 +866,10 @@ dialog::backdrop {
     .game-card{
       width: 13rem;
       height: 17rem;
+    }
+
+    .feature-add-btn{
+      margin-left: 48.5rem;
     }
   }
 
