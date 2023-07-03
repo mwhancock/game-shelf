@@ -10,6 +10,7 @@ const navItem = document.getElementsByClassName("nav-item");
 const search_input = document.getElementById("search_bar");
 const addGameBtn = document.getElementsByClassName("add-btn");
 const removeGameBtn = document.getElementsByClassName("remove-btn");
+const featureBtn = document.getElementsByClassName("feature-add-btn");
 const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
@@ -186,7 +187,7 @@ const getAtlasData = (params = "order_by=rank&limit=100") => {
 };
 
 // Fetches top 100 games on BGA and creates array of game objects
-getAtlasData("order_by=rank&limit=15").then((games_list) => {
+getAtlasData("order_by=trending&limit=15").then((games_list) => {
   games_list.forEach((game) => {
     const gameObj = {};
     gameObj.id = game.id;
@@ -301,17 +302,21 @@ const removeGameFromLibrary = (game_to_remove) => {
 
 
 function featureConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem, addBtn;
   temp = document.getElementById("feature-card-template");
 
   for (i = 0; i < 14; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    imgPath = recGames[i].image;
-    imgItem.setAttribute("src", imgPath);
     desItem = itemDiv.querySelector("p").cloneNode(true);
     nameItem = itemDiv.querySelector("h2").cloneNode(true);
+    addBtn = itemDiv.querySelector("button").cloneNode(true);
+    imgPath = recGames[i].image;
+    imgItem.setAttribute("src", imgPath);
+    addBtn.classList.add("feature-add-btn");
+    addBtn.setAttribute("id", recGames[i].id);
+    addBtn.innerText = "+"
     gameName = recGames[i].name;
     gameDes = recGames[i].description;
     if(gameDes === ""){
@@ -329,8 +334,10 @@ function featureConstructor() {
     itemDiv.append(imgItem);
     itemDiv.append(nameItem);
     itemDiv.append(desItem);
+    itemDiv.append(addBtn);
     gallery.append(itemDiv);
   }
+  addFeaturedGame();
 }
 
 
@@ -349,7 +356,6 @@ function libraryConstructor() {
     removeBtn.innerText = "X";
     itemDiv.classList.add("game-card");
     imgPath = getUserLibrary()[i]?.images?.medium;
-    console.log(imgPath);
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.classList.add("game-img");
@@ -412,6 +418,17 @@ function searchResultsConstructor() {
       removeGameFromLibrary(gameID);
     })
   }
+
+  const addFeaturedGame = () => {
+  for(let i = 0; i < featureBtn.length; i++){
+    featureBtn[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      const gameID = e.target.id;
+      addGameToLibrary(gameID);
+    })
+  }
+}
+
 
 
 function clearSearch() {
