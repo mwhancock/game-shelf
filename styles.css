@@ -141,7 +141,7 @@ dialog::backdrop {
   display: flex;
   justify-content: center;
   height: 40rem;
-  width: 90%;
+  width: 93%;
   overflow: hidden;
   position: absolute;
 }
@@ -165,7 +165,7 @@ dialog::backdrop {
   height: 19rem;
   width: 19rem;
   object-fit: cover;
-  margin-top: -.95rem;
+  margin-top: .95rem;
 }
 
 .material-symbols-outlined {
@@ -375,8 +375,8 @@ dialog::backdrop {
   font-weight: 700;
   font-size: 1.5rem;
   padding: .4rem 1rem;
-  /* margin-left: 1rem; */
-  top: 1rem;
+  left: 13rem;
+  top: -.75rem;
   transition: background 300ms;
   z-index: 100;
 }
@@ -584,7 +584,7 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    margin-left: 7.15rem;
+    left: 15rem;
   }
   
 }
@@ -631,7 +631,7 @@ dialog::backdrop {
     width: 20rem;
     object-fit: cover;
     margin-left: -18rem;
-    margin-top: .05rem;
+    margin-top: 2.5rem;
   }
 
   .feature-name{
@@ -684,7 +684,8 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    margin-left: 30rem;
+    top: .5rem;
+    left: 18rem;
   }
   
 }
@@ -743,7 +744,7 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    margin-left: 35rem;
+    left: 17.8rem;
   }
 }
 
@@ -784,7 +785,7 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    margin-left: 41rem;
+    left: 21.85rem;
   }
 }
 
@@ -819,7 +820,7 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    margin-left: 39rem;
+    left: 19.55rem;
   }
 }
 
@@ -869,7 +870,7 @@ dialog::backdrop {
     }
 
     .feature-add-btn{
-      margin-left: 48.5rem;
+      left: 27.3rem;
     }
   }
 

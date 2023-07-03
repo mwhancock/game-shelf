@@ -309,11 +309,11 @@ function featureConstructor() {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
     imgItem = itemDiv.querySelector("img").cloneNode(true);
-    imgPath = recGames[i].image;
-    imgItem.setAttribute("src", imgPath);
     desItem = itemDiv.querySelector("p").cloneNode(true);
     nameItem = itemDiv.querySelector("h2").cloneNode(true);
     addBtn = itemDiv.querySelector("button").cloneNode(true);
+    imgPath = recGames[i].image;
+    imgItem.setAttribute("src", imgPath);
     addBtn.classList.add("feature-add-btn");
     addBtn.setAttribute("id", recGames[i].id);
     addBtn.innerText = "+"
