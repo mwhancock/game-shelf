@@ -8,6 +8,8 @@ const search = document.getElementById("search_button");
 const navList = document.getElementById("nav-list");
 const navItem = document.getElementsByClassName("nav-item");
 const search_input = document.getElementById("search_bar");
+const addGameBtn = document.getElementsByClassName("add-btn");
+const removeGameBtn = document.getElementsByClassName("remove-btn");
 const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
@@ -260,29 +262,20 @@ const fetchGame = async (gameID) => {
   }
 
 
-
-// add to library // modify existing entry
+// remove from library
 const removeGameFromLibrary = (game_to_remove) => {
   const current_library = getUserLibrary();
-  const new_library = current_library.filter(game => game.id !== game_to_remove);
-
-  setUserLibrary(new_library);
+  const index = current_library.findIndex(game => game.id === game_to_remove);
+  const gameCard = document.getElementById(game_to_remove);
+  
+  if(index !== -1){
+    current_library.splice(index, 1);
+    gameCard.remove();
+    localStorage.setItem("user_library", JSON.stringify(current_library));
+  } else {
+    console.log("Game not found in library");
+  }
 };
-
-// // Method for retrieving the users library data based on LocalStorage IDs
-// const fetchUserLibrary = () => {
-//   // Retrieve stored library data from LocalStorage
-//   const user_library = getUserLibrary();
-//   const ids = [];
-
-//   if (!user_library)
-//     return console.log("No User Library Found in LocalStorage");
-
-//   // generate an array of ids from our library array
-//   user_library.forEach((game_obj) => ids.push(game_obj.id));
-
-// };
-
 
 
 //Card Constructors
@@ -323,26 +316,31 @@ function featureConstructor() {
 
 
 function libraryConstructor() {
-  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, desItem;
+  let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, removeBtn;
   temp = document.getElementById("game-card-template");
 
   for (i = 0; i < getUserLibrary().length; i++) {
     tempDiv = temp.content.cloneNode(true);
     itemDiv = tempDiv.querySelector("div");
+    itemDiv.setAttribute("id", getUserLibrary()[i].id);
     imgItem = itemDiv.querySelector("img").cloneNode(true);
+    removeBtn = itemDiv.querySelector("button").cloneNode(true);
+    removeBtn.classList.add("remove-btn");
+    removeBtn.setAttribute("id", getUserLibrary()[i].id);
+    removeBtn.innerText = "X";
     itemDiv.classList.add("game-card");
-    imgPath = getUserLibrary()[i].images.medium;
+    imgPath = getUserLibrary()[i]?.images?.medium;
+    console.log(imgPath);
     imgItem.setAttribute("src", imgPath);
     imgItem.setAttribute("alt", "a picture of a game");
     imgItem.classList.add("game-img");
-    desItem = itemDiv.querySelector("p").cloneNode(true);
     nameItem = itemDiv.querySelector("h4").cloneNode(true);
     gameName = getUserLibrary()[i].name;
     nameItem.classList.add("library-game-name");
     nameItem.innerText = `${gameName}`;
     itemDiv.append(imgItem);
     itemDiv.append(nameItem);
-    nameItem.append(desItem);
+    itemDiv.append(removeBtn);
     library.append(itemDiv);
   }
 }
@@ -377,7 +375,7 @@ function searchResultsConstructor() {
     document.getElementById("result_content").style.display = "block";
 
   }
-  const addGameBtn = document.getElementsByClassName("add-btn");
+
   
   for(let i = 0; i < addGameBtn.length; i++){
     addGameBtn[i].addEventListener("click", (e) => {
@@ -387,6 +385,14 @@ function searchResultsConstructor() {
     })
     searchArr = [];
   }}
+
+  for(let i = 0; i < removeGameBtn.length; i++){
+    removeGameBtn[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      const gameID = e.target.id;
+      removeGameFromLibrary(gameID);
+    })
+  }
 
 
 function clearSearch() {
