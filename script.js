@@ -226,6 +226,7 @@ const searchAtlasByName = (e) => {
       })
       .then(() => {
         searchResultsConstructor();
+        window.location.href = "#search_results";
       });
   } catch (error) {
     console.log("Error retrieving User Games by ID", error);
