@@ -34,17 +34,21 @@ If you want to play around wih the code, feel free to clone it onto your local s
 ## Screenshots
 
 Desktop layout:
+![home-layout](https://github.com/mwhancock/game-shelf/assets/97315149/1ef73c60-f26d-48e7-b25f-aa323eb7bb46)
 
-![home-page](https://github.com/mwhancock/game-shelf/assets/97315149/ee700d98-e713-48fa-84f4-1a026a836107)
-![lib](https://github.com/mwhancock/game-shelf/assets/97315149/326855e0-de11-4659-99b3-0f8f445b6803)
-![search results](https://github.com/mwhancock/game-shelf/assets/97315149/9768ca18-0c31-41de-81d1-03a979e4676d)
+![library-layout](https://github.com/mwhancock/game-shelf/assets/97315149/73ec8404-ba5e-47ba-8092-67e24772cf32)
+
+![search-results](https://github.com/mwhancock/game-shelf/assets/97315149/ded2a603-0949-43f8-aaf8-9b0cbd19fafa)
 
 
 Mobile Layout:
 
-![mobile-home](https://github.com/mwhancock/game-shelf/assets/97315149/26f4f822-7d12-469b-8949-179532686cd1)
-![mobile-lib](https://github.com/mwhancock/game-shelf/assets/97315149/44cbe621-fad1-4bbc-a20a-934ce453284e)
-![mobile-search](https://github.com/mwhancock/game-shelf/assets/97315149/cf97ead3-5d6e-4ae7-b2ca-aad67a015e51)
+
+![mobile-home](https://github.com/mwhancock/game-shelf/assets/97315149/1ce2020c-e132-4d9c-8115-f7070e9745b4)
+
+![mobile-library](https://github.com/mwhancock/game-shelf/assets/97315149/a9f8792a-b7d1-40fc-9761-50d409067298)
+
+![mobile-search](https://github.com/mwhancock/game-shelf/assets/97315149/76d396e4-0273-4597-b4b2-2948a468b67e)
 
 ---
 **_Please Note_** _while you can view this project, it is still under development and functionality may change drastically from one day to the next_
