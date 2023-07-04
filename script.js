@@ -15,8 +15,6 @@ const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
 let searchArr = [];
-let hotList = [];
-let hotListIds = [];
 let slideArr;
 let lastSlide;
 

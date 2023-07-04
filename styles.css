@@ -126,6 +126,7 @@ dialog::backdrop {
 }
 
 #close-btn:hover {
+  color: var(--text-color);
   background: var(--alt-accent-color);
 }
 
@@ -217,10 +218,14 @@ dialog::backdrop {
 }
 
 .close-btn{
-  border: none;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
   background: var(--accent-color);
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  color: #f3f3c7;
+  font-size: large;
+  font-weight: 700;
+  padding: .5rem 1rem;
   position: absolute;
   margin-left: 6.6rem;
   margin-top: -1.5rem;
@@ -229,6 +234,7 @@ dialog::backdrop {
 }
 
 .close-btn:hover{
+  color: var(--text-color);
   cursor: pointer;
   background: var(--alt-accent-color);
 }
