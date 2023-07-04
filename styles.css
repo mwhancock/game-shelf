@@ -358,7 +358,7 @@ dialog::backdrop {
   font-size: large;
   font-weight: 700;
   padding: .5rem 1rem;
-  margin-left: 77%;
+  margin-left: 70%;
   top: .25rem;
   transition: background 300ms;
   z-index: 100;
@@ -553,12 +553,14 @@ dialog::backdrop {
   .game-card{
     width: 10rem;
     height: 12.6rem;}
+
+  .feature-add-btn{
+    margin-left: 6rem;
+    margin: 1rem;
+  }
 }
 
-.feature-add-btn{
-  margin-left: 6rem;
-  margin: 1rem;
-}
+
 
 @media (min-width: 410px){
   #modal{
@@ -591,6 +593,10 @@ dialog::backdrop {
 
   .feature-add-btn{
     left: 15rem;
+  }
+
+  .remove-btn{
+    margin-left: 73%;
   }
   
 }
@@ -877,6 +883,10 @@ dialog::backdrop {
 
     .feature-add-btn{
       left: 27.3rem;
+    }
+
+    .remove-btn{
+      margin-left: 77%;
     }
   }
 
