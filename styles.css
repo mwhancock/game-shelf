@@ -352,8 +352,8 @@ dialog::backdrop {
   font-size: large;
   font-weight: 700;
   padding: .5rem 1rem;
-  margin-left: 70%;
-  top: .5rem;
+  margin-left: 77%;
+  top: .25rem;
   transition: background 300ms;
   z-index: 100;
 } 
