@@ -125,6 +125,11 @@ dialog::backdrop {
   transition: background 300ms; 
 }
 
+.dialog-close-btn:hover {
+  color: var(--text-color);
+  background: var(--alt-accent-color);
+}
+
 #close-btn:hover {
   color: var(--text-color);
   background: var(--alt-accent-color);
