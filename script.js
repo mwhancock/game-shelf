@@ -15,8 +15,6 @@ const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
 let searchArr = [];
-let hotList = [];
-let hotListIds = [];
 let slideArr;
 let lastSlide;
 
@@ -292,6 +290,7 @@ const removeGameFromLibrary = (game_to_remove) => {
     current_library.splice(index, 1);
     gameCard.remove();
     localStorage.setItem("user_library", JSON.stringify(current_library));
+    window.location.reload();
   } else {
     console.log("Game not found in library");
   }

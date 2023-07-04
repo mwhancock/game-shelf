@@ -126,6 +126,7 @@ dialog::backdrop {
 }
 
 #close-btn:hover {
+  color: var(--text-color);
   background: var(--alt-accent-color);
 }
 
@@ -217,10 +218,14 @@ dialog::backdrop {
 }
 
 .close-btn{
-  border: none;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
   background: var(--accent-color);
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  color: #f3f3c7;
+  font-size: large;
+  font-weight: 700;
+  padding: .5rem 1rem;
   position: absolute;
   margin-left: 6.6rem;
   margin-top: -1.5rem;
@@ -229,6 +234,7 @@ dialog::backdrop {
 }
 
 .close-btn:hover{
+  color: var(--text-color);
   cursor: pointer;
   background: var(--alt-accent-color);
 }
@@ -353,7 +359,7 @@ dialog::backdrop {
   font-weight: 700;
   padding: .5rem 1rem;
   margin-left: 70%;
-  top: .5rem;
+  top: .25rem;
   transition: background 300ms;
   z-index: 100;
 } 
@@ -547,12 +553,14 @@ dialog::backdrop {
   .game-card{
     width: 10rem;
     height: 12.6rem;}
+
+  .feature-add-btn{
+    margin-left: 6rem;
+    margin: 1rem;
+  }
 }
 
-.feature-add-btn{
-  margin-left: 6rem;
-  margin: 1rem;
-}
+
 
 @media (min-width: 410px){
   #modal{
@@ -585,6 +593,10 @@ dialog::backdrop {
 
   .feature-add-btn{
     left: 15rem;
+  }
+
+  .remove-btn{
+    margin-left: 73%;
   }
   
 }
@@ -871,6 +883,10 @@ dialog::backdrop {
 
     .feature-add-btn{
       left: 27.3rem;
+    }
+
+    .remove-btn{
+      margin-left: 77%;
     }
   }
 
