@@ -15,6 +15,7 @@ const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
 let searchArr = [];
+let slideIndex = 0;
 let slideArr;
 let lastSlide;
 
@@ -275,7 +276,7 @@ const fetchGame = async (gameID) => {
       setUserLibrary(fetchedGame);
       libraryConstructor();
       localStorage.setItem("user_library", JSON.stringify(sortLibrary()));
-      window.location.reload();
+      pageReload();
     }
 
   }
@@ -291,7 +292,7 @@ const removeGameFromLibrary = (game_to_remove) => {
     current_library.splice(index, 1);
     gameCard.remove();
     localStorage.setItem("user_library", JSON.stringify(current_library));
-    window.location.reload();
+    pageReload();
   } else {
     console.log("Game not found in library");
   }
@@ -331,10 +332,10 @@ function featureConstructor() {
     itemDiv.setAttribute("id", "desBox")
     itemDiv.classList.add("feature-card");
     imgItem.classList.add("gallery-img");
+    itemDiv.append(addBtn);
     itemDiv.append(imgItem);
     itemDiv.append(nameItem);
     itemDiv.append(desItem);
-    itemDiv.append(addBtn);
     gallery.append(itemDiv);
   }
   addFeaturedGame();
@@ -480,7 +481,7 @@ const shortenParagraph = (text, limit) => {
 
 
 
-let slideIndex = 0;
+
 
 
 // Manual controls for slide show
@@ -575,4 +576,11 @@ const inLibrary = () => {
   closeButton.addEventListener('click', () => {
     dialog.close();
 })
+}
+
+
+const pageReload = () => {
+  localStorage.setItem("index", slideIndex);
+  location.reload();
+  slideIndex = localStorage.getItem("index");
 }
