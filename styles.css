@@ -137,8 +137,13 @@ dialog::backdrop {
 
 /* GALLERY */
 
+#desBox{
+  margin-bottom: 1rem;
+}
+
 
 .feature-name, .feature-des{
+  border: var(--text-color);
   color: var(--text-color);
 }
 
@@ -168,10 +173,44 @@ dialog::backdrop {
 .gallery-img{
   border-radius: var(--main-border-radius);
   box-shadow: 3px 3px 7px var(--alt-accent-color);
-  height: 19rem;
-  width: 19rem;
+  height: 16rem;
+  width: 16rem;
   object-fit: cover;
   margin-top: .95rem;
+}
+
+.featured{
+  margin-top: -1rem;
+}
+
+
+.feature-des{
+  text-align: left;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.feature-add-btn{
+  position: absolute;
+  background: var(--accent-color);
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  color: #f3f3c7;
+  font-size: large;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: .4rem 1rem;
+  left: 83%;
+  top: .15rem;
+  transition: background 300ms;
+  z-index: 100;
+}
+
+.feature-add-btn:hover{
+  background: var(--alt-accent-color);
+  color: var(--text-color);
+  cursor: pointer;
 }
 
 .material-symbols-outlined {
@@ -180,10 +219,6 @@ dialog::backdrop {
   'wght' 700,
   'GRAD' 0,
   'opsz' 48
-}
-
-.menu{
-  visibility: hidden;
 }
 
 .next-btn{
@@ -260,7 +295,7 @@ dialog::backdrop {
   position: relative;
   height: 12.69rem;
   margin-top: .5rem;
-  width: 10.5rem;
+  width: 10rem;
   overflow-y: hidden;
   display: flex;
   justify-content: center;
@@ -275,9 +310,6 @@ dialog::backdrop {
   z-index: 1;
 }
 
-.feature-des{
-  text-align: left;
-}
 
 .search-card{
   background: var(--light-green);
@@ -302,7 +334,7 @@ dialog::backdrop {
   position: absolute;
   top: .7rem;
   height: 9rem;
-  width: 9rem;
+  width: 8.5rem;
   object-fit: cover;
   transition: 500ms ease;
 }
@@ -322,14 +354,6 @@ dialog::backdrop {
 .grid-box {
   display: grid;
   position: relative;
-}
-
-.lable {
-  margin-top: 3rem;
-}
-
-.featured{
-  margin-top: -1rem;
 }
 
 .add-btn{
@@ -370,29 +394,6 @@ dialog::backdrop {
 } 
 
 .remove-btn:hover{
-  background: var(--alt-accent-color);
-  color: var(--text-color);
-  cursor: pointer;
-}
-
-.feature-add-btn{
-  position: absolute;
-  background: var(--accent-color);
-  box-shadow: var(--box-shadow);
-  border: none;
-  border-radius: 10px;
-  color: #f3f3c7;
-  font-size: large;
-  font-weight: 700;
-  font-size: 1.5rem;
-  padding: .4rem 1rem;
-  left: 13rem;
-  top: -.75rem;
-  transition: background 300ms;
-  z-index: 100;
-}
-
-.feature-add-btn:hover{
   background: var(--alt-accent-color);
   color: var(--text-color);
   cursor: pointer;
@@ -444,12 +445,13 @@ dialog::backdrop {
 }
 
 .lib-games{
-  justify-content: center;
-  gap: 2rem;
-  grid-auto-flow: row;
-  grid-template-columns: repeat(2, 10rem);
+  justify-content: space-evenly;
+  gap: .5rem .75rem;
+  grid-auto-flow: row; 
+  grid-template-columns: repeat(2, 9.5rem);
   padding: 0.5rem;
   position: relative;
+  margin-left: -2%;
   height: auto;
 }
 
@@ -545,27 +547,6 @@ dialog::backdrop {
 
 
 /* MEDIA QUERIES */
-@media (min-width: 360px){
-  .gallery-img{
-    width: 16rem;
-    height: 16rem;
-  }
-
-  .lib-games{
-    gap: .35rem 1rem;
-  }
-
-  .game-card{
-    width: 10rem;
-    height: 12.6rem;}
-
-  .feature-add-btn{
-    margin-left: 6rem;
-    margin: 1rem;
-  }
-}
-
-
 
 @media (min-width: 410px){
   #modal{
@@ -579,7 +560,7 @@ dialog::backdrop {
 
   .game-card{
     width: 11rem;
-    height: 13.47rem;
+    height: 15.7rem;
   }
 
   .game-img{
@@ -588,20 +569,21 @@ dialog::backdrop {
   }
 
   .library-game-name{
-    margin-top: 10.8rem;
+    margin-top: 10.9rem;
   }
 
   .lib-games{
-    gap: .5rem 3rem;
-    margin-left: -4%;
+    justify-content: space-evenly;
+    /* gap: .5rem 2.5rem; */
+    margin-left: -6%;
+  }
+  .remove-btn{
+    margin-left: 73%;
   }
 
   .feature-add-btn{
-    left: 15rem;
-  }
-
-  .remove-btn{
-    margin-left: 73%;
+    position: absolute;
+    margin-left: .25rem;
   }
   
 }
@@ -652,13 +634,13 @@ dialog::backdrop {
   }
 
   .feature-name{
-    margin-left: 24rem;
+    margin-left: 59%;
     margin-top: -20rem;
     }
 
   .feature-des{
-    width: 15rem;
-    margin-left: 24rem;
+    width: 40%;
+    margin-left: 59%;
   }
 
   .next-btn{
@@ -692,17 +674,17 @@ dialog::backdrop {
   }
 
   .library-game-name{
-    margin-top: 10.8rem;
+    margin-top: 11rem;
   }
 
   .game-card{
     width: 11rem;
-    height: 13.4rem;
+    height: 15.7em;
   }
 
   .feature-add-btn{
-    top: .5rem;
-    left: 18rem;
+    top: 1.5rem;
+    left: 47%;
   }
   
 }
@@ -719,11 +701,12 @@ dialog::backdrop {
   }
 
   .gallery-img{
-    margin-left: -27.6rem;
+    width: 25rem;
+    margin-left: -25rem;
   }
 
   .feature-des{
-    width: 25rem;
+    width: 50%;
   }
 
   .games {
@@ -757,11 +740,10 @@ dialog::backdrop {
 
   .game-card{
     width: 11rem;
-    height: 13.4rem;
   }
 
   .feature-add-btn{
-    left: 17.8rem;
+    left: 45.75%;
   }
 }
 
@@ -777,12 +759,11 @@ dialog::backdrop {
 
   .gallery-img{
     margin-left: -34rem;
-    width: 25rem;
   }
 
   .feature-des{
-    width: 30rem;
-    margin-left: 27rem;
+    /* width: 0%; */
+    margin-left: 49%;
   }
 
   .preview-img{
@@ -802,7 +783,7 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    left: 21.85rem;
+    left: 38.5%;
   }
 }
 
@@ -816,16 +797,12 @@ dialog::backdrop {
     margin-left: 25rem;
   }
 
-  .feature-des{
-    margin-left: 25rem;
-  }
-
   .gallery{
     width: 70%;
   }
 
   .gallery-img{
-    width: 22rem;
+    margin-left: -55%;
   }
 
   .games{
@@ -837,7 +814,25 @@ dialog::backdrop {
   }
 
   .feature-add-btn{
-    left: 19.55rem;
+    left: 40.5%;
+  }
+}
+
+@media (min-width: 1500px){
+  .feature-add-btn{
+    left: 39.5%;
+  }
+}
+
+@media (min-width: 1600px){
+  .feature-add-btn{
+    left: 38.5%;
+  }
+}
+
+@media (min-width: 1700px){
+  .feature-add-btn{
+    left: 37.5%;
   }
 }
 
