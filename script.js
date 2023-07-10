@@ -197,12 +197,23 @@ getAtlasData("order_by=trending&limit=15").then((games_list) => {
   });
 
   featureConstructor();
+  // Add event listener to the next button that calls the next slide when clicked
+  const nextSlide = document.querySelector(".next-btn");
+  nextSlide.addEventListener("click", () => {
+    fwdSlide();
+  });
+
+  // Add event listener to the previous button that calls the previous slide when clicked
+  const prevSlide = document.querySelector(".prev-btn");
+  prevSlide.addEventListener("click", () => {
+  bwdSlide();
+  });
   let slideCards = document.getElementsByClassName("feature-card");
   slideArr = Array.from(slideCards);
   slideArr.forEach((slide) => {
     slide.style.display = "none";
   });
-  slideArr[0].style.display = "block";
+  slideArr[localStorage.getItem("index")].style.display = "block";
   lastSlide = slideArr.length - 1;
 });
 
@@ -486,17 +497,7 @@ const shortenParagraph = (text, limit) => {
 
 // Manual controls for slide show
 
-// Add event listener to the next button that calls the next slide when clicked
-const nextSlide = document.querySelector(".next-btn");
-nextSlide.addEventListener("click", () => {
-  fwdSlide();
-});
 
-// Add event listener to the previous button that calls the previous slide when clicked
-const prevSlide = document.querySelector(".prev-btn");
-prevSlide.addEventListener("click", () => {
-  bwdSlide();
-});
 
 // Function to move to next slide
 function fwdSlide() {
@@ -582,5 +583,4 @@ const inLibrary = () => {
 const pageReload = () => {
   localStorage.setItem("index", slideIndex);
   location.reload();
-  slideIndex = localStorage.getItem("index");
 }

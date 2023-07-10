@@ -187,7 +187,10 @@ dialog::backdrop {
 .feature-des{
   text-align: left;
   margin-bottom: 1rem;
+  height: 20rem;
   overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
 }
 
 .feature-add-btn{
