@@ -18,7 +18,7 @@ body {
   padding: 0;
   text-align: center;
   position: relative;
-  height: 100vh;
+  min-height: calc(100vh - 96px);
 }
 
 
@@ -535,7 +535,6 @@ dialog::backdrop {
 
 .foot {
   height: 3rem;
-  margin-top: 6rem;
   padding-bottom: 3rem;
   width: 100%;
 }
@@ -634,6 +633,10 @@ dialog::backdrop {
     margin-top: 2.5rem;
   }
 
+  .foot{
+    margin-top: 5.2rem;
+  }
+
   .feature-name{
     margin-left: 59%;
     margin-top: -20rem;
@@ -643,11 +646,6 @@ dialog::backdrop {
     width: 40%;
     margin-left: 59%;
   }
-
-  .foot{
-    margin-top: 10rem;
-  }
-
 
   .next-btn{
     margin-top: -2.5rem;
@@ -889,6 +887,10 @@ dialog::backdrop {
 
     .feature-add-btn{
       left: 27.3rem;
+    }
+
+    .foot{
+      margin-top: 10rem;
     }
 
     .remove-btn{
