@@ -537,7 +537,7 @@ dialog::backdrop {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
-  /* position: absolute; */
+  position: absolute;
   bottom: 0;
   width: 100%;
 }

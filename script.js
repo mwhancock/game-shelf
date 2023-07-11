@@ -15,11 +15,18 @@ const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
 let searchArr = [];
-let slideIndex = 0;
+let slideIndex;
 let slideArr;
 let lastSlide;
 
 
+const setIndex = () => {
+  if (localStorage.getItem("index") === null) {
+    localStorage.setItem("index", 0);
+  }
+}
+
+setIndex();
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (game) => {
   const current_library = getUserLibrary() ?? [];
@@ -197,6 +204,7 @@ getAtlasData("order_by=trending&limit=15").then((games_list) => {
   });
 
   featureConstructor();
+  
   // Add event listener to the next button that calls the next slide when clicked
   const nextSlide = document.querySelector(".next-btn");
   nextSlide.addEventListener("click", () => {
