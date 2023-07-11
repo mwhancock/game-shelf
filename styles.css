@@ -537,8 +537,6 @@ dialog::backdrop {
   height: 3rem;
   margin-top: 6rem;
   padding-bottom: 3rem;
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }
 
@@ -645,6 +643,11 @@ dialog::backdrop {
     width: 40%;
     margin-left: 59%;
   }
+
+  .foot{
+    margin-top: 10rem;
+  }
+
 
   .next-btn{
     margin-top: -2.5rem;

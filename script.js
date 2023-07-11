@@ -26,7 +26,9 @@ const setIndex = () => {
   }
 }
 
-setIndex();
+setIndex(slideIndex);
+slideIndex = localStorage.getItem("index");
+
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (game) => {
   const current_library = getUserLibrary() ?? [];
