@@ -15,18 +15,18 @@ const clientID = '9RQI1WBCZA';
 let usrLibrary = [];
 let recGames = [];
 let searchArr = [];
-let slideIndex;
+let slideIndex = 0;
 let slideArr;
 let lastSlide;
 
 
-const setIndex = () => {
+const setIndex = (index) => {
   if (localStorage.getItem("index") === null) {
-    localStorage.setItem("index", 0);
+    localStorage.setItem("index", index);
   }
 }
 
-setIndex();
+setIndex(slideIndex);
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (game) => {
   const current_library = getUserLibrary() ?? [];
