@@ -2,6 +2,7 @@
 :root{
   --accent-color: #825574;
   --alt-accent-color: #CFB0C5;
+  --accent-text: #f3f3c7;
   --bg-color: #fff4e0;
   --dark-green: #8dac87;
   --light-green: #b4cfb0;
@@ -117,7 +118,7 @@ dialog::backdrop {
   border: none;
   box-shadow: 0 2px 5px var(--alt-accent-color);
   border-radius: 10px;
-  color: #f3f3c7;
+  color: var(--accent-text);
   font-weight: bold;
   height: 2rem;
   width: 5rem;
@@ -199,7 +200,7 @@ dialog::backdrop {
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: #f3f3c7;
+  color: var(--accent-text);
   font-size: large;
   font-weight: 700;
   font-size: 1.5rem;
@@ -265,7 +266,7 @@ dialog::backdrop {
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: #f3f3c7;
+  color: var(--accent-text);
   font-size: large;
   font-weight: 700;
   padding: .5rem 1rem;
@@ -365,7 +366,7 @@ dialog::backdrop {
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: #f3f3c7;
+  color: var(--accent-text);
   font-size: large;
   font-weight: 700;
   padding: 1rem 2rem;
@@ -386,7 +387,7 @@ dialog::backdrop {
   box-shadow: var(--box-shadow);
   border: none;
   border-radius: 10px;
-  color: #f3f3c7;
+  color: var(--accent-text);
   font-size: large;
   font-weight: 700;
   padding: .5rem 1rem;
