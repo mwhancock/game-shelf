@@ -4,7 +4,7 @@
 ## Description
 Game Shelf is an application built using HTML, CSS, and javascript whose purpose is to help users manage their board game collection.
 In it's current state, users can search for games, then add them to their library where they get saved in the browsers local storage, and it showcases some popular games on the home page.
-I'm pulling all the game data from [Board Game Atlas' API](https://www.boardgameatlas.com/api/docs "BGA API docs").
+I'm pulling all the game data from [Board Game Geeks API](https://boardgamegeek.com/wiki/page/BGG_XML_API2 "BGA API docs").
 I have a lot of cool things planned for this application, so be sure to check out the planned features section to find out more!
 
 ---
