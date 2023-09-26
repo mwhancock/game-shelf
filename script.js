@@ -25,8 +25,9 @@ const setIndex = () => {
   }
 }
 
-setIndex(slideIndex);
-slideIndex = localStorage.getItem("index");
+setIndex();
+slideIndex = parseInt(localStorage.getItem("index"));
+
 
 // Sets entire library object into LocalStorage (only needed on first fetch // if LocalStorage doesn't exist)
 const setUserLibrary = (game) => {
@@ -88,108 +89,64 @@ const getHotIds = async () => {
 
 
 
-  const getGameDetails = async (gameID) => { 
-    const game = await fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${gameID}`)
-      .then((res) => res.text())
-      .then((data) => {
-        const parser = new DOMParser();
-        const xmlData = parser.parseFromString(data, "text/xml");
-        const gameData = Array.from(xmlData.getElementsByTagName("item"));
-        const gameObj = gameData.map((game) => {
-          return {
-            id: gameID,
-            name: game.querySelector("name").getAttribute("value"),
-            image: game.querySelector("image").textContent.trim(),
-            description: game.querySelector("description").textContent.trim(),
-          }
-        })
-        return gameObj;
+const getGameDetails = async (gameID) => { 
+  const game = await fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${gameID}`)
+    .then((res) => res.text())
+    .then((data) => {
+      const parser = new DOMParser();
+      const xmlData = parser.parseFromString(data, "text/xml");
+      const gameData = Array.from(xmlData.getElementsByTagName("item"));
+      const gameObj = gameData.map((game) => {
+        return {
+          id: gameID,
+          name: game.querySelector("name").getAttribute("value"),
+          image: game.querySelector("image").textContent.trim(),
+          description: game.querySelector("description").textContent.trim(),
+        }
       })
-      .catch((err) => console.log("ERROR: ", err));
-      return game;
-    };
+      return gameObj;
+    })
+    .catch((err) => console.log("ERROR: ", err));
+    return game;
+  };
 
-    getHotIds().then((hotlist) => {
-      const promises = hotlist.map((id) => getGameDetails(id));
-      Promise.all(promises).then((games) => {
-        recGames = games;
-        featureConstructor();
-      });
-    });
+getHotIds().then((hotlist) => {
+  const promises = hotlist.map((id) => getGameDetails(id));
+  Promise.all(promises).then((game) => {
+    recGames = (game);
+    // console.log(recGames[0]);
+    featureConstructor();
+  });
+});
 
-
-
-
-
-//return a game object from the board game geek api for game by name
-// const searchBGG = (e) => {
-//   e.preventDefault();
-//   const search_term = search_input.value ?? undefined;
-//   if (!search_term) return console.warn("please provide a Search Value");
-//   try {
-//     fetch(`https://boardgamegeek.com/xmlapi2/search?query=${search_term}`)
-//       .then((res) => {
-//         return res.text();
-//       })
-//       .then((data) => {
-//         const game = parseXmlFromGeek(data);
-//         return game
-//       });
-//   } catch (error) {
-//     console.log("Error retrieving User Games by ID", error);
-//   }
-// };
-
-
+// console.log(recGames);
+    
+    
+    
+    // Add event listener to the next button that calls the next slide when clicked
+    document.addEventListener("DOMContentLoaded", () => {
+        
+        const nextSlide = document.querySelector(".next-btn");
+        nextSlide.addEventListener("click", () => {
+          fwdSlide();
+        });
+        
+        // Add event listener to the previous button that calls the previous slide when clicked
+        const prevSlide = document.querySelector(".prev-btn");
+        prevSlide.addEventListener("click", () => {
+          bwdSlide();
+        });
+        let slideCards = document.getElementsByClassName("feature-card");
+        console.log(slideCards);
+        slideArr = Array.from(slideCards);
+        console.log(slideArr);
+        slideArr.forEach((slide) => {
+          slide.style.display = "none";
+        });
+        slideArr[localStorage.getItem("index")].style.display = "block";
+        lastSlide = slideArr.length - 1;
+  });
   
-// Add event listener to the next button that calls the next slide when clicked
-//   const nextSlide = document.querySelector(".next-btn");
-//   nextSlide.addEventListener("click", () => {
-//     fwdSlide();
-//   });
-
-// // Add event listener to the previous button that calls the previous slide when clicked
-//   const prevSlide = document.querySelector(".prev-btn");
-//   prevSlide.addEventListener("click", () => {
-//   bwdSlide();
-//   });
-//   let slideCards = document.getElementsByClassName("feature-card");
-//   slideArr = Array.from(slideCards);
-//   slideArr.forEach((slide) => {
-//     slide.style.display = "none";
-//   });
-//   slideArr[localStorage.getItem("index")].style.display = "block";
-//   lastSlide = slideArr.length - 1;
-
-
-
-
-// const searchAtlasByName = (e) => {
-//   e.preventDefault();
-
-//   const search_term = search_input.value ?? undefined;
-
-//   if (!search_term) return console.warn("Please provide a Search Value");
-
-//   try {
-//     getAtlasData(`name=${search_term}&fuzzy_match=true&order_by=name&limit=100`)
-//       .then((res) => {
-//         res.forEach((game) => {
-//           const gameObj = {};
-//           gameObj.id = game.id;
-//           gameObj.image = game.images.medium;
-//           gameObj.name = game.name;
-//           searchArr.push(gameObj);
-//         });
-//       })
-//       .then(() => {
-//         searchResultsConstructor();
-//         window.location.href = "#search_results";
-//       });
-//   } catch (error) {
-//     console.log("Error retrieving User Games by ID", error);
-//   }
-// };
 
 
   //sorts user library by name
@@ -252,6 +209,7 @@ const removeGameFromLibrary = (game_to_remove) => {
 function featureConstructor() {
   let itemDiv, imgItem, imgPath, i, temp, tempDiv, nameItem, gameName, gameDes, desItem, addBtn;
   temp = document.getElementById("feature-card-template");
+  
 
   for (i = 0; i < 14; i++) {
     tempDiv = temp.content.cloneNode(true);
@@ -261,7 +219,6 @@ function featureConstructor() {
     nameItem = itemDiv.querySelector("h2").cloneNode(true);
     addBtn = itemDiv.querySelector("button").cloneNode(true);
     imgPath = recGames[i][0].image;
-    console.log(imgPath);
     imgItem.setAttribute("src", imgPath);
     addBtn.classList.add("feature-add-btn");
     addBtn.setAttribute("id", recGames[i][0].id);
@@ -286,7 +243,7 @@ function featureConstructor() {
     itemDiv.append(desItem);
     gallery.append(itemDiv);
   }
-  // addFeaturedGame();
+  addFeaturedGame();
 }
 
 
@@ -351,32 +308,32 @@ function featureConstructor() {
 //   }
 
   
-//   for(let i = 0; i < addGameBtn.length; i++){
-//     addGameBtn[i].addEventListener("click", (e) => {
-//       e.preventDefault();
-//       const gameID = e.target.id;
-//       addGameToLibrary(gameID);
-//     })
-//     searchArr = [];
-//   }}
+  for(let i = 0; i < addGameBtn.length; i++){
+    addGameBtn[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      const gameID = e.target.id;
+      addGameToLibrary(gameID);
+    })
+    searchArr = [];
+  }
 
-//   for(let i = 0; i < removeGameBtn.length; i++){
-//     removeGameBtn[i].addEventListener("click", (e) => {
-//       e.preventDefault();
-//       const gameID = e.target.id;
-//       removeGameFromLibrary(gameID);
-//     })
-//   }
+  for(let i = 0; i < removeGameBtn.length; i++){
+    removeGameBtn[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      const gameID = e.target.id;
+      removeGameFromLibrary(gameID);
+    })
+  }
 
-//   const addFeaturedGame = () => {
-//   for(let i = 0; i < featureBtn.length; i++){
-//     featureBtn[i].addEventListener("click", (e) => {
-//       e.preventDefault();
-//       const gameID = e.target.id;
-//       addGameToLibrary(gameID);
-//     })
-//   }
-// }
+  const addFeaturedGame = () => {
+  for(let i = 0; i < featureBtn.length; i++){
+    featureBtn[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      const gameID = e.target.id;
+      addGameToLibrary(gameID);
+    })
+  }
+}
 
 
 
